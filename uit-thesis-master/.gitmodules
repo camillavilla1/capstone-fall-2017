@@ -1,0 +1,3 @@
+[submodule "ult-base"]
+	path = ult-base
+	url = https://github.com/egraff/ult-base.git
