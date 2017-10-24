@@ -87,6 +87,8 @@
 \item[Lessons learned/main conclusion - 1-3 setninger]
 \item [Kutt heller etterpaa] 
 \end{description}
+
+This dissertation present/describe ...
 \end{abstract}
 
 
@@ -112,7 +114,7 @@ The motivation!
 \item Problem definition: This project investegated ... x, with the purpose of y.
 \end{itemize}
 
-The motivation is that no single sensor may cover the sensing needs, and that sensing needs can change rapidly over time. Consequently, there us a need for sensor fusion, and allow for combining sensors at different computers.
+The motivation  behind this project is that no single sensor may cover the sensing needs, and that sensing needs can change rapidly over time. Consequently, there is a need for sensor fusion, and allow for combining sensors at different computers.
 
 \section{Contributions}
 What was the contribution?
@@ -155,10 +157,7 @@ This is some stuff, {\sc smallcaps {\em smallcapsemphasized}} {\em regularemphas
 If the acronym \ac{uit} is displayed, then loadglsentries works.
 Hello. This is a test: \ac{camilla}
 
-It is fun to use modern \upsc{OpenMP} technology!\footnote{This is a snarky
-footnote. Words and etc. Semantic web technologies are technologies that enable
-semantification of the Web as we know it today. Hopefully this spans some lines
-now.}
+It is fun to use modern \upsc{OpenMP} technology!\footnote{This is a snarky footnote. Words and etc. Semantic web technologies are technologies that enable semantification of the Web as we know it today. Hopefully this spans some lines now.}
 
 It is fun to use \emph{modern \upsc{OpenMP}} technology! And it is fun to use \ac{d3} and \ac{html5}.
 
@@ -168,27 +167,51 @@ footnote.}
 \definition{Some other definition}
 \definition{Its raining dogs and cats}
 
-\begin{figure}
-\centering
-\includegraphics[scale=0.1]{example_image.jpg}
-\caption{Figure link should point to top of figure.}
-\label{fig:ex}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[scale=0.1]{example_image.jpg}
+%\caption{Figure link should point to top of figure.}
+%\label{fig:ex}
+%\end{figure}
 
 
 \chapter{Background and Related Work}
 \begin{itemize}
 \item Taking Sensor Networks from the Lab to the Jungle
 \item Wireless Sensor Networks for Habitat Monitoring
+\item Se de andre paperne Otto har sendt
 \end{itemize}
 
 \section{Something}
 gggg
 
 \chapter{Architecture}
+Functionalities, abstractions, tell it clean/neat.
 
+\begin{figure}
+\centering
+\includegraphics[scale=0.4]{Prosjektoppgave_arkitektur.png}
+\caption{Figure showing architecture}
+\label{fig:ex}
+\end{figure}
+
+
+
+We now describe the system architecture, functionality of individual components and how they operate together.
+\begin{itemize}
+\item Physical sensors??
+\item Datastore (DAO)
+\item Fused data
+\item Virtual sensors
+\item Result from virtual sensor to user
+\end{itemize}
 
 \chapter{Design}
+Client/Server, p2p, put/get, pub/sub, protokoller etc..
+BESKRIV INTERAKSJONEN MELLOM ENHETENE!!
+
+Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
+Er de virtuelle sensorene servere eller publisher?
 
 \begin{table}
 \centering
@@ -258,12 +281,17 @@ main(m1,s) char *s; {
 
 \chapter{Implementation}
 %\lipsum[3-4]
+Threads, data structures, language ...
+Pandas (dataframe), CV2 (show image), exifread, Python 2.7, missing testing (CPU, memory, time?)
 
 \chapter{Evaluation} 
+metrics, define (CPU, memoury, lantecy.), benchmarks (mirko, kernel...
+How to measure, where done, PSEUDOCODE
 \section{Experimental Setup}
 \section{Something!?}
 \section{Results}
 What does the result say?
+Each eksperiemnt, result, meaning
 
 \chapter{Discussion}
 Idea, architecture, design, results, andre løsninger, "arch har scaleproblem?"
