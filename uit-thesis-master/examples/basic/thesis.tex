@@ -105,7 +105,14 @@ This dissertation present/describe ...
 \mainmatter
 
 \chapter{Introduction}
-Introduction to this thesis test! You can start typing!!\cite{coursebook} \\
+\begin{itemize}
+\item mention focus on camera-sensors/data?!?\cite{coursebook} 
+\end{itemize}
+
+This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors.
+
+The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
+
 
 \section{Motivation}
 The motivation!
@@ -126,25 +133,24 @@ Something about motivation and stuff
 \section{Limitations}
 AVGRENSE, VIKTIG!!
 
-\begin{itemize}
-\item The first item .
-\item The second item is
-\end{itemize}
+%\begin{itemize}
+%\item The first item .
+%\item The second item is
+%\end{itemize}
 
-Some text ...
 
-\begin{enumerate}
-\item The first item
-\item The second item is a 
-\end{enumerate}
+%\begin{enumerate}
+%\item The first item
+%\item The second item is a 
+%\end{enumerate}
 
-\begin{description}
-\item[Entry A] with definition A.
-\item[Entry B] with definitioin B.
-\item[Entry C] with definition C.
-\end{description}
+%\begin{description}
+%\item[Entry A] with definition A.
+%\item[Entry B] with definition B.
+%\item[Entry C] with definition C.
+%\end{description}
 
-\newpage
+%\newpage
 
 \subsection{A subsection}
 
@@ -190,14 +196,11 @@ Functionalities, abstractions, tell it clean/neat.
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.4]{Prosjektoppgave_arkitektur.png}
+\includegraphics[scale=0.45]{Prosjektoppgave_arkitektur.png}
 \caption{Figure showing architecture}
 \label{fig:ex}
 \end{figure}
 
-
-
-We now describe the system architecture, functionality of individual components and how they operate together.
 \begin{itemize}
 \item Physical sensors??
 \item Datastore (DAO)
@@ -205,6 +208,18 @@ We now describe the system architecture, functionality of individual components 
 \item Virtual sensors
 \item Result from virtual sensor to user
 \end{itemize}
+
+This section describes the system architecture(, functionality of individual components and how they operate together).
+A three-layered architecture: data storage, fused data, virtual sensors.??
+
+The physical sensors transmit their data to the data storage. The data storage consists of images from different sensors and excel-sheets containing information about each picture. 
+The fused data retrieves it's data from the data storage and store the fused data into an CSV-file.
+
+The virtual sensors are divided into animal-sensors, e.g. one raven-sensor, one arctic fox- sensor etc.
+The user types in what animal it wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor receive its result from the fused data from the CSV-file.
+
+Finally, the data/pictures is displayed to the user/biologist through a user interface(?)/image-shower (Python OpenCV library). The architecture of the system is presented in Figure \ref{fig:ex}.
+
 
 \chapter{Design}
 Client/Server, p2p, put/get, pub/sub, protokoller etc..
@@ -223,15 +238,16 @@ Content left & Content right\\
 \caption{A table}
 \end{table}
 
-\begin{table}
-\centering
-\begin{tabular}{|l|l|}
-\hline
-Content left & Content right\\
-\hline
-\end{tabular}
-\caption{Another table}
-\end{table}
+%\begin{table}
+%\centering
+%\begin{tabular}{|l|l|}
+%\hline
+%Content left & Content right\\
+%\hline
+%\end{tabular}
+%\caption{Another table}
+%\end{table}
+
 
 \newpage
 
@@ -284,10 +300,29 @@ main(m1,s) char *s; {
 Threads, data structures, language ...
 Pandas (dataframe), CV2 (show image), exifread, Python 2.7, missing testing (CPU, memory, time?)
 
+
+The system is implemented and written in Python 2.7\footnote{\url{https://www.python.org/}} because .. (frameworks available in this language??).
+
+To visualize/show pictures, a Python library called OpenCV \footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
+To read exif/metadata from pictures, we used a Python library called exifread 2.1.2 \footnote{\url{https://pypi.python.org/pypi/ExifRead}}.
+
 \chapter{Evaluation} 
 metrics, define (CPU, memoury, lantecy.), benchmarks (mirko, kernel...
 How to measure, where done, PSEUDOCODE
+
+\begin{itemize}
+\item[Time] Finding folders and metadata takes:  1:43:13.488799,
+Reading excel file takes:  0:00:17.413845,
+Comparing takes:  4:43:30.705587,
+Overall time is  6:27:01.608355.
+Med alle bilder m/metadata og hele fotoboks2011_nordkynn_nordkynn.2011.xlsx.
+
+This chapter describes the experimental setup and metrics used to evaluate the implemented system. 
+
+\end{itemize}
 \section{Experimental Setup}
+All experiements was done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit.
+
 \section{Something!?}
 \section{Results}
 What does the result say?
