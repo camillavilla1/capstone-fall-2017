@@ -106,7 +106,8 @@ This dissertation present/describe ...
 
 \chapter{Introduction}
 \begin{itemize}
-\item mention focus on camera-sensors/data?!?\cite{coursebook} 
+\item Mention focus on camera-sensors/data, and not other sensors?!?\cite{coursebook} 
+\item Talk a little bit about COAT in general?
 \end{itemize}
 
 This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors.
@@ -133,6 +134,10 @@ Something about motivation and stuff
 \section{Limitations}
 AVGRENSE, VIKTIG!!
 
+\begin{itemize}
+\item Mention focus on camera-sensors/data, and not other sensors?!
+\end{itemize}
+
 %\begin{itemize}
 %\item The first item .
 %\item The second item is
@@ -153,7 +158,7 @@ AVGRENSE, VIKTIG!!
 %\newpage
 
 \subsection{A subsection}
-
+\iffalse
 We can use the \ac{api} to \ac{2api} do stuff, and write about what we did in a \gls{thesis}!
 
 This is some stuff, {\sc smallcaps {\em smallcapsemphasized}} {\em regularemphasized}
@@ -172,7 +177,7 @@ footnote.}
 
 \definition{Some other definition}
 \definition{Its raining dogs and cats}
-
+\fi
 %\begin{figure}
 %\centering
 %\includegraphics[scale=0.1]{example_image.jpg}
@@ -194,32 +199,31 @@ gggg
 \chapter{Architecture}
 Functionalities, abstractions, tell it clean/neat.
 
+There are 6 components in the system: physical sensors, data storage, fused data, virtual sensors and the user. However, the main components in the system are the data storage, the fused data, the virtual sensors and the user.
+In this chapter, we will describe the architecture of the data storage, fused data, virtual sensors and the user.The architecture of the system is presented in Figure \ref{fig:ex}.
+
 \begin{figure}
 \centering
-\includegraphics[scale=0.45]{Prosjektoppgave_arkitektur.png}
-\caption{Figure showing architecture}
+\includegraphics[scale=0.5]{Architecture.pdf}
+\caption{Figure showing the system architecture.}
 \label{fig:ex}
 \end{figure}
 
-\begin{itemize}
-\item Physical sensors??
-\item Datastore (DAO)
-\item Fused data
-\item Virtual sensors
-\item Result from virtual sensor to user
-\end{itemize}
 
-This section describes the system architecture(, functionality of individual components and how they operate together).
-A three-layered architecture: data storage, fused data, virtual sensors.??
+\section{Physical Sensors and Data Storage}
 
-The physical sensors transmit their data to the data storage. The data storage consists of images from different sensors and excel-sheets containing information about each picture. 
+The physical sensors transmit their data to the data storage. The data storage consists of (several set of) images from different sensors and excel-sheets containing information about each picture. 
 The fused data retrieves it's data from the data storage and store the fused data into an CSV-file.
 
-The virtual sensors are divided into animal-sensors, e.g. one raven-sensor, one arctic fox- sensor etc.
+The virtual sensors are divided into animal-sensors, e.g. one raven-sensor, one red-fox- sensor etc.
 The user types in what animal it wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor receive its result from the fused data from the CSV-file.
 
-Finally, the data/pictures is displayed to the user/biologist through a user interface(?)/image-shower (Python OpenCV library). The architecture of the system is presented in Figure \ref{fig:ex}.
+Finally, the data/pictures is displayed to the user/biologist through a user interface(?)/image-shower (Python OpenCV library).
 
+
+\section{Fused Data}
+\section{Virtual Sensors}
+\section{Result from Virtual Sensor to User}
 
 \chapter{Design}
 Client/Server, p2p, put/get, pub/sub, protokoller etc..
@@ -228,6 +232,13 @@ BESKRIV INTERAKSJONEN MELLOM ENHETENE!!
 Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 Er de virtuelle sensorene servere eller publisher?
 
+Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
+
+Ca 16-17000 rows i et excel-ark. Leser ut info som dyr, antall, sted, datetime, site, year og putter i en string.
+
+Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
+
+\iffalse 
 \begin{table}
 \centering
 \begin{tabular}{|l|l|}
@@ -249,7 +260,7 @@ Content left & Content right\\
 %\end{table}
 
 
-\newpage
+%\newpage
 
 \begin{lstlisting}[frame=single,caption={Small C program},language=C]
 #include "stdio.h"
@@ -293,12 +304,12 @@ main(m1,s) char *s; {
 }
 \end{lstlisting}
 
-
+\fi
 
 \chapter{Implementation}
 %\lipsum[3-4]
 Threads, data structures, language ...
-Pandas (dataframe), CV2 (show image), exifread, Python 2.7, missing testing (CPU, memory, time?)
+Pandas (dataframe \footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} \footnote{\url{http://pandas.pydata.org/pandas-docs/stable/}}), CV2 (show image), exifread, Python 2.7, missing testing (CPU, memory, time?)
 
 
 The system is implemented and written in Python 2.7\footnote{\url{https://www.python.org/}} because .. (frameworks available in this language??).
@@ -316,6 +327,12 @@ Reading excel file takes:  0:00:17.413845,
 Comparing takes:  4:43:30.705587,
 Overall time is  6:27:01.608355.
 Med alle bilder m/metadata og hele fotoboks2011_nordkynn_nordkynn.2011.xlsx.
+
+\item[New time] Finding folders and metadata takes:  1:46:17.406581
+Reading excel file takes:  0:01:07.686779
+Comparing takes:  19:03:11.177869
+Overall time is  20:50:36.271415
+Med alle bilder m/mETADATA og hele nordkynn og varanger
 
 This chapter describes the experimental setup and metrics used to evaluate the implemented system. 
 
