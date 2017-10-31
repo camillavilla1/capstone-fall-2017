@@ -98,7 +98,7 @@ This dissertation present/describe ...
 
 \tableofcontents
 
-\listofdefinition
+%\listofdefinition
 \listoffigures
 
 %:-------------------------- Mainmatter -----------------------
@@ -119,7 +119,7 @@ The purpose is to provide for a more powerful and flexible sensor in the COAT mo
 The motivation!
 \begin{itemize}
 \item W3
-\item Problem definition: This project investegated ... x, with the purpose of y.
+\item Problem definition: This project investigated ... x, with the purpose of y.
 \end{itemize}
 
 The motivation  behind this project is that no single sensor may cover the sensing needs, and that sensing needs can change rapidly over time. Consequently, there is a need for sensor fusion, and allow for combining sensors at different computers.
@@ -190,7 +190,11 @@ footnote.}
 \begin{itemize}
 \item Taking Sensor Networks from the Lab to the Jungle
 \item Wireless Sensor Networks for Habitat Monitoring
-\item Se de andre paperne Otto har sendt
+\item Building Virtual Sensors and Actuators over Logical Neighborhoods
+\item A virtual sensor system for user-generated, real-time environmental data products
+\item Integrating modeling and smart sensors for environmental and human health
+\item Capability representation model for heterogeneous remote sensing sensors: Case study on soil moisture monitoring
+\item Dice: Monitoring Global Invariants with Wireless Sensor Networks
 \end{itemize}
 
 \section{Something}
@@ -200,43 +204,50 @@ gggg
 Functionalities, abstractions, tell it clean/neat.
 
 There are 6 components in the system: physical sensors, data storage, fused data, virtual sensors and the user. However, the main components in the system are the data storage, the fused data, the virtual sensors and the user.
-In this chapter, we will describe the architecture of the data storage, fused data, virtual sensors and the user.The architecture of the system is presented in Figure \ref{fig:ex}.
+In this chapter, we will describe the architecture of the data storage, fused data, virtual sensors and the user. The architecture of the system is presented in Figure \ref{fig:ex}.
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.5]{Architecture.pdf}
+\includegraphics[scale=0.25]{Architecture2.png}
 \caption{Figure showing the system architecture.}
 \label{fig:ex}
 \end{figure}
 
 
 \section{Physical Sensors and Data Storage}
-
-The physical sensors transmit their data to the data storage. The data storage consists of (several set of) images from different sensors and excel-sheets containing information about each picture. 
-The fused data retrieves it's data from the data storage and store the fused data into an CSV-file.
-
-The virtual sensors are divided into animal-sensors, e.g. one raven-sensor, one red-fox- sensor etc.
-The user types in what animal it wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor receive its result from the fused data from the CSV-file.
-
-Finally, the data/pictures is displayed to the user/biologist through a user interface(?)/image-shower (Python OpenCV library).
-
+The physical sensors transmit their data to the data storage. The data storage consists of several set of images from different sensors and excel-sheets containing information about each picture. The physical sensors are placed at different location in the Arctic Tundra such as Nordkynn and Varanger, which includes Komag, Nyborg and Stjernevann.
 
 \section{Fused Data}
+The fused data retrieves it's data from the data storage and store the fused data into an CSV-file on demand. The fused data is the image-path from all the directories in the data storage combined with necessary information from the excel-sheet such as date-time, location, site, year, what kind of animal was in the image and also how many animals there was.
+
 \section{Virtual Sensors}
+The virtual sensors are divided such as each sensor represent an animal that scientists are interested in, e.g. one raven-sensor, one red fox-sensor and one golden eagle-sensor.
+The user types in what animal it wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor receive its result from the fused data from the CSV-file.
+
 \section{Result from Virtual Sensor to User}
+A user wants to retrieve images from the data store.
+The user interacts with a user application. This application takes care of the communication to the virtual sensors. When a user gives a command/commands, the user application sends it to one of the virtual sensors, the virtual sensor retrieve data from the fused data as described in the section above, and deliver the response back to the user. The image(s) are displayed through an image-vision library/software.
+
+
+
 
 \chapter{Design}
 Client/Server, p2p, put/get, pub/sub, protokoller etc..
 BESKRIV INTERAKSJONEN MELLOM ENHETENE!!
 
 Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
-Er de virtuelle sensorene servere eller publisher?
+Er de virtuelle sensorene servere eller client/publisher?
 
+\section{Data Storage}
+\section{Fused Data from Sensors}
 Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
 
 Ca 16-17000 rows i et excel-ark. Leser ut info som dyr, antall, sted, datetime, site, year og putter i en string.
 
 Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
+\section{Virtual Sensors}
+\section{User}
+
 
 \iffalse 
 \begin{table}
@@ -326,13 +337,29 @@ How to measure, where done, PSEUDOCODE
 Reading excel file takes:  0:00:17.413845,
 Comparing takes:  4:43:30.705587,
 Overall time is  6:27:01.608355.
-Med alle bilder m/metadata og hele fotoboks2011_nordkynn_nordkynn.2011.xlsx.
+Med alle bilder m/metadata og hele fotoboks2011\_nordkynn\_nordkynn.2011.xlsx.
 
 \item[New time] Finding folders and metadata takes:  1:46:17.406581
 Reading excel file takes:  0:01:07.686779
 Comparing takes:  19:03:11.177869
 Overall time is  20:50:36.271415
 Med alle bilder m/mETADATA og hele nordkynn og varanger
+
+\item["Concurrent"] python find\_folder\_ok\_concurrent.py 
+Finding folders and metadata takes:  1:30:50.250732
+Reading excel file takes:  0:00:18.127597
+Comparing takes:  4:18:33.368199
+Overall time is  5:49:41.746759
+-- Pool(processes=4)
+FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
+
+\item["Concurrent"]
+Finding folders and metadata takes:  1:44:18.788013
+Reading excel file takes:  0:00:17.269817
+Comparing takes:  3:54:23.483186
+Overall time is  5:38:59.541248
+-- Pool(processes=100)
+FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 
 This chapter describes the experimental setup and metrics used to evaluate the implemented system. 
 
@@ -343,15 +370,32 @@ All experiements was done on a Lenovo ThinkCenter with an Intel® Core™ i5-640
 \section{Something!?}
 \section{Results}
 What does the result say?
-Each eksperiemnt, result, meaning
+Each experiment, result, meaning
 
 \chapter{Discussion}
-Idea, architecture, design, results, andre løsninger, "arch har scaleproblem?"
-\section{abcd}
+Idea, architecture, design, results, other solutions, "arch have scale-problem?"
+
+\section{Architecture}
+\subsection{Other solutions}
+\begin{itemize}
+\item Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
+\item Updates of "database" in background, not on demand -> future work
+\end{itemize}
+
+\section{Design}
+\subsection{Other solutions}
+\begin{itemize}
+\item hash-map instead of multiple lists with different animals. hash on animal and/or place
+\item parallel/concurrent program when doing metadata-collecting and reading from excel-sheet and writing to csv
+\item 
+\end{itemize}
+
+
 
 \chapter{Contributions}
-
+Combine with conclusion??
 \chapter{Conclusion}
+\section{Contributions?}
 \section{Future Work}
 
 \chapter{Future Work?}
