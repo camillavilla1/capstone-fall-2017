@@ -176,14 +176,7 @@ Referencing figure \ref{fig:ex} to test link.\footnote{This is another
 footnote.}
 
 \definition{Some other definition}
-\definition{Its raining dogs and cats}
 \fi
-%\begin{figure}
-%\centering
-%\includegraphics[scale=0.1]{example_image.jpg}
-%\caption{Figure link should point to top of figure.}
-%\label{fig:ex}
-%\end{figure}
 
 
 \chapter{Background and Related Work}
@@ -197,22 +190,25 @@ footnote.}
 \item Dice: Monitoring Global Invariants with Wireless Sensor Networks
 \end{itemize}
 
-A virtual sensor is a constructed/application sensor imotsetning til a physical sensor ... as described in reference.. \cite{VirtualSensors2006}
 
 \section{Virtual Sensors}
+A virtual sensor is a constructed/application sensor unlike/dissimliar/contrary/diverse to a physical sensor as described by S. Kabadayi et. al \cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
+
+In this project the biologists want to find pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect data from the physical sensors and then return those images that equivalent to the biologists input.
+
 
 \section{Something}
 
 \chapter{Architecture}
 This chapter describes the architecture of the system.
 There are 6 components in the system: physical sensors, data storage, fused data, virtual sensors and the user. However, the main components in the system are the data storage, the fused data, the virtual sensors and the user.
-The architecture of the system is presented in Figure \ref{fig:ex}.
+The architecture of the system is presented in Figure \ref{fig:architecture}.
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.32]{Architecture2.png}
+\includegraphics[width=\textwidth]{Architecture2.png}
 \caption{Figure showing the system architecture.}
-\label{fig:ex}
+\label{fig:architecture}
 \end{figure}
 
 
@@ -239,14 +235,14 @@ BESKRIV INTERAKSJONEN MELLOM ENHETENE!!
 Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 Er de virtuelle sensorene servere eller client/publisher?
 
-In this chapter we will look at the design of the environment. We will present the design of the data storage, the fused data the virtual sensors and the user application. Figure \ref{fig:ex} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures.
+In this chapter we will look at the design of the environment. We will present the design of the data storage, the fused data the virtual sensors and the user application. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures.
 
 
 \begin{figure}
 \centering
-\includegraphics[scale=0.3]{Design.png}
+\includegraphics[width=\textwidth]{Design.png}
 \caption{Figure showing the system design.}
-\label{fig:ex}
+\label{fig:design}
 \end{figure}
 
 \section{Data Storage and Fused Data from Sensors}
@@ -279,6 +275,20 @@ Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
 \section{Virtual Sensors}
 \section{User}
 The user-application is the connection between  the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see.
+The user only need to specify the following 3 paramteres for the virtual sensor:
+\begin{description}
+\item [Animal]
+\item [Date-time]
+\item [Location]
+\end{description}
+
+\begin{itemize}
+\item Animal:
+\item Date-time:
+\item Location:
+\end{itemize}
+
+
 
 \iffalse 
 \begin{table}
@@ -364,19 +374,19 @@ metrics, define (CPU, memoury, lantecy.), benchmarks (mirko, kernel...
 How to measure, where done, PSEUDOCODE
 
 \begin{itemize}
-\item[Time] Finding folders and metadata takes:  1:43:13.488799,
+\item Time: Finding folders and metadata takes:  1:43:13.488799,
 Reading excel file takes:  0:00:17.413845,
 Comparing takes:  4:43:30.705587,
 Overall time is  6:27:01.608355.
 Med alle bilder m/metadata og hele fotoboks2011\_nordkynn\_nordkynn.2011.xlsx.
 
-\item[New time] Finding folders and metadata takes:  1:46:17.406581
+\item New time: Finding folders and metadata takes:  1:46:17.406581
 Reading excel file takes:  0:01:07.686779
 Comparing takes:  19:03:11.177869
 Overall time is  20:50:36.271415
 Med alle bilder m/mETADATA og hele nordkynn og varanger
 
-\item["Concurrent"] python find\_folder\_ok\_concurrent.py 
+\item "Concurrent" python find\_folder\_ok\_concurrent.py 
 Finding folders and metadata takes:  1:30:50.250732
 Reading excel file takes:  0:00:18.127597
 Comparing takes:  4:18:33.368199
@@ -384,7 +394,7 @@ Overall time is  5:49:41.746759
 -- Pool(processes=4)
 FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 
-\item["Concurrent"]
+\item "Concurrent" igjen
 Finding folders and metadata takes:  1:44:18.788013
 Reading excel file takes:  0:00:17.269817
 Comparing takes:  3:54:23.483186
@@ -404,7 +414,7 @@ What does the result say?
 Each experiment, result, meaning
 
 \chapter{Discussion}
-Idea, architecture, design, results, other solutions, "arch have scale-problem?"
+Idea, architecture, design, results, other solutions, "arch have scale-problem?".
 
 \section{Architecture}
 \subsection{Other solutions}
@@ -456,10 +466,10 @@ readme, source code, dataset measurement RAW
   1998.
 
 \bibitem{VirtualSensors2006}
-Sanem Kabadayia, Adam Pridgen, Christine Julien 
+S. Kabadayi and A. Pridgen and C. Julien
 \newblock {\em Virtual Sensors: Abstracting Data from Physical Sensors}.
 \newblock , 2006.
-\newblock In {\em 2006 International Symposium on a World of Wireless, Mobile and Multimedia Networks(WoWMoM'06)}.
+\newblock In {\em 2006 International Symposium on a World of Wireless, Mobile and Multimedia Networks(WoWMoM'06), 6 pp.-592}.
 
 
 
