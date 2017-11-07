@@ -106,7 +106,7 @@ This dissertation present/describe ...
 
 \chapter{Introduction}
 \begin{itemize}
-\item Mention focus on camera-sensors/data, and not other sensors?!?\cite{coursebook} 
+\item Mention focus on camera-sensors/data, and not other sensors?!
 \item Talk a little bit about COAT in general?
 \end{itemize}
 
@@ -140,25 +140,21 @@ AVGRENSE, VIKTIG!!
 
 %\begin{itemize}
 %\item The first item .
-%\item The second item is
 %\end{itemize}
-
 
 %\begin{enumerate}
 %\item The first item
-%\item The second item is a 
 %\end{enumerate}
 
 %\begin{description}
 %\item[Entry A] with definition A.
-%\item[Entry B] with definition B.
-%\item[Entry C] with definition C.
 %\end{description}
 
 %\newpage
 
-\subsection{A subsection}
 \iffalse
+\subsection{A subsection}
+
 We can use the \ac{api} to \ac{2api} do stuff, and write about what we did in a \gls{thesis}!
 
 This is some stuff, {\sc smallcaps {\em smallcapsemphasized}} {\em regularemphasized}
@@ -179,7 +175,7 @@ footnote.}
 \fi
 
 
-\chapter{Background and Related Work}
+\chapter{(Background and) Related Work}
 \begin{itemize}
 \item Taking Sensor Networks from the Lab to the Jungle
 \item Wireless Sensor Networks for Habitat Monitoring
@@ -187,17 +183,29 @@ footnote.}
 \item A virtual sensor system for user-generated, real-time environmental data products
 \item Integrating modeling and smart sensors for environmental and human health
 \item Capability representation model for heterogeneous remote sensing sensors: Case study on soil moisture monitoring
-\item Dice: Monitoring Global Invariants with Wireless Sensor Networks
+\item Dice: Monitoring Global Invariants with Wireless Sensor Networks 
+\\ \em{Ştefan Gună, Luca Mottola, and Gian Pietro Picco. 2014. DICE: Monitoring global invariants with wireless
+sensor networks. ACM Trans. Sensor Netw. 10, 4, Article 54 (April 2014), 34 pages.}
+DOI: http://dx.doi.org/10.1145/2509434
 \end{itemize}
 
 
 \section{Virtual Sensors}
-A virtual sensor is a constructed/application sensor unlike/dissimliar/contrary/diverse to a physical sensor as described by S. Kabadayi et. al.\cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
+A virtual sensor is a constructed sensor unlike/dissimliar/contrary to a physical sensor as described by S. Kabadayi et. al.\cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
 
-In this project the biologists want to find/(search for) pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect data from the physical sensors and then return those images that are equivalent to the biologists input.
+In this project the biologists want to search for pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect data from the physical sensors and then return those images that are equivalent to the biologists input.
+
+Ciciriello et. al.\cite{Ciciriello} describes virtual nodes which are programming abstractions that should simplify the development of decentralized wireless sensor network applications. Their system enable access to the data by a given set of sensors and making it into one virtual sensor that a programmer can interact with.
+The physical nodes are abstracted and specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}. The nodes are combined in a logical neighborhood that are specified based on their characteristics by the programmer. 
+
+TinyOS \cite{TinyOS}
+
+Our work relies on physical sensor data which is already in a data storage, and not directly from the physical sensors.
 
 
 \section{Something}
+
+
 
 \chapter{Architecture}
 This chapter describes the architecture of the system.
@@ -381,7 +389,7 @@ Finding folders and metadata takes:  1:30:50.250732
 Reading excel file takes:  0:00:18.127597
 Comparing takes:  4:18:33.368199
 Overall time is  5:49:41.746759
--- Pool(processes=4)
+\\ -- Pool(processes=4)
 FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 
 \item "Concurrent" igjen
@@ -390,7 +398,7 @@ Reading excel file takes:  0:00:17.269817
 Comparing takes:  3:54:23.483186
 Overall time is  5:38:59.541248
 -- Pool(processes=100)
-FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
+\\ FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 
 This chapter describes the experimental setup and metrics used to evaluate the implemented system. 
 
@@ -448,23 +456,45 @@ readme, source code, dataset measurement RAW
 
 \begin{thebibliography}{9}
 
-\bibitem{coursebook}
- Robert Sedgewick 
-  \emph{Algorithms in C - parts 1-4}.
-  Addison-Wesley Publishing Company,
-  3. Edition,
-  1998.
-
 \bibitem{VirtualSensors2006}
 S. Kabadayi and A. Pridgen and C. Julien
-\newblock {\em Virtual Sensors: Abstracting Data from Physical Sensors}.
-\newblock , 2006.
-\newblock In {\em 2006 International Symposium on a World of Wireless, Mobile and Multimedia Networks(WoWMoM'06), 6 pp.-592}.
+\newblock {\em Virtual Sensors: Abstracting Data from Physical Sensors}, 2006,
+\newblock in {\em 2006 International Symposium on a World of Wireless, Mobile and Multimedia Networks(WoWMoM'06), 6 pp.-592}.
+
+
+\bibitem{Ciciriello}
+Ciciriello, Pietro and Mottola, Luca and Picco, Gian Pietro
+\newblock {\em Building Virtual Sensors and Actuators over Logical Neighborhoods}, 2006,
+\newblock in {ACM, 19--24}.
+\newblock {\em \url{http://doi.acm.org/10.1145/1176866.1176870}}.
+
+
+\bibitem{TinyOS}
+Hill, Jason and Szewczyk, Robert and Woo, Alec and Hollar, Seth and Culler, David and Pister, Kristofer
+\newblock {\em System Architecture Directions for Networked Sensors}, 2000,
+\newblock in {\em  ASPLOS-IX: Proc. of the 9 nt Int. Conf. on
+Architectural Support for Programming Languages and
+Operating Systems}, pages 93–104, 2000.
+
+
+\bibitem{Mottola2006}
+Mottola, Luca and Picco, Gian Pietro
+\newblock {\em Logical Neighborhoods: A Programming Abstraction for Wireless Sensor Networks}, 2006,
+\newblock in {\em  Distributed Computing in Sensor Systems: Second IEEE International Conference, DCOSS 2006, San Francisco, CA, USA, June 18-20, 2006. Proceedings}, pages 150--168, 2000.
+\newblock {\em \url{http://.............}}.
+
+
+\bibitem{Mottola2006_2}
+Mottola, Luca and Picco, Gian Pietro
+\newblock {\em Programming Wireless Sensor Networks with Logical Neighborhoods}, 2006,
+\newblock in {\em  Proceedings of the First International Conference on Integrated Internet Ad Hoc and Sensor Networks},
+ series = {InterSense '06}, pages 150--168, 2000.
+\newblock {\em \url{http://doi.acm.org/10.1145/1142680.1142691}}.
+
 
 
 
 \end{thebibliography}
-
 
 \end{document}
 
