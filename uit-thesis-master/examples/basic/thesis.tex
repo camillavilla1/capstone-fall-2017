@@ -191,11 +191,14 @@ DOI: http://dx.doi.org/10.1145/2509434
 
 
 \section{Virtual Sensors}
-A virtual sensor is a constructed sensor unlike/dissimliar/contrary to a physical sensor as described by S. Kabadayi et. al.\cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
+A virtual sensor is a constructed sensor in contrary to a physical sensor as described by S. Kabadayi et. al.\cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
+\\ \\
+\emph{Recent research efforts have focused on simple in-network data aggregation techniques. Project targeted directly for sensor networks have often explored representing the sensor network as a database. Two demonstrative examples are TinyDB \cite{tinyDB} and Cougar \cite{cougar}. Generally these approaches enable applcations with data requests that follow out from a central point (e.g. a base station) and create routing trees to funnel replies back to this root. These approaches focus on performing intelligent in-network aggregation and routing to reduce the overall energy cost while still keeping the semantic value of data high. in both approaches, data aggregation is specified using an SQL-like language. Queries cannot be used to merge different data types; only homogeneous data aggregation is possible. In contrast, the virtual sensor approach offers simple programming interface, supports multiple access points, and offers raw and heterogeneous in-network data processing.}
 
+\\ \\
 In this project the biologists want to search for pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect data from the physical sensors and then return those images that are equivalent to the biologists input.
 
-Ciciriello et. al.\cite{Ciciriello} describes virtual nodes which are programming abstractions that should simplify the development of decentralized wireless sensor network applications. Their system enable access to the data by a given set of sensors and making it into one virtual sensor that a programmer can interact with.
+Ciciriello et. al.\cite{Ciciriello} describes virtual nodes which are programming abstractions that should simplify the development of decentralized wireless sensor network (WSN) applications. Their system enable access to the data by a given set of sensors and making it into one virtual sensor that a programmer can interact with.
 The physical nodes are abstracted and specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}. The nodes are combined in a logical neighborhood that are specified based on their characteristics by the programmer. 
 
 TinyOS \cite{TinyOS}
@@ -474,13 +477,13 @@ Hill, Jason and Szewczyk, Robert and Woo, Alec and Hollar, Seth and Culler, Davi
 \newblock {\em System Architecture Directions for Networked Sensors}, 2000,
 \newblock in {\em  ASPLOS-IX: Proc. of the 9 nt Int. Conf. on
 Architectural Support for Programming Languages and
-Operating Systems}, pages 93–104, 2000.
+Operating Systems}, pages 93–104.
 
 
 \bibitem{Mottola2006}
 Mottola, Luca and Picco, Gian Pietro
 \newblock {\em Logical Neighborhoods: A Programming Abstraction for Wireless Sensor Networks}, 2006,
-\newblock in {\em  Distributed Computing in Sensor Systems: Second IEEE International Conference, DCOSS 2006, San Francisco, CA, USA, June 18-20, 2006. Proceedings}, pages 150--168, 2000.
+\newblock in {\em  Distributed Computing in Sensor Systems: Second IEEE International Conference, DCOSS 2006, San Francisco, CA, USA, June 18-20, 2006. Proceedings}, pages 150--168.
 \newblock {\em \url{http://.............}}.
 
 
@@ -488,8 +491,22 @@ Mottola, Luca and Picco, Gian Pietro
 Mottola, Luca and Picco, Gian Pietro
 \newblock {\em Programming Wireless Sensor Networks with Logical Neighborhoods}, 2006,
 \newblock in {\em  Proceedings of the First International Conference on Integrated Internet Ad Hoc and Sensor Networks},
- series = {InterSense '06}, pages 150--168, 2000.
+ series = {InterSense '06}, pages 150--168.
 \newblock {\em \url{http://doi.acm.org/10.1145/1142680.1142691}}.
+
+
+\bibitem{tinyDB}
+Madden, Samuel R. and Franklin, Michael J. and Hellerstein, Joseph M. and Hong, Wei
+\newblock {\em TinyDB: An Acquisitional Query Processing System for Sensor Networks}, March 2005,
+\newblock in {\em  ACM Trans. Database Syst. Vol. 30, Nr. 1}, pages 122--173.
+\newblock {\em \url{http://doi.acm.org/10.1145/1061318.1061322}}.
+
+
+\bibitem{cougar}
+Yao, Yong and Gehrke, Johannes
+\newblock {\em The Cougar Approach to In-network Query Processing in Sensor Networks}, September 2002,
+\newblock in {\em  SIGMOD Rec., Vol. 31, Nr. 3}, pages 9--18.
+\newblock {\em \url{http://doi.acm.org/10.1145/601858.601861}}.
 
 
 
