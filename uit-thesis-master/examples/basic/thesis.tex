@@ -175,7 +175,8 @@ footnote.}
 \fi
 
 
-\chapter{(Background and) Related Work}
+\chapter{Related Work}
+\iffalse
 \begin{itemize}
 \item Taking Sensor Networks from the Lab to the Jungle
 \item Wireless Sensor Networks for Habitat Monitoring
@@ -188,25 +189,29 @@ footnote.}
 sensor networks. ACM Trans. Sensor Netw. 10, 4, Article 54 (April 2014), 34 pages.}
 DOI: http://dx.doi.org/10.1145/2509434
 \end{itemize}
-
+\fi
 
 \section{Virtual Sensors}
 A virtual sensor is a constructed sensor in contrary to a physical sensor as described by S. Kabadayi et. al.\cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
-\\ \\
-\emph{Recent research efforts have focused on simple in-network data aggregation techniques. Project targeted directly for sensor networks have often explored representing the sensor network as a database. Two demonstrative examples are TinyDB \cite{tinyDB} and Cougar \cite{cougar}. Generally these approaches enable applcations with data requests that follow out from a central point (e.g. a base station) and create routing trees to funnel replies back to this root. These approaches focus on performing intelligent in-network aggregation and routing to reduce the overall energy cost while still keeping the semantic value of data high. in both approaches, data aggregation is specified using an SQL-like language. Queries cannot be used to merge different data types; only homogeneous data aggregation is possible. In contrast, the virtual sensor approach offers simple programming interface, supports multiple access points, and offers raw and heterogeneous in-network data processing.}
 
-\\ \\
+Previous research have focused on simple in-network data aggregation techniques and the sensor networks are often represented as a database. Two examples of such approaches are TinyDB \cite{tinyDB} and Cougar \cite{cougar}, which enable applications to have a central point (base station) and create routing trees  to funnel replies back to this root. The main focus on these approaches are operating intelligent in-network aggregation and routing to reduce  the overall energy cost while still keep the semantic value of data high.
+In both examples, the data aggregation is specified using an SQL-like language. However, queries cannot be used to merge different data types, only homogeneous data aggregation is achievable.
+The virtual sensors approach is  offering a simple interface and \textbf{hetero/homo-geneous (in-network)???} data aggregation. Yet, our virtual sensors have no SQL-like language or a database to store the aggregated data. Our work also relies on physical sensor data which is already in a data storage, and not directly from physical sensors.
+
 In this project the biologists want to search for pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect data from the physical sensors and then return those images that are equivalent to the biologists input.
 
-Ciciriello et. al.\cite{Ciciriello} describes virtual nodes which are programming abstractions that should simplify the development of decentralized wireless sensor network (WSN) applications. Their system enable access to the data by a given set of sensors and making it into one virtual sensor that a programmer can interact with.
-The physical nodes are abstracted and specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}. The nodes are combined in a logical neighborhood that are specified based on their characteristics by the programmer. 
+Ciciriello et. al.\cite{Ciciriello} describes virtual nodes which are programming abstractions that should simplify the development of decentralized wireless sensor network (WSN) applications. Their system enable access to the data by a given set of sensors and making it into one virtual sensor that a programmer can interact with. Their virtual nodes are implemented using TinyOS \cite{TinyOS} and their physical nodes are abstracted and specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}. The nodes are combined in a logical neighborhood that are specified based on their characteristics by the programmer. 
 
-TinyOS \cite{TinyOS}
+Hill et. al. \cite{hill} present a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data. 
+The virtual rainfall sensor is illustrated in Figure \ref{fig:rainfall_sensor}. It is created by linking data-processing modules together in a workflow that is triggered by a data fetcher provided by the streaming data toolkit.
+In contrast, our virtual sensors system is running on-demand, not in background/real-time....
 
-Our work relies on physical sensor data which is already in a data storage, and not directly from the physical sensors.
-
-
-\section{Something}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{rainfall_sensor.png}
+\caption{Figure illustrating the virtual rainfall sensor.}
+\label{fig:rainfall_sensor}
+\end{figure}
 
 
 
@@ -231,7 +236,7 @@ The data store also contains several excel-sheets containing information about e
 The fused data retrieves it's data from the data storage and store the fused data into a Comma-Separated Value (CSV) file on demand. The fused data is the image-path from all the directories in the data storage combined with necessary information from the excel-sheet such as date-time, location, site, year, what kind of animal was in the image and also how many animals there was.
 
 \section{Virtual Sensors}
-The virtual sensors are divided multiple sensors representing different animals that scientists are interested in, e.g. one raven-sensor, one red fox-sensor and one golden eagle-sensor.
+The virtual sensors are divided into multiple sensors representing different animals that scientists are interested in, e.g. one raven-sensor, one red fox-sensor and one golden eagle-sensor.
 The user types in what animal it wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor receive its result from the fused data from the CSV-file.
 
 \section{Result from Virtual Sensor to User}
@@ -267,10 +272,6 @@ Date and time from each image is extracted and stored in a dictionary together w
 
 
 \section{Fused Data from Sensors}
-
-
-
-
 Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
 
 
@@ -361,14 +362,30 @@ main(m1,s) char *s; {
 
 \chapter{Implementation}
 %\lipsum[3-4]
+This chapter will elaborate on how we implemented the system, along with stuff...
+
 Threads, data structures, language ...
-Pandas (dataframe \footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} \footnote{\url{http://pandas.pydata.org/pandas-docs/stable/}}), CV2 (show image), exifread, Python 2.7, missing testing (CPU, memory, time?)
+missing testing (CPU, memory, time?)
 
 
-The system is implemented and written in Python 2.7\footnote{\url{https://www.python.org/}} because .. (frameworks available in this language??).
+The system is implemented and written in Python 2.7\footnote{\url{https://www.python.org/}}. We made this choice because Python is highly portable among different platforms.... (frameworks available in this language??)
 
-To visualize/show pictures, a Python library called OpenCV \footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
+
+
+
+\section{Pandas}
+Pandas (dataframe \footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}}, \footnote{\url{http://pandas.pydata.org/pandas-docs/stable/}})
+
+\section{ExifRead}
 To read exif/metadata from pictures, we used a Python library called exifread 2.1.2 \footnote{\url{https://pypi.python.org/pypi/ExifRead}}.
+
+\section{OpenCV}
+CV2 - show image
+To visualize/show pictures, a Python library called OpenCV \footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
+
+\section{User application}
+The user application is implemented as a ...
+There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about ...
 
 \chapter{Evaluation} 
 metrics, define (CPU, memoury, lantecy.), benchmarks (mirko, kernel...
@@ -458,56 +475,62 @@ readme, source code, dataset measurement RAW
 \newpage{}
 
 \begin{thebibliography}{9}
-
+%1
 \bibitem{VirtualSensors2006}
-S. Kabadayi and A. Pridgen and C. Julien
+S. Kabadayi and A. Pridgen and C. Julien,
 \newblock {\em Virtual Sensors: Abstracting Data from Physical Sensors}, 2006,
 \newblock in {\em 2006 International Symposium on a World of Wireless, Mobile and Multimedia Networks(WoWMoM'06), 6 pp.-592}.
 
-
+%2
 \bibitem{Ciciriello}
-Ciciriello, Pietro and Mottola, Luca and Picco, Gian Pietro
+Ciciriello, Pietro and Mottola, Luca and Picco, Gian Pietro,
 \newblock {\em Building Virtual Sensors and Actuators over Logical Neighborhoods}, 2006,
 \newblock in {ACM, 19--24}.
 \newblock {\em \url{http://doi.acm.org/10.1145/1176866.1176870}}.
 
-
+%3
 \bibitem{TinyOS}
-Hill, Jason and Szewczyk, Robert and Woo, Alec and Hollar, Seth and Culler, David and Pister, Kristofer
+Hill, Jason and Szewczyk, Robert and Woo, Alec and Hollar, Seth and Culler, David and Pister, Kristofer,
 \newblock {\em System Architecture Directions for Networked Sensors}, 2000,
 \newblock in {\em  ASPLOS-IX: Proc. of the 9 nt Int. Conf. on
 Architectural Support for Programming Languages and
 Operating Systems}, pages 93–104.
 
-
+%4
 \bibitem{Mottola2006}
-Mottola, Luca and Picco, Gian Pietro
+Mottola, Luca and Picco, Gian Pietro,
 \newblock {\em Logical Neighborhoods: A Programming Abstraction for Wireless Sensor Networks}, 2006,
 \newblock in {\em  Distributed Computing in Sensor Systems: Second IEEE International Conference, DCOSS 2006, San Francisco, CA, USA, June 18-20, 2006. Proceedings}, pages 150--168.
-\newblock {\em \url{http://.............}}.
+\newblock {\em \url{https://doi.org/10.1007/11776178_10}}.
 
-
+%5
 \bibitem{Mottola2006_2}
-Mottola, Luca and Picco, Gian Pietro
+Mottola, Luca and Picco, Gian Pietro,
 \newblock {\em Programming Wireless Sensor Networks with Logical Neighborhoods}, 2006,
 \newblock in {\em  Proceedings of the First International Conference on Integrated Internet Ad Hoc and Sensor Networks},
  series = {InterSense '06}, pages 150--168.
 \newblock {\em \url{http://doi.acm.org/10.1145/1142680.1142691}}.
 
-
+%6
 \bibitem{tinyDB}
-Madden, Samuel R. and Franklin, Michael J. and Hellerstein, Joseph M. and Hong, Wei
+Madden, Samuel R. and Franklin, Michael J. and Hellerstein, Joseph M. and Hong, Wei,
 \newblock {\em TinyDB: An Acquisitional Query Processing System for Sensor Networks}, March 2005,
 \newblock in {\em  ACM Trans. Database Syst. Vol. 30, Nr. 1}, pages 122--173.
 \newblock {\em \url{http://doi.acm.org/10.1145/1061318.1061322}}.
 
-
+%7
 \bibitem{cougar}
-Yao, Yong and Gehrke, Johannes
+Yao, Yong and Gehrke, Johannes,
 \newblock {\em The Cougar Approach to In-network Query Processing in Sensor Networks}, September 2002,
 \newblock in {\em  SIGMOD Rec., Vol. 31, Nr. 3}, pages 9--18.
 \newblock {\em \url{http://doi.acm.org/10.1145/601858.601861}}.
 
+%8
+\bibitem{hill}
+David J. Hill and Yong Liu and Luigi Marini and Rob Kooper and Alejandro Rodriguez and Joe Futrelle and Barbara S. Minsker and James Myers and Terry McLaren,
+\newblock {\em A virtual sensor system for user-generated, real-time environmental data products}, 2011,
+\newblock in {\em  Environmental Modelling \& Software, Vol. 26, Nr. 12}, pages 1710 - 1724.
+\newblock {\em \url{http://www.sciencedirect.com/science/article/pii/S1364815211001988}}.
 
 
 
