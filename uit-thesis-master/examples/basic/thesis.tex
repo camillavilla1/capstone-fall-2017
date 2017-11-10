@@ -196,7 +196,7 @@ A virtual sensor is a constructed sensor in contrary to a physical sensor as des
 
 Previous research have focused on simple in-network data aggregation techniques and the sensor networks are often represented as a database. Two examples of such approaches are TinyDB \cite{tinyDB} and Cougar \cite{cougar}, which enable applications to have a central point (base station) and create routing trees  to funnel replies back to this root. The main focus on these approaches are operating intelligent in-network aggregation and routing to reduce  the overall energy cost while still keep the semantic value of data high.
 In both examples, the data aggregation is specified using an SQL-like language. However, queries cannot be used to merge different data types, only homogeneous data aggregation is achievable.
-The virtual sensors approach is  offering a simple interface and \textbf{hetero/homo-geneous (in-network)???} data aggregation. Yet, our virtual sensors have no SQL-like language or a database to store the aggregated data. Our work also relies on physical sensor data which is already in a data storage, and not directly from physical sensors.
+Their virtual sensors approach is  offering a simple interface and heterogeneous in-network data aggregation. Yet, our virtual sensors have no SQL-like language or a database to store the aggregated data. Our work also relies on physical sensor data which is already in a data storage, and not directly from physical sensors.
 
 In this project the biologists want to search for pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect data from the physical sensors and then return those images that are equivalent to the biologists input.
 
@@ -204,7 +204,7 @@ Ciciriello et. al.\cite{Ciciriello} describes virtual nodes which are programmin
 
 Hill et. al. \cite{hill} present a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data. 
 The virtual rainfall sensor is illustrated in Figure \ref{fig:rainfall_sensor}. It is created by linking data-processing modules together in a workflow that is triggered by a data fetcher provided by the streaming data toolkit.
-In contrast, our virtual sensors system is running on-demand, not in background/real-time....
+In contrast, our virtual sensors system is running on-demand, not in real-time.
 
 \begin{figure}
 \centering
@@ -362,32 +362,53 @@ main(m1,s) char *s; {
 
 \chapter{Implementation}
 %\lipsum[3-4]
-This chapter will elaborate on how we implemented the system, along with stuff...
 
-Threads, data structures, language ...
-missing testing (CPU, memory, time?)
+\section{Overview}
+This chapter will elaborate on how we implemented the system, \textbf{general implementation requirements, issues and choices??}.
 
-
-The system is implemented and written in Python 2.7\footnote{\url{https://www.python.org/}}. We made this choice because Python is highly portable among different platforms.... (frameworks available in this language??)
+The system is implemented and written in Python 2.7\footnote{\url{https://www.python.org/}}. We made this choice because Python is highly portable among different platforms and there are also many frameworks available in this language that are relevant for this implementation.
 
 
+In the rest of this chapter we will first look at the different frameworks used in this virtual sensor system in Section \ref{sssec:pandas}, \ref{sssec:exif} and \ref{sssec:opencv}. Then we will look at the data storage in Section \ref{sssec:storage}, the fused data in Section \ref{ssec:fused}, the virtual sensors in Section \ref{vsensor}, and at last we will describe the user application in Section \ref{sssec:user}.
+
+Threads, data structures, language ... testing (CPU, memory, time?)
 
 
-\section{Pandas}
-Pandas (dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}}, \footnote{\url{http://pandas.pydata.org/pandas-docs/stable/}})
+\section{Pandas} \label{sssec:pandas}
+Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. 
 
-\section{ExifRead}
+\subsection{Dataframe}
+A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns). 
+
+
+
+\section{ExifRead} \label{sssec:exif}
 To read exif/metadata from pictures, we used a Python library called exifread 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}.
 
-\section{OpenCV}
+\textit{"Easy to use Python module to extract Exif metadata from tiff and jpeg files."}%e
+
+\section{OpenCV} \label{sssec:opencv}
 CV2 - show image
 To visualize/show pictures, a Python library called OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
 
-\section{Some other stuff}
+OpenCV was started at Intel in 1999 by Gary Bradsky and it was relsased in 2000.
 
-\section{User application}
+\textit{Currently OpenCV supports a wide variety of programming languages like C++, Python, Java etc and is available on different platforms including Windows, Linux, OS X, Android, iOS etc.}
+
+OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
+
+\section{Data Storage} \label{sssec:storage}
+Contains folders with labeled animals, but images have no metadata so don't know when it is taken etc..
+Therefore, traverse the whole storage and find "real" images w/metadata and compare to excel-sheet....
+
+\section{Fused Data} \label{ssec:fused}
+
+\section{Virtual Sensors} \label{vsensor}
+
+\section{User application} \label{sssec:user}
 The user application is implemented as a ...
 There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about ...
+
 
 \chapter{Evaluation} 
 metrics, define (CPU, memory, latency.), benchmarks (micro, kernel...
@@ -434,7 +455,7 @@ What does the result say?
 Each experiment, result, meaning
 
 \chapter{Discussion}
-Idea, architecture, design, results, other solutions, "arch have scale-problem?".
+%Idea, architecture, design, results, other solutions, "arch have scale-problem?".
 
 \section{Architecture}
 \subsection{Other solutions}
