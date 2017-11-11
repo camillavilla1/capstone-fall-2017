@@ -275,15 +275,10 @@ Date and time from each image is extracted and stored in a dictionary together w
 Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
 
 
-FRA HÅVARDS MASTER: The csv files did not contain any filenames,
-only image metadata and animal classifications, so we had to get creative
-to find out which images the annotations corresponded to. Fortunately, each
-image had metadata stored in Exchangeable Image File Format ( exif ). We
-created a Python script to extract the date and time from each image, along
-with camera information, to match them with the annotations. This was quite
-a time-consuming task because of the number of images to process.
+\textit{FRA HÅVARDS MASTER: The csv files did not contain any filenames, only image metadata and animal classifications, so we had to get creative to find out which images the annotations corresponded to. Fortunately, each image had metadata stored in Exchangeable Image File Format ( exif ). We created a Python script to extract the date and time from each image, along with camera information, to match them with the annotations. This was quite a time-consuming task because of the number of images to process.}
 
 Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
+
 \section{Virtual Sensors}
 \section{User}
 The user-application is the connection between  the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see.
@@ -375,35 +370,41 @@ Threads, data structures, language ... testing (CPU, memory, time?)
 
 
 \section{Pandas} \label{sssec:pandas}
+PUT UNDER FUSED DATA?
 Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. 
 
-\subsection{Dataframe}
-A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns). 
+We use Pandas in this project to extract relevant data from the excel-sheets in the data storage. The extracted data is extracted using Pandas Dataframe. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-sheet.
 
 
 
 \section{ExifRead} \label{sssec:exif}
+PUT UNDER FUSED DATA?
+
 To read exif/metadata from pictures, we used a Python library called exifread 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}.
 
-\textit{"Easy to use Python module to extract Exif metadata from tiff and jpeg files."}%e
+\textit{"Easy to use Python module to extract Exif metadata from tiff and jpeg files."}
 
 \section{OpenCV} \label{sssec:opencv}
-CV2 - show image
-To visualize/show pictures, a Python library called OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
+PUT UNDER VIRTUAL SENSOR/USER?
+OpenCV was started at Intel in 1999 by Gary Bradsky and it was relsased in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
+At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc.
 
-OpenCV was started at Intel in 1999 by Gary Bradsky and it was relsased in 2000.
-
-\textit{Currently OpenCV supports a wide variety of programming languages like C++, Python, Java etc and is available on different platforms including Windows, Linux, OS X, Android, iOS etc.}
 
 OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
+
+
+CV2 - show image
+To visualize/show pictures, a Python library called OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
 
 \section{Data Storage} \label{sssec:storage}
 Contains folders with labeled animals, but images have no metadata so don't know when it is taken etc..
 Therefore, traverse the whole storage and find "real" images w/metadata and compare to excel-sheet....
 
 \section{Fused Data} \label{ssec:fused}
+Pandas dataframe, exif
 
 \section{Virtual Sensors} \label{vsensor}
+opencv
 
 \section{User application} \label{sssec:user}
 The user application is implemented as a ...
@@ -411,6 +412,8 @@ There is currently no logging of a user's action. Nor is it possible for more th
 
 
 \chapter{Evaluation} 
+This chapter describes the experimental setup...
+
 metrics, define (CPU, memory, latency.), benchmarks (micro, kernel...
 How to measure, where done, PSEUDOCODE
 
@@ -449,10 +452,13 @@ This chapter describes the experimental setup and metrics used to evaluate the i
 \section{Experimental Setup}
 All experiements was done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit.
 
-\section{Something!?}
+
 \section{Results}
+In this section we will discuss the results of the testing described in the sections above...
+
 What does the result say?
 Each experiment, result, meaning
+
 
 \chapter{Discussion}
 %Idea, architecture, design, results, other solutions, "arch have scale-problem?".
