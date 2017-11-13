@@ -196,7 +196,7 @@ A virtual sensor is a constructed sensor in contrary to a physical sensor as des
 
 Previous research have focused on simple in-network data aggregation techniques and the sensor networks are often represented as a database. Two examples of such approaches are TinyDB \cite{tinyDB} and Cougar \cite{cougar}, which enable applications to have a central point (base station) and create routing trees  to funnel replies back to this root. The main focus on these approaches are operating intelligent in-network aggregation and routing to reduce  the overall energy cost while still keep the semantic value of data high.
 In both examples, the data aggregation is specified using an SQL-like language. However, queries cannot be used to merge different data types, only homogeneous data aggregation is achievable.
-Their virtual sensors approach is  offering a simple interface and heterogeneous in-network data aggregation. Yet, our virtual sensors have no SQL-like language or a database to store the aggregated data. Our work also relies on physical sensor data which is already in a data storage, and not directly from physical sensors.
+Their virtual sensors approach is  offering a simple interface and heterogeneous in-network data aggregation. Yet, our virtual sensors have no SQL-like language or a database to store the aggregated data. Our work also relies on physical sensor data which is already in a data storage, and not directly from the physical sensors.
 
 In this project the biologists want to search for pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect data from the physical sensors and then return those images that are equivalent to the biologists input.
 
@@ -222,7 +222,7 @@ The architecture of the system is presented in Figure \ref{fig:architecture}.
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{Architecture2.png}
+\includegraphics[width=\textwidth]{Architecture3.png}
 \caption{Figure showing the system architecture.}
 \label{fig:architecture}
 \end{figure}
@@ -273,7 +273,7 @@ The excel-sheet in the data storage contains a pictures location, date-time, sit
 %Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
 
 \section{Virtual Sensors}
-The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the \textbf{respective} virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar like the request from the user, one and one picture is visualized on the computer screen to the user.
+The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the \textbf{respective/corresponding} virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar like the request from the user, one and one picture is visualized on the computer screen to the user.
 
 
 \section{User Application}
@@ -282,7 +282,7 @@ The user only need to specify the following 3 parameters for the virtual sensor:
 
 \begin{itemize}
 \item \textbf{Animal:} The user can choose to see 3 different animals; raven, red fox and the golden eagle. The user can also chose to see pictures with no animals in it. The reason that the user only can chose between these 4 categories is that these are the only virtual sensors that are implemented in this version of the system.
-\item \textbf{Date-time:} If the user wants a specific date-time the picture(s) was taken, he/she can specify the date and time in this section. If the user leave this field blank, all dates count when the system search for pictures.
+\item \textbf{Date-time:} If the user wants a specific date-time the picture(s) was taken, he/she can specify the date and time in this section. If the user leave this field blank, all dates \textbf{count/will be "processed"} when the system search for pictures.
 \item \textbf{Location:} At last, the user can chose if he/she wants the picture to be located anywhere specific. The only valid arguments in this field is Nordkynn, Komag, Nyborg or Stjernevann since these are the only names in the CSV-file in the fused data.
 \end{itemize}
 
@@ -364,11 +364,13 @@ main(m1,s) char *s; {
 \section{Overview}
 This chapter will elaborate on how we implemented the system, \textbf{general implementation requirements, issues and choices??}.
 
-The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. We made this choice because Python is object oriented and it simply have all the frameworks available that are relevant for this implementation. Both of the programs are implemented in this language.
+The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. We made this choice because Python is object oriented and it simply have all the frameworks available that are relevant for this implementation. %Both of the programs are implemented in this language.
 
-In the rest of this chapter we will first look at the different frameworks used in this virtual sensor system in Section... Then we will look at the data storage and the fused data in Section \ref{ssec:storage_fused}, the virtual sensors in Section \ref{vsensor}, and at last we will describe the user application in Section \ref{sssec:user}.
+%different frameworks used in this virtual sensor system in Section...
 
-Threads, data structures, language ... testing (CPU, memory, time?)
+In the rest of this chapter we will first look at the data storage and the fused data in Section \ref{ssec:storage_fused}, then we will take a look at the virtual sensors in Section \ref{vsensor}, and at last we will describe the user application in Section \ref{sssec:user}.
+
+Threads, data structures, language ...
 
 
 %\section{Pandas} \label{sssec:pandas}
@@ -414,19 +416,19 @@ Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data A
 Er de virtuelle sensorene servere eller client/publisher?}
 The virtual sensors are \textit{constructed/implemented} as functions/definitions, not threads or subprocesses (uavhengige prosesser - independent processes)... \textit{Discussed in discussion Section....}
 
+The OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
+
 \subsection{OpenCV}
-OpenCV was started at Intel in 1999 by Gary Bradsky and it was relsased in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
-At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc.
+OpenCV was started at Intel in 1999 by Gary Bradsky and it was released in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
+At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
 
-OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
-
-This OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
+%This OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
 
 \section{User application} \label{sssec:user}
 The user application is implemented as a ...
 There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about implementing this...\textit{(One user - one application, another user run another new application)}
 
-\textit{Write about that you don't have any animal, only the ones who is most of in csv-file, not every animal is presented..}
+\textit{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
 
 \chapter{Evaluation} 
@@ -434,6 +436,8 @@ This chapter describes the experimental setup...
 
 metrics, define (CPU, memory, latency.), benchmarks (micro, kernel...
 How to measure, where done, PSEUDOCODE
+
+\ NOTATER:
 
 \begin{itemize}
 \item Time: Finding folders and metadata takes:  1:43:13.488799,
