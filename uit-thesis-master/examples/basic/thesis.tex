@@ -267,8 +267,6 @@ The excel-sheets contains from 17 000 to 70 000 rows with information about each
 
 The excel-sheet in the data storage contains a pictures location, date-time, site and year, but it did not contain any filename or a filepath. We then had to find a method to find out which images correspond to which field/row in the excel-sheet. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where pictures are located and read date and time for each picture which is stored in a Python dictionary, like a key-value store, with date and time as key and image-path as value. This was quit a time-consuming task because of the numbers of images to process.
 
-
-
 %\section{Fused Data from Sensors}
 %Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
 
@@ -358,7 +356,6 @@ main(m1,s) char *s; {
     }
 }
 \end{lstlisting}
-
 \fi
 
 \chapter{Implementation}
@@ -413,6 +410,9 @@ Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data A
 
 
 \section{Virtual Sensors} \label{vsensor}
+\textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
+Er de virtuelle sensorene servere eller client/publisher?}
+The virtual sensors are \textit{constructed/implemented} as functions/definitions, not threads or subprocesses (uavhengige prosesser - independent processes)... \textit{Discussed in discussion Section....}
 
 \subsection{OpenCV}
 OpenCV was started at Intel in 1999 by Gary Bradsky and it was relsased in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
