@@ -245,7 +245,7 @@ The user interacts with a user application. This application takes care of the c
 
 
 \chapter{Design}
-Client/Server, p2p, put/get, pub/sub, protokoller etc..
+Client/Server, p2p, put/get, pub/sub, protokoller, FTP etc..
 BESKRIV INTERAKSJONEN MELLOM ENHETENE!!
 
 Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
@@ -261,40 +261,47 @@ In this chapter we will look at the design of the environment. We will present t
 \label{fig:design}
 \end{figure}
 
-\section{Data Storage and Fused Data from Sensors}
+\section{Data Storage and Fused Data from Sensors} \label{ssec:des_fused}
 The dataset from the physical sensors contains over 1.6 millions of pictures from 2011 to 2016 taken from the Arctic Tundra in Finnmark, Norway. The physical sensors are placed at different areas in the Arctic Tundra such as Nordkynn, Komag, Nyborg, Stjernevann and Gaissene.
 The excel-sheets contains from 17 000 to 70 000 rows with information about each picture taken.
 
-The excel-sheet in the data storage contains a pictures location, date-time, site and year, but it did not contain any filename or a filepath. We then had to find a method to find out which images correspond to which field/row in the excel-sheet. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traversing the directories where pictures are located and read date and time for each picture which is stored in a Python dictionary, like a key-value store, with date and time as key and image-path as value.
+The excel-sheet in the data storage contains a pictures location, date-time, site and year, but it did not contain any filename or a filepath. We then had to find a method to find out which images correspond to which field/row in the excel-sheet. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where pictures are located and read date and time for each picture which is stored in a Python dictionary, like a key-value store, with date and time as key and image-path as value. This was quit a time-consuming task because of the numbers of images to process.
 
 
-Date and time from each image is extracted and stored in a dictionary together with the necessary information from the excel-sheet.
 
+%\section{Fused Data from Sensors}
+%Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
 
-\section{Fused Data from Sensors}
-Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
-
-
-\textit{FRA HÅVARDS MASTER: The csv files did not contain any filenames, only image metadata and animal classifications, so we had to get creative to find out which images the annotations corresponded to. Fortunately, each image had metadata stored in Exchangeable Image File Format ( exif ). We created a Python script to extract the date and time from each image, along with camera information, to match them with the annotations. This was quite a time-consuming task because of the number of images to process.}
-
-Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
+%Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
 
 \section{Virtual Sensors}
-\section{User}
-The user-application is the connection between  the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see.
-The user only need to specify the following 3 paramteres for the virtual sensor:
-\begin{description}
-\item [Animal]
-\item [Date-time]
-\item [Location]
-\end{description}
+The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the \textbf{respective} virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar like the request from the user, one and one picture is visualized on the computer screen to the user.
+
+
+\section{User Application}
+The user-application is the connection between  the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see. The main menu is shown in Listing \ref{lst:mainmenu}.
+The user only need to specify the following 3 parameters for the virtual sensor:
 
 \begin{itemize}
-\item Animal:
-\item Date-time:
-\item Location:
+\item \textbf{Animal:} The user can choose to see 3 different animals; raven, red fox and the golden eagle. The user can also chose to see pictures with no animals in it. The reason that the user only can chose between these 4 categories is that these are the only virtual sensors that are implemented in this version of the system.
+\item \textbf{Date-time:} If the user wants a specific date-time the picture(s) was taken, he/she can specify the date and time in this section. If the user leave this field blank, all dates count when the system search for pictures.
+\item \textbf{Location:} At last, the user can chose if he/she wants the picture to be located anywhere specific. The only valid arguments in this field is Nordkynn, Komag, Nyborg or Stjernevann since these are the only names in the CSV-file in the fused data.
 \end{itemize}
 
+\begin{lstlisting}[frame=single,caption={Main menu },label={lst:mainmenu}, language=Python]
+
+**** WELCOME! ****
+******************
+
+Write what you want to see
+(Raven, RedFox, GoldenEagle): 
+
+Write when you want to see (blank is all dates): 
+E.g: 2011:03:24 or 2011:04:24 10:10:00
+
+Where do you want the animal to be located
+(nordkynn, varanger: komag, nyborg, stjernevann):
+\end{lstlisting}
 
 
 \iffalse 
@@ -307,7 +314,6 @@ Content left & Content right\\
 \end{tabular}
 \caption{A table}
 \end{table}
-
 
 %\newpage
 
@@ -361,54 +367,66 @@ main(m1,s) char *s; {
 \section{Overview}
 This chapter will elaborate on how we implemented the system, \textbf{general implementation requirements, issues and choices??}.
 
-The system is implemented and written in Python 2.7\footnote{\url{https://www.python.org/}}. We made this choice because Python is highly portable among different platforms and there are also many frameworks available in this language that are relevant for this implementation.
+The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. We made this choice because Python is object oriented and it simply have all the frameworks available that are relevant for this implementation. Both of the programs are implemented in this language.
 
-
-In the rest of this chapter we will first look at the different frameworks used in this virtual sensor system in Section \ref{sssec:pandas}, \ref{sssec:exif} and \ref{sssec:opencv}. Then we will look at the data storage in Section \ref{sssec:storage}, the fused data in Section \ref{ssec:fused}, the virtual sensors in Section \ref{vsensor}, and at last we will describe the user application in Section \ref{sssec:user}.
+In the rest of this chapter we will first look at the different frameworks used in this virtual sensor system in Section... Then we will look at the data storage and the fused data in Section \ref{ssec:storage_fused}, the virtual sensors in Section \ref{vsensor}, and at last we will describe the user application in Section \ref{sssec:user}.
 
 Threads, data structures, language ... testing (CPU, memory, time?)
 
 
-\section{Pandas} \label{sssec:pandas}
-PUT UNDER FUSED DATA?
+%\section{Pandas} \label{sssec:pandas}
+%PUT UNDER FUSED DATA?
+%Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. 
+
+%We use Pandas in this project to extract relevant data from the excel-sheets in the data storage.
+
+%The extracted data is extracted using Pandas Dataframe. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-sheet.
+
+%\section{ExifRead} \label{sssec:exif}
+%PUT UNDER FUSED DATA?
+
+%To read exif/metadata from pictures, we used a Python library called exifread 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}.
+
+%\textit{"Easy to use Python module to extract Exif metadata from tiff and jpeg files."}
+
+%\section{OpenCV} \label{sssec:opencv}
+%OpenCV was started at Intel in 1999 by Gary Bradsky and it was relsased in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
+%At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc.
+
+%OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
+
+%CV2 - show image
+%To visualize/show pictures, a Python library called OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
+
+%\section{Data Storage} \label{sssec:storage}
+
+\section{Data Storage and Fused Data} \label{ssec:storage_fused}
+The data storage contains folders with labeled animals, but these images have no metadata so we don't know when the picture is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-sheets containing date, time, location and site.
+
+\subsection{Exchangeable Image File Format - EXIF}
+To read the metadata, as mentioned in Section \ref{ssec:des_fused}, we used EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, simply because it was easy to use this Python module to extract the metadata from the jpg-files.
+
+\subsection{Pandas}
+We use Pandas dataframe in this implementation to extract relevant data from the excel-sheets in the data storage. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-sheet.
+
 Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. 
 
-We use Pandas in this project to extract relevant data from the excel-sheets in the data storage. The extracted data is extracted using Pandas Dataframe. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-sheet.
 
+\section{Virtual Sensors} \label{vsensor}
 
-
-\section{ExifRead} \label{sssec:exif}
-PUT UNDER FUSED DATA?
-
-To read exif/metadata from pictures, we used a Python library called exifread 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}.
-
-\textit{"Easy to use Python module to extract Exif metadata from tiff and jpeg files."}
-
-\section{OpenCV} \label{sssec:opencv}
-PUT UNDER VIRTUAL SENSOR/USER?
+\subsection{OpenCV}
 OpenCV was started at Intel in 1999 by Gary Bradsky and it was relsased in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
 At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc.
 
-
 OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
 
-
-CV2 - show image
-To visualize/show pictures, a Python library called OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
-
-\section{Data Storage} \label{sssec:storage}
-Contains folders with labeled animals, but images have no metadata so don't know when it is taken etc..
-Therefore, traverse the whole storage and find "real" images w/metadata and compare to excel-sheet....
-
-\section{Fused Data} \label{ssec:fused}
-Pandas dataframe, exif
-
-\section{Virtual Sensors} \label{vsensor}
-opencv
+This OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
 
 \section{User application} \label{sssec:user}
 The user application is implemented as a ...
-There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about ...
+There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about implementing this...\textit{(One user - one application, another user run another new application)}
+
+\textit{Write about that you don't have any animal, only the ones who is most of in csv-file, not every animal is presented..}
 
 
 \chapter{Evaluation} 
@@ -475,13 +493,7 @@ Each experiment, result, meaning
 \begin{itemize}
 \item hash-map instead of multiple lists with different animals. hash on animal and/or place
 \item parallel/concurrent program when doing metadata-collecting and reading from excel-sheet and writing to csv
-\item FRA HÅVARDS MASTER: The csv files did not contain any filenames,
-only image metadata and animal classifications, so we had to get creative
-to find out which images the annotations corresponded to. Fortunately, each
-image had metadata stored in Exchangeable Image File Format ( exif ). We
-created a Python script to extract the date and time from each image, along
-with camera information, to match them with the annotations. This was quite
-a time-consuming task because of the number of images to process.
+\item FRA HÅVARDS MASTER: \textit{The csv files did not contain any filenames, only image metadata and animal classifications, so we had to get creative to find out which images the annotations corresponded to. Fortunately, each image had metadata stored in Exchangeable Image File Format ( exif ). We created a Python script to extract the date and time from each image, along with camera information, to match them with the annotations. This was quite a time-consuming task because of the number of images to process.}
 \end{itemize}
 
 
