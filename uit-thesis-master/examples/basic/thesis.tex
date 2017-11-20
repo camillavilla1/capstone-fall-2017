@@ -78,7 +78,7 @@
 \begin{abstract}
 %\lipsum[2-3]
 \begin{description}
-\item[W3] Whats wrong with the word? / motivation 1-3 setninger
+\item[W3] Whats wrong with the world? / motivation 1-3 setninger
 \item[Architecture - 1-3 setninger]
 \item [Design- 1-3 setninger]
 \item[Implementation - 1-3 setninger]
@@ -107,6 +107,7 @@ This dissertation present/describe ...
 \chapter{Introduction}
 \begin{itemize}
 \item Mention focus on camera-sensors/data, and not other sensors?!
+\textit{John M.: Hvorfor fokus på bilder - forenkle, begrense, starte et sted}
 \item Talk a little bit about COAT in general?
 \end{itemize}
 
@@ -114,7 +115,11 @@ This project will develop an abstraction for virtual sensors, and do a prototype
 
 The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
 
+
+
 %There are increasing numbers of physical sensors used for various purposes. For example, ...
+
+%OTTO RETTING: Assume biologists want to search for pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect/\textbf{locate} data from the physical/\textbf{storage} sensors and then return those images that matches to the biologists request.
 
 \section{Motivation}
 The motivation!
@@ -127,6 +132,7 @@ The motivation  behind this project is that no single sensor may cover the sensi
 
 \section{Contributions}
 What was the contribution?
+%OTTO: Principles, models, artifact and evaluation of it. Lessons learned/insights. Conclusion
 
 \section{Assumptions}
 AVGRENSE, VIKTIG!!
@@ -207,20 +213,19 @@ DOI: http://dx.doi.org/10.1145/2509434
 \fi
 
 \section{Virtual Sensors}
-A virtual sensor is a constructed sensor in contrary to a physical sensor as described by S. Kabadayi et. al.\cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
+A virtual sensor is a constructed sensor in contrary to a physical sensor \cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
 
 Previous research have focused on simple in-network data aggregation techniques and the sensor networks are often represented as a database. Two examples of such approaches are TinyDB \cite{tinyDB} and Cougar \cite{cougar}, which enable applications to have a central point (base station) and create routing trees  to funnel replies back to this root. The main focus on these approaches are operating intelligent in-network aggregation and routing to reduce  the overall energy cost while still keep the semantic value of data high.
 In both examples, the data aggregation is specified using an SQL-like language. However, queries cannot be used to merge different data types, only homogeneous data aggregation is achievable.
 Their virtual sensors approach is  offering a simple interface and heterogeneous in-network data aggregation. Yet, our virtual sensors have no SQL-like language or a database to store the aggregated data. Our work also relies on physical sensor data which is already in a data storage, and not directly from the physical sensors.
 
-In this project the biologists want to search for pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect data from the physical sensors and then return those images that are equivalent to the biologists input.
 
-Ciciriello et. al.\cite{Ciciriello} describes virtual nodes which are programming abstractions that should simplify the development of decentralized wireless sensor network (WSN) applications. Their system enable access to the data by a given set of sensors and making it into one virtual sensor that a programmer can interact with. Their virtual nodes are implemented using TinyOS \cite{TinyOS} and their physical nodes are abstracted and specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}. The nodes are combined in a logical neighborhood that are specified based on their characteristics by the programmer. 
+A virtual node\cite{Ciciriello} is a set of physical sensors that a programmer can interact with as a single sensor. Their virtual nodes are implemented using TinyOS \cite{TinyOS} and their physical nodes are abstracted and specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}. The nodes are combined in a logical neighborhood that are specified based on their characteristics by the programmer. 
 
 
-Hill et. al. \cite{hill} present a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data. 
-The virtual rainfall sensor is illustrated in Figure \ref{fig:rainfall_sensor}. It is created by linking data-processing modules together in a workflow that is triggered by a data fetcher provided by the streaming data toolkit.
-In contrast, our virtual sensors system is running on-demand, not in real-time.
+It is a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data. 
+The system can provide point-averaged radar-rainfall products at either temporal resolution of the radar or as a temporal average of a fixed time period, which is illustrated in Figure \ref{fig:rainfall_sensor}
+In contrast, our virtual sensors system is running on-demand, not in real-time. \textbf{OGSÅ ANDRE ULIKHETER}
 
 \begin{figure}
 \centering
@@ -230,51 +235,86 @@ In contrast, our virtual sensors system is running on-demand, not in real-time.
 \end{figure}
 
 
-
-Dice??
-\textit{"Improve network lifetime -> routing protocol for many-2-many communication". Talking about TinyOS and CTP.
-In this article we present DICE, a system enabling WSN-based distributed monitoring of global invariants. A DICE invariant is expressed by predicates defined over the state of multiple WSN nodes, such as the expected state of actuators based on given sensed environmental conditions.}
-
-\textit{We presented DICE (Distributed Invariant CheckEr), a system for WSN-based distributed monitoring of global invariants in physical processes. DICE provides a declarative language to specify invariants and a runtime support enabling efficient monitoring of their violations.}
-
-\textit{\textbf{SYSTEM ARCHITECTURE}
-We describe the toolchain and runtime architecture of DICE. Our prototype targets TinyOS [Hill et al. 2000], and relies on CTP [Gnawali et al. 2009 - Collection tree protocol: two principles of wireless routing protocols] for the tree-based forwarding necessary to the TREE dissemination strategy. Nevertheless, the techniques we describe do not depend on either.
-We use our TinyOS implementation of DICE, described in Section 4, to run both simulation and tested experiments.
-In computer science, an invariant is a condition that can be relied upon to be true during execution of a program, or during some portion of it. It is a logical assertion that is held to always be true during a certain phase of execution.}
+%\subsection{dice - expand!}
 
 
-\textit{\textbf{Sensor-Cloud Infrastructure}
-Physical Sensor Management with Virtualized Sensors on Cloud Computing
-http://ieeexplore.ieee.org/document/5635688/\#}
+%Dice??
+%\textit{"Improve network lifetime -> routing protocol for many-2-many communication". Talking about TinyOS and CTP.
+%In this article we present DICE, a system enabling WSN-based distributed monitoring of global invariants. A DICE invariant is expressed by predicates defined over the state of multiple WSN nodes, such as the expected state of actuators based on given sensed environmental conditions.}
+
+%\textit{We presented DICE (Distributed Invariant CheckEr), a system for WSN-based distributed monitoring of global invariants in physical processes. DICE provides a declarative language to specify invariants and a runtime support enabling efficient monitoring of their violations.}
+
+%\textit{\textbf{SYSTEM ARCHITECTURE}
+%We describe the toolchain and runtime architecture of DICE. Our prototype targets TinyOS [Hill et al. 2000], and relies on CTP [Gnawali et al. 2009 - Collection tree protocol: two principles of wireless routing protocols] for the tree-based forwarding necessary to the TREE dissemination strategy. Nevertheless, the techniques we describe do not depend on either.
+%We use our TinyOS implementation of DICE, described in Section 4, to run both simulation and tested experiments.
+%In computer science, an invariant is a condition that can be relied upon to be true during execution of a program, or during some portion of it. It is a logical assertion that is held to always be true during a certain phase of execution.}
+
+
+%\textit{\textbf{Sensor-Cloud Infrastructure}
+%Physical Sensor Management with Virtualized Sensors on Cloud Computing
+%http://ieeexplore.ieee.org/document/5635688/\#}
+
+
+\chapter{The Data Set}
+EGET KAP FOR DETTE
+
+\textbf{HVORDAN DE ER SAMLET, HVORDAN DE ER ORGANISERT?}
+
+The dataset from the physical sensors contains over 1.6 millions of pictures from 2011 to 2016 taken from the Arctic Tundra in Finnmark, Norway. The physical sensors are placed at different areas in the Arctic Tundra such as Nordkynn, Komag, Nyborg, Stjernevann and Gaissene.
+The excel-sheets contains from 17 000 to 70 000 rows with information about each picture taken. \textit{ Eller "thousands of rows with data?" Må få frem at det er masse data som ligger i excel-ark?}
 
  
 \chapter{Architecture}
 This chapter describes the architecture of the system.
-There are 6 components in the system: physical sensors, data storage, fused data, virtual sensors and the user. However, the main components in the system are the data storage, the fused data, the virtual sensors and the user.
-The architecture of the system is presented in Figure \ref{fig:architecture}.
+There are 6 components in the system: physical sensors, \textit{raw data, anaytics and classified data} storage, fusion of data, fused data, virtual sensors and the user interface. 
+%However, the main components in the system are the data storage, the fused data, the virtual sensors and the user.
+The architecture of the system is presented in Figure \ref{fig:architecture}. \textbf{The arrows indicates the communication lines.... eller flyten av data eller hvem som er aktiv i å gjøre akses/sende - NOE SÅNT HER OGSÅ I NY FIGUR}
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{Architecture3.png}
+\includegraphics[width=\textwidth]{Architecture_otto.png}
 \caption{Figure showing the system architecture.}
 \label{fig:architecture}
 \end{figure}
 
 
-\section{Physical Sensors and Data Storage}
-The physical sensors transmit their data to the data storage, so the data storage consists of several set of images from the different bait-camera sensors. These pictures are organized by the year they where taken and also where the camera was placed in the Arctic Tundra in Finnmark, Norway. 
-The data store also contains several excel-sheets containing information about each picture structured by the location of the physical bait-camera sensor position.
+\section{Physical Sensors}
+The physical sensors produce raw data. The raw data consists of images from different bait-camera sensors.
+The data also contains metadata about each image.(\textbf{More on the metadata!) --- Referere til chap. om the data set?}
 
-\section{Fused Data}
-The fused data retrieves it's data from the data storage and store the fused data into a Comma-Separated Value (CSV) file on demand. The fused data is the image-path from all the directories in the data storage combined with necessary information from the excel-sheet such as date-time, location, site, year, what kind of animal was in the image and also how many animals there was.
+\subsection{The Data Set}
+Hvordan de er samlet, hvordan de er organisert
+NEVNES OGSÅ I DESIGN, HA ET EGET KAPITTEL OM DETTE FØR ARCH OG DESIGN FOR Å SAMLE DISSE 2?
+
+\ OLD 
+\textit{The physical sensors transmit their data to the data storage, so the data storage consists of several set of images from the different bait-camera sensors. These pictures are organized by the year they where taken and also where the camera was placed in the Arctic Tundra in Finnmark, Norway. 
+The data store also contains several excel-sheets containing information about each picture structured by the location of the physical bait-camera sensor position.}
+
+\section{Raw Data}
+\section{Analytics and Classified Data}
+\section{Fusing of data and Fused Data}
+
+\subsection{Fused Data}
+The fused data retrieves it's data and on demand. The fused data is the location/where to find combined with necessary metadata such as date-time, location, site, year, what kind of animal there as in the image and also how many animals there was.
+
+\ OLD
+\textit{The fused data retrieves it's data from the data storage and store the fused data into a Comma-Separated Value (CSV) file on demand. The fused data is the image-path from all the directories in the data storage combined with necessary information from the excel-sheet such as date-time, location, site, year, what kind of animal was in the image and also how many animals there was.}
+
 
 \section{Virtual Sensors}
 The virtual sensors are divided into multiple sensors representing different animals that scientists are interested in, e.g. one raven-sensor, one red fox-sensor and one golden eagle-sensor.
-The user types in what animal it wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor receive its result from the fused data from the CSV-file.
+The user types in what animal he/she wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor retrieves its result from the fused data.
 
-\section{Result from Virtual Sensor to User}
-A user wants to retrieve images from the data store.
-The user interacts with a user application. This application takes care of the communication to the virtual sensors. When a user gives a command, the user application sends it to one of the virtual sensors, the virtual sensor retrieve data from the fused data as described in the section above, and deliver the response back to the user. The image(s) are displayed through an image-vision.
+\ OLD
+\textit{The virtual sensors are divided into multiple sensors representing different animals that scientists are interested in, e.g. one raven-sensor, one red fox-sensor and one golden eagle-sensor.
+The user types in what animal it wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor receive its result from the fused data from the CSV-file.}
+
+\subsection{Result from Virtual Sensor to User}
+A user wants to retrieve fused data about animals. The user interacts with a virtual sensor user interface. This takes care of the interaction with the virtual sensor. When a user gives a command, the responsible(?) virtual sensor retrieve data from the fused data as described in the section above, and presents the result back to the user.
+
+\ OLD
+\textit{A user wants to retrieve images from the data store.
+The user interacts with a user application. This application takes care of the communication to the virtual sensors. When a user gives a command, the user application sends it to one of the virtual sensors, the virtual sensor retrieve data from the fused data as described in the section above, and deliver the response back to the user. The image(s) are displayed through an image-vision.}
 
 
 \chapter{Design}
@@ -284,7 +324,10 @@ BESKRIV INTERAKSJONEN MELLOM ENHETENE!!
 Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 Er de virtuelle sensorene servere eller client/publisher?
 
-In this chapter we will look at the design of the environment. We will present the design of the data storage, the fused data the virtual sensors and the user application. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures.
+In this chapter we will look at the design of the system and present the design of each component of the architecture. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures. \textbf{Få med direction of arrows/active side?}
+
+\ OLD
+\textit{In this chapter we will look at the design of the environment. We will present the design of the data storage, the fused data the virtual sensors and the user application. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures.}
 
 
 \begin{figure}
@@ -294,22 +337,25 @@ In this chapter we will look at the design of the environment. We will present t
 \label{fig:design}
 \end{figure}
 
-\section{Data Storage and Fused Data from Sensors} \label{ssec:des_fused}
-The dataset from the physical sensors contains over 1.6 millions of pictures from 2011 to 2016 taken from the Arctic Tundra in Finnmark, Norway. The physical sensors are placed at different areas in the Arctic Tundra such as Nordkynn, Komag, Nyborg, Stjernevann and Gaissene.
-The excel-sheets contains from 17 000 to 70 000 rows with information about each picture taken.
+\section{Data Storage} \label{ssec:des_fused}
+%The dataset from the physical sensors contains over 1.6 millions of pictures from 2011 to 2016 taken from the Arctic Tundra in Finnmark, Norway. The physical sensors are placed at different areas in the Arctic Tundra such as Nordkynn, Komag, Nyborg, Stjernevann and Gaissene.
+%The excel-sheets contains from 17 000 to 70 000 rows with information about each picture taken.
 
-The excel-sheet in the data storage contains a pictures location, date-time, site and year, but it did not contain any filename or a filepath. We then had to find a method to find out which images correspond to which field/row in the excel-sheet. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where pictures are located and read date and time for each picture which is stored in a Python dictionary, like a key-value store, with date and time as key and image-path as value. This was quit a time-consuming task because of the numbers of images to process.
+The excel-sheet in the data storage contains a pictures location, date-time, site and year, but it did not contain any filename or a filepath. We then had to find a method to find out which images correspond to which field/row in the excel-sheet. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where pictures are located and read date and time for each picture and store it in a Python dictionary, like a key-value store, with date and time as key and image-path as value. This was quit a time-consuming task because of the numbers of images to process.
 
 %\section{Fused Data from Sensors}
 %Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
 
 %Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
 
-\section{Virtual Sensors}
-The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the \textbf{respective/corresponding} virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar like the request from the user, one and one picture is visualized on the computer screen to the user.
+\section{Virtual Sensors TIL Sensor Fusion}
+The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
 
+\textbf{respective/corresponding}
 
-\section{User Application}
+\textit{John M.: Kand u ha flre identeiske virtuelel sensorer for å prosesere i parelll? Og Er det sensorene som visualiserer, eller returnerer de data som kan  visualiseres av klienten= ut fra 4.3 høres det ut som siste}
+
+\section{User Application TIL Virtual Sensors}
 The user-application is the connection between  the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see. The main menu is shown in Listing \ref{lst:mainmenu}.
 The user only need to specify the following 3 parameters for the virtual sensor:
 
@@ -397,71 +443,52 @@ main(m1,s) char *s; {
 \section{Overview}
 This chapter will elaborate on how we implemented the system, \textbf{general implementation requirements, issues and choices??}.
 
-The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. We made this choice because Python is object oriented and it simply have all the frameworks available that are relevant for this implementation. %Both of the programs are implemented in this language.
+The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. \textbf{ This was a practical ... reason 1, reason 2, reason 3...}
+We made this choice because Python is object oriented and it offers different frameworks that are relevant for this implementation. %Both of the programs are implemented in this language.
 
 %different frameworks used in this virtual sensor system in Section...
 
-In the rest of this chapter we will first look at the data storage and the fused data in Section \ref{ssec:storage_fused}, then we will take a look at the virtual sensors in Section \ref{vsensor}, and at last we will describe the user application in Section \ref{sssec:user}.
+In the rest of this chapter we will first look at the data storage in Section \ref{ssec:imp_storage}, then we will take a look at the sensor fusion in Section \ref{ssec:imp_senfus}, and at last we will describe the virtual sensors in Section \ref{ssec:imp_virsens}.
 
 Threads, data structures, language ...
 
-
-%\section{Pandas} \label{sssec:pandas}
-%PUT UNDER FUSED DATA?
-%Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. 
-
-%We use Pandas in this project to extract relevant data from the excel-sheets in the data storage.
-
-%The extracted data is extracted using Pandas Dataframe. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-sheet.
-
-%\section{ExifRead} \label{sssec:exif}
-%PUT UNDER FUSED DATA?
-
-%To read exif/metadata from pictures, we used a Python library called exifread 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}.
-
-%\textit{"Easy to use Python module to extract Exif metadata from tiff and jpeg files."}
-
-%\section{OpenCV} \label{sssec:opencv}
-%OpenCV was started at Intel in 1999 by Gary Bradsky and it was relsased in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
-%At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc.
-
-%OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
-
-%CV2 - show image
-%To visualize/show pictures, a Python library called OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} was implemented.
-
-%\section{Data Storage} \label{sssec:storage}
-
-\section{Data Storage and Fused Data} \label{ssec:storage_fused}
+\section{Data Storage} \label{ssec:imp_storage}
+\subsection{Data Storage and Fused Data} \label{ssec:storage_fused}
 The data storage contains folders with labeled animals, but these images have no metadata so we don't know when the picture is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-sheets containing date, time, location and site.
+\textbf{HOW DID I TRAVERSE?!?!?!}
 
 \subsection{Exchangeable Image File Format - EXIF}
-To read the metadata, as mentioned in Section \ref{ssec:des_fused}, we used EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, simply because it was easy to use this Python module to extract the metadata from the jpg-files.
+To read the metadata, as mentioned in Section \ref{ssec:des_fused}, we used a Python module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata from the jpg-files.
 
 \subsection{Pandas}
-We use Pandas dataframe in this implementation to extract relevant data from the excel-sheets in the data storage. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-sheet.
+Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-sheet.
 
-Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. 
+We use Pandas dataframe to extract relevant data from the excel-sheets in the data storage. \textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
 
+\section{Sensor Fusion} \label{ssec:imp_senfus}
+\subsection{Comparing, CSV-file}
 
-\section{Virtual Sensors} \label{vsensor}
+\section{Virtual Sensors} \label{ssec:imp_virsens}
+\subsection{Virtual Sensors} \label{vsensor}
 \textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 Er de virtuelle sensorene servere eller client/publisher?}
 The virtual sensors are \textit{constructed/implemented} as functions/definitions, not threads or subprocesses (uavhengige prosesser - independent processes)... \textit{Discussed in discussion Section....}
 
 The OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
 
-\subsection{OpenCV}
-OpenCV was started at Intel in 1999 by Gary Bradsky and it was released in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
-At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
+\textit{John M.: lesere vil kanskje tenke at dette er overkill. Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus.}
 
-%This OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
+%\subsection{OpenCV}
+%OpenCV was started at Intel in 1999 by Gary Bradsky and it was released in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
+%At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
 
-\section{User application} \label{sssec:user}
+
+\subsection{User application} \label{sssec:user}
 The user application is implemented as a ...
 There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about implementing this...\textit{(One user - one application, another user run another new application)}
 
 \textit{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
+
 
 
 \chapter{Evaluation} 
@@ -507,7 +534,7 @@ This chapter describes the experimental setup and metrics used to evaluate the i
 
 \end{itemize}
 \section{Experimental Setup}
-All experiements was done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit.
+All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit.
 
 \section{Experimental Design}
 \section{Results}
@@ -541,7 +568,6 @@ Each experiment, result, meaning
 Combine with conclusion??
 \chapter{Conclusion}
 \section{Contributions?}
-\section{Future Work}
 
 \chapter{Future Work?}
 
