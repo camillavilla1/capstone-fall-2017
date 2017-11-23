@@ -263,6 +263,7 @@ In contrast, our virtual sensors system is running on-demand, not in real-time. 
 The dataset is provided by COAT and contains over 1.6 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The camera traps are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
 The dataset contains pictures during night- and daytime. The cameras have infrared flash so the cameras can take pictures at nighttime. These pictures are without color while the pictures taken at daytime are with color, as shown in Figure \ref{fig:pictures}.
 
+\textbf{Wildlife camera Reconyx}
 
 \begin{figure*}[t!]
     \centering
@@ -283,10 +284,10 @@ The dataset contains pictures during night- and daytime. The cameras have infrar
 
 
 \section{Dataset Directory Structure}
-The pictures in the dataset is structured in directories and folders. The dataset is first divided into different years going from 2011 to 2015. Each of these folders are then again divided into the area of the 5 camera traps in the Arctic Tundra. Inside each of these folders specified by the area, they contain folders from each site inside the specific area.
+The pictures in the dataset is structured in directories and folders. The dataset is first divided into different years going from 2011 to 2015. Each of these folders are then again divided into the areas of the 5 camera traps in the Arctic Tundra. Inside each of these folders specified by the area, they contain folders from each site inside the specific area.
 Figure \ref{fig:directories} shows a cropped screenshot of the directories.
 
-%\textbf{(In total 1976 directories.) -- mappestruktur -- metadata på bilder}
+\textbf{(In total 1976 directories, men alle er ikke i bruk/relevant)}
 
 \begin{figure}
 \centering
@@ -295,29 +296,36 @@ Figure \ref{fig:directories} shows a cropped screenshot of the directories.
 \label{fig:directories}
 \end{figure}
 
+\section{Image Annotations}
+\textit{Biologist working on the COAT project have detected animals in each image and made annotations stored in excel-files containing metadata and animal classification.}
 
-COAT also provided excel-sheets with information about all of the images in the dataset. The dataset contains the images metadata and animal classification, but did not contain any filenames or a filepath. We then had to find a method to find out which images correspond to the metadata in the excel-sheets. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where images are located and read date-time from the metadata and store it in a dictionary with date-time as key and image-path as value. This was quite a time-consuming task because of the number of images to process.
+COAT provided annotations stored in excel-files with information about all of the images in the dataset that biologist working at the COAT project have detected. The biologist have used these annotations to see what animal was present at a specific time and to see statistics. The biologist have not made these annotations to go back in time and look at the images, and the dataset is then not made for...
+
+ 
+The excel-files are structured in their own folder and each file is named as a combination of the camera traps area, it's year and the site. An example is \textit{"fotoboks2011\_nordkynn\_nordkynn.2011.xlsx"}.
+
+\textbf{Ta med hvordan/hva slags metadata som ligger i excel-filen? Evt i bildene.}
+
+The dataset contains the images metadata and animal classification, but did not contain any filenames or a filepath. We then had to find a method to find out which images correspond to the metadata in the excel-files. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where images are located and read date-time from the metadata and store it in a \textbf{new CSV-file (Comma-separated Values.}/dictionary with date-time as key and image-path as value. This was quite a time-consuming task because of the number of images to process.
+\textbf{Forklare mer hvordan dette er gjort i design/implementasjon}
+
+
 
 
 \chapter{Architecture}
 This chapter describes the architecture of the system.
-There are 6 components in the system: physical sensors, \textit{raw data, anaytics and classified data} storage, fusion of data, fused data, virtual sensors and the user interface. 
+The components in the system are: physical sensors, raw data, anaytics and classified data, fusion of data, fused data, virtual sensors and the user interface. 
 
-The architecture of the system is presented in Figure \ref{fig:architecture}. The arrows indicates the communication lines and the dataflow between each component in the system. \textbf{..eller flyten av data/dataflow eller hvem som er aktiv i å gjøre akses/sende - NOE SÅNT HER OGSÅ I NY FIGUR}
+The architecture of the system is presented in Figure \ref{fig:architecture1}. The arrows indicates the communication lines and the dataflow between each component in the system. \textbf{..eller flyten av data/dataflow eller hvem som er aktiv i å gjøre akses/sende - NOE SÅNT HER OGSÅ I NY FIGUR}
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{Architecture_otto4.png}
-\caption{Figure showing the system architecture.}
-\label{fig:architecture}
-\end{figure}
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{Architecture_otto.png}
+\includegraphics[width=\textwidth]{Architecture_otto5.png}
 \caption{Figure showing the system architecture.}
-\label{fig:architecture}
+\label{fig:architecture1}
 \end{figure}
+
 
 \section{Physical Sensors}
 The physical sensors produce raw data. The raw data consists of images from different bait-camera sensors.
@@ -328,9 +336,11 @@ The data also contains metadata about each image, as described in Chapter \ref{c
 
 \section{Raw Data}
 Raw data from physical sensors..
+raw data - nilder og excelfil combined
 
-\section{Analytics and Classified Data}
-Biologist have detected animals in each picture and made excel-files containing metadata about each picture.(ELLER NEVNE DETTE I CHAPTER DATASET??
+\section{Analytics and Labeled Data}
+\textbf{Henvise til Chapter \ref{chap:data_set}}
+
 
 \section{Fusing of data and Fused Data}
 \subsection{Fusing of data}
@@ -382,7 +392,8 @@ In this chapter we will look at the design of the system and present the design 
 %The dataset from the physical sensors contains over 1.6 millions of pictures from 2011 to 2016 taken from the Arctic Tundra in Finnmark, Norway. The physical sensors are placed at different areas in the Arctic Tundra such as Nordkynn, Komag, Nyborg, Stjernevann and Gaissene.
 %The excel-sheets contains from 17 000 to 70 000 rows with information about each picture taken.
 
-The excel-sheet in the data storage contains a pictures location, date-time, site, year and animal classification, but it did not contain any filename or a filepath. We then had to find a method to find out which images correspond to which field/row in the excel-sheet. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where pictures are located and read date and time for each picture and store it in a Python dictionary, like a key-value store, with date and time as key and image-path as value. This was quite a time-consuming task because of the numbers of images to process.
+%The excel-sheet in the data storage contains a pictures location, date-time, site, year and animal classification, but it did not contain any filename or a filepath. We then had to find a method to find out which images correspond to which field/row in the excel-sheet. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where pictures are located and read date and time for each picture and store it in a Python dictionary, like a key-value store, with date and time as key and image-path as value. This was quite a time-consuming task because of the numbers of images to process.
+\textbf{Hvordan lagrer du data? (sensor, metadata.. Desgin og interface.. database, dictionary... osv}
 
 ... described in Chapter \ref{chap:data_set}...
 
@@ -396,12 +407,19 @@ The respective virtual sensor must handle events from the user. Assume a user wa
 
 \textbf{respective/corresponding}
 
-\textit{John M.: Kan du ha flere identeiske virtuelel sensorer for å prosesere i parelll? Og Er det sensorene som visualiserer, eller returnerer de data som kan  visualiseres av klienten= ut fra 4.3 høres det ut som siste}
+\textit{John M.: "Kan du ha flere identeiske virtuelle sensorer for å prosesere i parallel? Og Er det sensorene som visualiserer, eller returnerer de data som kan  visualiseres av klienten= ut fra 4.3 høres det ut som siste"}
 
 \section{User Application TIL Virtual Sensors}
-\textbf{Otto: I design: The image(s) are displayed through an image-vision.}
+%\textbf{Otto: I design: The image(s) are displayed through an image-vision.}
 
-The user-application is the connection between  the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see. The main menu is shown in Listing \ref{lst:mainmenu}.
+\subsection{Virtual Sensors}
+Divided into multiple virtual sensors depending on animal.
+\subsubsection{Raven Sensor}
+\subsubsection{Golden Eagle Sensor}
+\subsubsection{Red Fox Sensor}
+
+\subsection{User Application}
+The user-application is the connection between the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see. The main menu is shown in Listing \ref{lst:mainmenu}.
 The user only need to specify the following 3 parameters for the virtual sensor:
 
 \begin{itemize}
@@ -499,16 +517,16 @@ Threads, data structures, language ...
 
 \section{Data Storage} \label{ssec:imp_storage}
 \subsection{Data Storage and Fused Data} \label{ssec:storage_fused}
-The data storage contains folders with labeled animals, but these images have no metadata so we don't know when the picture is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-sheets containing date, time, location and site.
+The data storage contains folders with labeled animals, but these images have no metadata so we don't know when the picture is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-files containing date, time, location and site.
 \textbf{HOW DID I TRAVERSE?!?!?!}
 
 \subsection{Exchangeable Image File Format - EXIF}
 To read the metadata, as mentioned in Section \ref{ssec:des_fused}, we used a Python module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata from the jpg-files.
 
 \subsection{Pandas}
-Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-sheet.
+Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabluar data structure with labeled axes (rows and columns), just like an excel-files.
 
-We use Pandas dataframe to extract relevant data from the excel-sheets in the data storage. \textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
+We use Pandas dataframe to extract relevant data from the excel-files in the data storage. \textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
 
 
 \section{Sensor Fusion} \label{ssec:imp_senfus}
@@ -523,6 +541,8 @@ The virtual sensors are \textit{constructed/implemented} as functions/definition
 The OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
 
 \textit{John M.: lesere vil kanskje tenke at dette er overkill. Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus.}
+
+\textbf{Valgte å fokusere på 3 dyr ettersom de var de som det var flest av i excel-arkene.. and time constraints..}
 
 %\subsection{OpenCV}
 %OpenCV was started at Intel in 1999 by Gary Bradsky and it was released in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
@@ -604,7 +624,7 @@ Each experiment, result, meaning
 \subsection{Other solutions}
 \begin{itemize}
 \item hash-map instead of multiple lists with different animals. hash on animal and/or place
-\item parallel/concurrent program when doing metadata-collecting and reading from excel-sheet and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
+\item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
 %\item FRA HÅVARDS MASTER: \textit{The csv files did not contain any filenames, only image metadata and animal classifications, so we had to get creative to find out which images the annotations corresponded to. Fortunately, each image had metadata stored in Exchangeable Image File Format ( exif ). We created a Python script to extract the date and time from each image, along with camera information, to match them with the annotations. This was quite a time-consuming task because of the number of images to process.}
 \end{itemize}
 
@@ -615,7 +635,7 @@ Combine with conclusion??
 \chapter{Conclusion}
 \section{Contributions?}
 
-\chapter{Future Work?}
+\chapter{Future Work}
 
 \chapter{Appendix?}
 readme, source code, dataset measurement RAW
