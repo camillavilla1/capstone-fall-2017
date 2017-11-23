@@ -306,9 +306,11 @@ The excel-files are structured in their own folder and each file is named as a c
 
 \textbf{Ta med hvordan/hva slags metadata som ligger i excel-filen? Evt i bildene.}
 
-The dataset contains the images metadata and animal classification, but did not contain any filenames or a filepath. We then had to find a method to find out which images correspond to the metadata in the excel-files. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where images are located and read date-time from the metadata and store it in a \textbf{new CSV-file (Comma-separated Values.}/dictionary with date-time as key and image-path as value. This was quite a time-consuming task because of the number of images to process.
-\textbf{Forklare mer hvordan dette er gjort i design/implementasjon}
+The dataset contains the images metadata and animal classification, but did not contain any filenames or a filepath. We then had to find a method to find out which images correspond to the metadata in the excel-files. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where images are located and read date-time from the metadata and store it in a new CSV-file (Comma-separated Values).
+%/dictionary with date-time as key and image-path as value.
+This was quite a time-consuming task because of the number of images to process.
 
+\textbf{Forklare mer hvordan dette er gjort i design/implementasjon. Skal jeg si noe som ".. explained in details in Chapter/Section ...??}
 
 
 
@@ -316,7 +318,9 @@ The dataset contains the images metadata and animal classification, but did not 
 This chapter describes the architecture of the system.
 The components in the system are: physical sensors, raw data, anaytics and classified data, fusion of data, fused data, virtual sensors and the user interface. 
 
-The architecture of the system is presented in Figure \ref{fig:architecture1}. The arrows indicates the communication lines and the dataflow between each component in the system. \textbf{..eller flyten av data/dataflow eller hvem som er aktiv i å gjøre akses/sende - NOE SÅNT HER OGSÅ I NY FIGUR}
+The architecture of the system is presented in Figure \ref{fig:architecture1}. The arrows indicates the dataflow between each component in the system.
+
+%\textbf{..eller flyten av data/dataflow eller hvem som er aktiv i å gjøre akses/sende - NOE SÅNT HER OGSÅ I NY FIGUR}
 
 
 \begin{figure}
@@ -331,20 +335,22 @@ The architecture of the system is presented in Figure \ref{fig:architecture1}. T
 The physical sensors produce raw data. The raw data consists of images from different bait-camera sensors.
 The data also contains metadata about each image, as described in Chapter \ref{chap:data_set}. 
 
+\textbf{Hva mer??}
 
 \section{Raw Data, Analytics and Labeled Data}
 The raw data contains images from the physical sensors and annotations in excel-files containing metadata about each image alongside image classification, as described in Chapter \ref{chap:data_set}.
 
+\textbf{Hva mer??}
 %\section{Analytics and Labeled Data}
 
 
-
-\section{Fusing of data and Fused Data}
-\subsection{Fusing of data}
+%\section{Fusing of data and Fused Data}
+\section{Fusing Of Data}%\subsection{Fusing of data}
 Get analytics and classified data from raw data (excel) and the raw-data and fuse/aggregate correlated/corresponding(?) data.
 
+\textbf{Hva mer??}
 
-\subsection{Fused Data}
+\section{Fused Data}%\subsection{Fused Data}
 The fused data retrieves it's data and on demand. The fused data is the physical sensors location combined with necessary metadata such as date-time, location, site, year, what kind of animal there as in the image and also how many animals there was/\textbf{and animal classification}.
 
 
@@ -361,16 +367,14 @@ The user types in the user interface, described in Section \ref{sec:arch_user_in
 
 
 \section{User Interface} \label{sec:arch_user_int}
-A user wants to retrieve fused data about animals. The user interacts with the virtual sensor user interface. This takes care of the interaction with the virtual sensor. When a user gives a command, the responsible virtual sensor retrieve data from the fused data as described in the section above/Section \ref{sec:arch_vs} , and presents the result back to the user.
+A user wants to retrieve fused data about animals. The user interacts with the virtual sensor user interface. This takes care of the interaction with the virtual sensor. When a user gives a command, the responsible virtual sensor retrieve data from the fused data as described in Section \ref{sec:arch_vs}, and presents the result back to the user.
 
 
 
 \chapter{Design}
-Client/Server, p2p, put/get, pub/sub, protokoller, FTP etc..
-BESKRIV INTERAKSJONEN MELLOM ENHETENE!!
+\textbf{Client/Server, p2p, put/get, pub/sub, protokoller, FTP etc..
+BESKRIV INTERAKSJONEN MELLOM ENHETENE!!}
 
-Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
-Er de virtuelle sensorene servere eller client/publisher?
 
 In this chapter we will look at the design of the system and present the design of each component of the architecture. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures. \textbf{Få med direction of arrows/active side?}
 
@@ -385,32 +389,40 @@ In this chapter we will look at the design of the system and present the design 
 \label{fig:design}
 \end{figure}
 
-\section{Data Storage} \label{ssec:des_fused}
-%The dataset from the physical sensors contains over 1.6 millions of pictures from 2011 to 2016 taken from the Arctic Tundra in Finnmark, Norway. The physical sensors are placed at different areas in the Arctic Tundra such as Nordkynn, Komag, Nyborg, Stjernevann and Gaissene.
-%The excel-sheets contains from 17 000 to 70 000 rows with information about each picture taken.
+\section{Data Storage} \label{ssec:des_fused} 
+\textbf{Hvordan lagrer du data? (sensor, metadata.. Design og interface.. database, dictionary... osv}
 
-%The excel-sheet in the data storage contains a pictures location, date-time, site, year and animal classification, but it did not contain any filename or a filepath. We then had to find a method to find out which images correspond to which field/row in the excel-sheet. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where pictures are located and read date and time for each picture and store it in a Python dictionary, like a key-value store, with date and time as key and image-path as value. This was quite a time-consuming task because of the numbers of images to process.
-\textbf{Hvordan lagrer du data? (sensor, metadata.. Desgin og interface.. database, dictionary... osv}
-
-... described in Chapter \ref{chap:data_set}...
+The data storage contains raw data from the physical camera trap sensors and excel-files containing annotations for each raw data, as described in Chapter \ref{chap:data_set}.
 
 %\section{Fused Data from Sensors}
-%Rekursiv traversering av directories og leser metadata fra bildene (ca 1,6 mill bilder)) - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).
 
+
+\section{Sensor Fusion}
+As mentioned earlier in Chapter \ref{chap:data_set}, the dataset did not contain any filename or a filepath. It only contained image metadata such as a pictures location, date-time, site, year and animal classification. We then had to find a method to find out which images correspond to which field/row in the excel-sheet.
+
+By recursively traverse the directories where the images are located, we could read from the metadata the date and time for each picture along with annotations in the excel-files.
+
+%Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where pictures are located and read date and time for each picture and store it in a Python dictionary, like a key-value store, with date and time as key and image-path as value. This was quite a time-consuming task because of the numbers of images to process.
 %Disse sammenlignes og de som matcher blir skrevet til en CSV-fil.
 
-\section{Virtual Sensors TIL Sensor Fusion}
-The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
+\textbf{Rekursiv traversering av directories og leser metadata fra bildene - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).}
 
 \textbf{respective/corresponding}
 
-\textit{John M.: "Kan du ha flere identeiske virtuelle sensorer for å prosesere i parallel? Og Er det sensorene som visualiserer, eller returnerer de data som kan  visualiseres av klienten= ut fra 4.3 høres det ut som siste"}
 
-\section{User Application TIL Virtual Sensors}
+\section{Virtual Sensors}
+\textit{John M.: "Kan du ha flere identiske virtuelle sensorer for å prosesere i parallel? Og Er det sensorene som visualiserer, eller returnerer de data som kan  visualiseres av klienten= ut fra 4.3 høres det ut som siste"}
+
+\textbf{Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
+Er de virtuelle sensorene servere eller client/publisher?}
+
 %\textbf{Otto: I design: The image(s) are displayed through an image-vision.}
 
 \subsection{Virtual Sensors}
-Divided into multiple virtual sensors depending on animal.
+\textbf{Divided into multiple virtual sensors depending on animal.}
+
+The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
+
 \subsubsection{Raven Sensor}
 \subsubsection{Golden Eagle Sensor}
 \subsubsection{Red Fox Sensor}
@@ -443,6 +455,7 @@ Where do you want the animal to be located
 \end{lstlisting}
 
 
+
 \iffalse 
 \begin{table}
 \centering
@@ -453,9 +466,7 @@ Content left & Content right\\
 \end{tabular}
 \caption{A table}
 \end{table}
-
 %\newpage
-
 \begin{lstlisting}[frame=single,caption={Small C program},language=C]
 #include "stdio.h"
 #define e 3
