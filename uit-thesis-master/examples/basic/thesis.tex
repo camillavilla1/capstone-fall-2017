@@ -520,6 +520,8 @@ main(m1,s) char *s; {
 
 \chapter{Implementation}
 \section{Overview}
+\textbf{Threads, data structures, language...}
+
 This chapter will elaborate on how we implemented the system, general implementation requirements, issues and choices.
 
 The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. \textbf{ This was a practical ... reason 1, reason 2, reason 3...}
@@ -531,24 +533,37 @@ We made this choice because Python is object oriented and it offers different fr
 In the rest of this chapter we will first look at the data storage in Section \ref{sec:imp_storage}, then we will take a look at the sensor fusion in Section \ref{sec:imp_senfus}, and at last we will describe the virtual sensors in Section \ref{sec:imp_virsens}.
 
 
-\textbf{Threads, data structures, language...}
+\textbf{libraries used in this implementation:}
 
-\section{Data Storage} \label{sec:imp_storage}
-\subsection{Data Storage and Fused Data} \label{ssec:storage_fused}
-The data storage contains folders with labeled animals, but these images have no metadata so we don't know when the picture is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-files containing date, time, location and site.
-\textbf{HOW DID I TRAVERSE AND USE DATAFRAME?!?!?!}
+\subsubsection{Exchangeable Image File Format - EXIF}
+Python module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata from the jpg-files.
 
-\subsection{Exchangeable Image File Format - EXIF}
-To read the metadata, as mentioned in Section \ref{sec:des_fused}, we used a Python module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata from the jpg-files.
-
-\subsection{Pandas}
+\subsubsection{Pandas (Dataframe)}
 Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel-files.
 
-We use Pandas dataframe to extract relevant data from the excel-files in the data storage. \textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
+\subsubsection{OpenCV}
+\textbf{OpenCV V2.4.9.1... provides the functionality for loading and preprocessing the images...}
+
+%OpenCV was started at Intel in 1999 by Gary Bradsky and it was released in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
+%At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
+
+\section{Data Storage} \label{sec:imp_storage}
+\subsection{Data Storage} \label{ssec:storage_fused}
+The data storage contains folders with labeled animals, but these images have no metadata so we don't know when the picture is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-files containing date, time, location and site.
+\textbf{HOW DID I TRAVERSE}
+
+%\subsection{Exchangeable Image File Format - EXIF}
+%To read the metadata, as mentioned in Section \ref{sec:des_fused}, we used a Python module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata from the jpg-files.
+
+%\subsection{Pandas} %moved to overview.
+%Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel-files.
 
 
 \section{Sensor Fusion} \label{sec:imp_senfus}
 \subsection{Comparing, CSV-file}
+\textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
+
+We use Pandas dataframe to extract relevant data from the excel-files in the data storage.
 
 \section{Virtual Sensors} \label{sec:imp_virsens}
 \subsection{Virtual Sensors} %\label{sec:imp_vsensor}
@@ -558,13 +573,10 @@ The virtual sensors are \textit{constructed/implemented} as functions/definition
 
 The OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
 
+
 \textit{John M.: lesere vil kanskje tenke at dette er overkill. Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus.}
 
 \textbf{Valgte å fokusere på 3 dyr ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting}
-
-%\subsection{OpenCV}
-%OpenCV was started at Intel in 1999 by Gary Bradsky and it was released in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
-%At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
 
 
 \subsection{User application} \label{ssec:user}
