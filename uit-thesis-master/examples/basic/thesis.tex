@@ -565,7 +565,7 @@ The data storage contains folders with labeled and sorted animals, but these ima
 
 \section{Sensor Fusion} \label{sec:imp_senfus}
 \subsection{Raw Data Information Extraction}
-The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value.
+The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
 
 \subsection{Excel files Extraction}
 The excel files contains annotations for each image. To read excel files, we use Pandas Dataframe, described in Section \ref{sssec:imp_df}. From the excel files, we extract information like date, time, animals, region, site and year. The necessary information about each animal is stored in a string.
@@ -590,7 +590,7 @@ A different problem was that some column-header names was written with a big let
 \subsection{Comparing}
 \textit{Disse sammenlignes og de som matcher blir skrevet til en ny CSV fil med nødvendig info for å finne bilde.}
 
-
+Samlet både metadata og excel-data så kan de sammenlignes.. 
 
 \section{Virtual Sensors} \label{sec:imp_virsens}
 \subsection{Virtual Sensors} %\label{sec:imp_vsensor}
@@ -600,11 +600,12 @@ Er de virtuelle sensorene servere eller client/publisher?}
 %\textit{constructed/implemented}
 The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because ...
 
-
 \textbf{Valgte å fokusere på 3 dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
 \textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
-The OpenCV library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
+
+
+The OpenCV library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user. Our focus was not on which library 
 
 
 \textit{John M.: lesere vil kanskje tenke at dette er overkill. Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus.}
@@ -660,7 +661,9 @@ This chapter describes the experimental setup and metrics used to evaluate the i
 
 \end{itemize}
 \section{Experimental Setup}
-All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit.
+All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit with gcc V6.3.0 compiler and Python V2.7.13.
+
+
 
 \section{Experimental Design}
 \section{Results}
