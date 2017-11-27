@@ -541,7 +541,7 @@ We made this choice because Python is object oriented and it offers different fr
 In the rest of this chapter we will first look at the data storage in Section \ref{sec:imp_storage}, then we will take a look at the sensor fusion in Section \ref{sec:imp_senfus}, and at last we will describe the virtual sensors in Section \ref{sec:imp_virsens}.
 
 
-\textbf{libraries used in this implementation:}
+\textbf{libraries used in this implementation: (evt. lage det som en liste?}
 
 \subsubsection{Exchangeable Image File Format - EXIF} \label{sssec:imp_exif}
 %\ac{EXIF}
@@ -559,15 +559,11 @@ OpenCV V2.4.9.1\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/l
 %At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.%
 
 \section{Data Storage} \label{sec:imp_storage}
-%\subsection{Data Storage} \label{ssec:storage_fused}
 The data storage contains folders with labeled and sorted animals, but these images consists of no metadata so we don't have any information of when the image is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-files containing information like date, time, location and site.
 \textbf{HOW DID I TRAVERSE}
 
 
 \section{Sensor Fusion} \label{sec:imp_senfus}
-%\subsection{Comparing, CSV-file}
-\textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
-
 \subsection{Raw Data Information Extraction}
 The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value.
 
@@ -576,7 +572,7 @@ The excel files contains annotations for each image. To read excel files, we use
 
 During implementation we came across a problem with inconsistency between cells in the same row. The problem was that the datetime cells information was inconsistent with the information in cells day, month, year, hours and minutes, shown in Figure \ref{fig:inconsistency}. Our solution was to alter and concatenate the correct values to make a new datetime.
 
-\begin{figure} [b]
+\begin{figure}[b]
 \centering
 \includegraphics[width=\textwidth]{inconsistency2.png}
 \caption{Shows inconsistency between cells in rows in excel file.}
@@ -589,6 +585,7 @@ Another problem was that the cells containing column-names was different. One ex
 \textbf{Solution: overwrite moth to month? Not done, though about it while writing this now... Only tried with two excel files that contains "moth", time restrictions and wanted to find some pictures instead of nothing..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn.. og unngå æøå. Fikse på raw data}
 
 A different problem was that some column-header names was written with a big letter like \textit{"Time"} in some excel files and other contained \textit{"time"}. Our solution was to make every column header into lowercases using Pandas Dataframe own function, \textit{pandas.Series.str.lower()}.
+
 
 \subsection{Comparing}
 \textit{Disse sammenlignes og de som matcher blir skrevet til en ny CSV fil med nødvendig info for å finne bilde.}
@@ -604,22 +601,20 @@ Er de virtuelle sensorene servere eller client/publisher?}
 The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because ...
 
 
-\textbf{Valgte å fokusere på 3 dyr (og alle dyr/ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
+\textbf{Valgte å fokusere på 3 dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
 \textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
 The OpenCV library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
+
 
 \textit{John M.: lesere vil kanskje tenke at dette er overkill. Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus.}
 
 
 
 \subsection{User application} \label{ssec:user}
-The user application is implemented as a interface in the terminal...
-There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about implementing this...\textit{(One user - one application, another user run another new application). Restricted to 3 animals and 4 places..}
+The user application is implemented as a interface in the terminal that communicates with the virtual sensors.
 
-
-
-
+There is currently not possible for more than one user to be connected in the same application at a time. Because of lack of time, we have not thought about implementing this. Our focus has been making a prototype of the user interface to be easy to use for biologists/users and to show images that the user wants to see/on users request.
 
 
 \chapter{Evaluation} 
