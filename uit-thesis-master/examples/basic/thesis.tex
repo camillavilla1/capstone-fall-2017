@@ -21,8 +21,9 @@
 \newacronym{api}{API}{application programming interface}\glsunset{api}
 \newacronym{2api}{2API}{application programming interface}
 \newacronym{d3}{D3}{Data-Driven Documents}
-\newacronym{camilla}{CAMILLA}{Camilla is cool!!}
+\newacronym{EXIF}{EXIF}{Exchangeable Image File Format}
 \newacronym{html5}{HTML5}{version 5 of the HyperText Markup Language standard}
+
 \newglossaryentry{thesis}
 {
   name=thesis,
@@ -101,6 +102,7 @@ This dissertation present/describe ...
 %\listofdefinition
 \listoffigures
 
+
 %:-------------------------- Mainmatter -----------------------
 \mainmatter
 
@@ -168,7 +170,7 @@ This is some stuff, {\sc smallcaps {\em smallcapsemphasized}} {\em regularemphas
 \Gls{lage}: a test glossary entry.
 
 If the acronym \ac{uit} is displayed, then loadglsentries works.
-Hello. This is a test: \ac{camilla}
+Hello.
 
 It is fun to use modern \upsc{OpenMP} technology!\footnote{This is a snarky footnote. Words and etc. Semantic web technologies are technologies that enable semantification of the Web as we know it today. Hopefully this spans some lines now.}
 
@@ -179,6 +181,10 @@ footnote.}
 
 \definition{Some other definition}
 \fi
+
+
+
+
 
 
 
@@ -267,13 +273,13 @@ The dataset contains pictures during night- and daytime. The cameras have infrar
 
 \begin{figure*}[t!]
     \centering
-    \begin{subfigure}[t]{0.5\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
         %\centering
         \includegraphics[width=\textwidth]{IMG_0040.JPG}
         \caption{Picture of ravens at daytime.}
     \end{subfigure}%
     ~ 
-    \begin{subfigure}[t]{0.5\textwidth}
+    \begin{subfigure}[t]{0.45\textwidth}
         %\centering
         \includegraphics[width=\textwidth]{IMG_1562.JPG}
         \caption{Picture of an arctic fox at nighttime.}
@@ -387,7 +393,7 @@ In this chapter we will look at the design of the system and present the design 
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{Design3.png}
+\includegraphics[width=\textwidth]{Design4.png}
 \caption{Figure showing the system design.}
 \label{fig:design}
 \end{figure}
@@ -426,6 +432,7 @@ The respective virtual sensor must handle events from the user. Assume a user wa
 The virtual sensors are divided into multiple sensors depending on animals. 
 
 The virtual sensors in this approach are functions in a sequential \textbf{system/program}. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes.
+
 \textbf{Mer i implementasjon?}
 
 
@@ -535,21 +542,24 @@ In the rest of this chapter we will first look at the data storage in Section \r
 
 \textbf{libraries used in this implementation:}
 
-\subsubsection{Exchangeable Image File Format - EXIF}
-Python module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata from the jpg-files.
+\subsubsection{Exchangeable Image File Format - EXIF} \label{sssec:imp_exif}
+%\ac{EXIF}
+Exchangeable Image File Format (EXIF) is a standard that specifies the formats for images, sound, scanners and other systems recorded by digital cameras. This standard consists of image information of the EXIF image file or the EXIF audio file.
 
-\subsubsection{Pandas (Dataframe)}
-Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel-files.
+Python have a module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata(image information from the jpg-files.
 
-\subsubsection{OpenCV}
-\textbf{OpenCV V2.4.9.1... provides the functionality for loading and preprocessing the images...}
+\subsubsection{Pandas Dataframe} \label{sssec:imp_df}
+Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel-file.
+
+\subsubsection{OpenCV} \label{sssec:imp_cv}
+OpenCV V2.4.9.1 is an open-source library which provides the functionality for loading and preprocessing images.
 
 %OpenCV was started at Intel in 1999 by Gary Bradsky and it was released in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
-%At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.
+%At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.%
 
 \section{Data Storage} \label{sec:imp_storage}
 \subsection{Data Storage} \label{ssec:storage_fused}
-The data storage contains folders with labeled animals, but these images have no metadata so we don't know when the picture is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-files containing date, time, location and site.
+The data storage contains folders with labeled and sorted animals, but these images consists of no metadata so we don't have any information of when the image is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-files containing information like date, time, location and site.
 \textbf{HOW DID I TRAVERSE}
 
 %\subsection{Exchangeable Image File Format - EXIF}
@@ -559,11 +569,20 @@ The data storage contains folders with labeled animals, but these images have no
 %Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel-files.
 
 
-\section{Sensor Fusion} \label{sec:imp_senfus}
-\subsection{Comparing, CSV-file}
-\textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
 
-We use Pandas dataframe to extract relevant data from the excel-files in the data storage.
+
+\section{Sensor Fusion} \label{sec:imp_senfus}
+%\subsection{Comparing, CSV-file}
+\textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
+\textit{We use Pandas dataframe, described in Section \ref{sssec:imp_df}, to extract relevant data from the excel-files in the data storage.}
+
+The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value.
+
+\textit{Excel - pandas dataframe, lese ut information. Lagre i en string med info som datetime, location, site, year, animal og antall animals.}
+
+
+\textit{Disse sammenlignes og de som matcher blir skrevet til en ny CSV fil med nødvendig info for å finne bilde.}
+
 
 \section{Virtual Sensors} \label{sec:imp_virsens}
 \subsection{Virtual Sensors} %\label{sec:imp_vsensor}
