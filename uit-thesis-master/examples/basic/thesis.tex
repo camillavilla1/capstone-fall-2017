@@ -101,7 +101,8 @@ This dissertation present/describe ...
 
 %\listofdefinition
 \listoffigures
-
+%\printglossary
+%\printglossaries
 
 %:-------------------------- Mainmatter -----------------------
 \mainmatter
@@ -558,30 +559,38 @@ OpenCV V2.4.9.1 is an open-source library which provides the functionality for l
 %At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.%
 
 \section{Data Storage} \label{sec:imp_storage}
-\subsection{Data Storage} \label{ssec:storage_fused}
+%\subsection{Data Storage} \label{ssec:storage_fused}
 The data storage contains folders with labeled and sorted animals, but these images consists of no metadata so we don't have any information of when the image is taken. Therefore, the solution is to traverse the whole data storage and find the original images with metadata and compare these to the excel-files containing information like date, time, location and site.
 \textbf{HOW DID I TRAVERSE}
-
-%\subsection{Exchangeable Image File Format - EXIF}
-%To read the metadata, as mentioned in Section \ref{sec:des_fused}, we used a Python module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata from the jpg-files.
-
-%\subsection{Pandas} %moved to overview.
-%Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel-files.
-
-
 
 
 \section{Sensor Fusion} \label{sec:imp_senfus}
 %\subsection{Comparing, CSV-file}
 \textbf{HVORDAN EXTRACTED JEG DATA FRA EN DATAFRAME?!}
-\textit{We use Pandas dataframe, described in Section \ref{sssec:imp_df}, to extract relevant data from the excel-files in the data storage.}
 
+\subsection{Raw Data Information Extraction}
 The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value.
 
-\textit{Excel - pandas dataframe, lese ut information. Lagre i en string med info som datetime, location, site, year, animal og antall animals.}
+\subsection{Excel files Extraction}
+The excel files contains annotations for each image. To read excel files, we use Pandas Dataframe, described in Section \ref{sssec:imp_df}. From the excel files, we extract information like date, time, animals, region, site and year. The necessary information about each animal is stored in a string.
+
+During implementation we came across a problem with inconsistency between cells in the same row. The problem was that the datetime cells information was inconsistent with the information in cells day, month, year, hours and minutes, shown in Figure \ref{fig:inconsistency}. Our solution was to alter and concatenate the correct values to make a new datetime.
+
+\begin{figure} [b]
+\centering
+\includegraphics[width=\textwidth]{inconsistency2.png}
+\caption{Shows inconsistency between cells in rows in excel file.}
+\label{fig:inconsistency}
+\end{figure}
 
 
+Another problem was that the cells containing column-names was different. One example is that month was written \textit{"moth"} in some excel files and \textit{"month"} in others. \textbf{Solution: overwrite moth to month? Not done, though about it while writing this now... Only tried with two excel files that contains "moth", time restrictions and wanted to find some pictures instead of nothing..}
+
+A different problem was that some column-header names was written with a big letter like \textit{"Time"} in some excel files and other contained \textit{"time"}. Our solution was to make every column header into lowercases using Pandas Dataframe own function, \textit{pandas.Series.str.lower()}.
+
+\subsection{Comparing}
 \textit{Disse sammenlignes og de som matcher blir skrevet til en ny CSV fil med nødvendig info for å finne bilde.}
+
 
 
 \section{Virtual Sensors} \label{sec:imp_virsens}
