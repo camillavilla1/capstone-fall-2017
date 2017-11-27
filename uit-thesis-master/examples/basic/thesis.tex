@@ -425,12 +425,12 @@ As mentioned earlier, was this quite a time-consuming task because of the number
 
 %\textbf{Otto: I design: The image(s) are displayed through an image-vision.}
 
-\subsection{Virtual Sensors}
+\subsection{Virtual Sensors} \label{ssec:des_vs}
 \textbf{Divided into multiple virtual sensors depending on animal.}
 
 The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
 
-The virtual sensors are divided into multiple sensors depending on animals. 
+The virtual sensors are divided into multiple sensors depending on animals...
 
 The virtual sensors in this approach are functions in a sequential \textbf{system/program}. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes.
 
@@ -553,7 +553,7 @@ Python have a module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/py
 Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel-file.
 
 \subsubsection{OpenCV} \label{sssec:imp_cv}
-OpenCV V2.4.9.1 is an open-source library which provides the functionality for loading and preprocessing images.
+OpenCV V2.4.9.1\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} is an open-source library which provides the functionality for loading and preprocessing images.
 
 %OpenCV was started at Intel in 1999 by Gary Bradsky and it was released in 2000. OpenCV supports many algorithms related to Machine Learning and Computer Vision. 
 %At this time, OpenCV supports a wide range of programming languages such as C++, Python and Java and is also available on different platforms like Windows, Linux, OS X etc. OpenCV-Python combines the best qualities of OpenCV C++ API and Python language.%
@@ -584,7 +584,9 @@ During implementation we came across a problem with inconsistency between cells 
 \end{figure}
 
 
-Another problem was that the cells containing column-names was different. One example is that month was written \textit{"moth"} in some excel files and \textit{"month"} in others. \textbf{Solution: overwrite moth to month? Not done, though about it while writing this now... Only tried with two excel files that contains "moth", time restrictions and wanted to find some pictures instead of nothing..}
+Another problem was that the cells containing column-names was different. One example is that month was written \textit{"moth"} in some excel files and \textit{"month"} in others.
+
+\textbf{Solution: overwrite moth to month? Not done, though about it while writing this now... Only tried with two excel files that contains "moth", time restrictions and wanted to find some pictures instead of nothing..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn.. og unngå æøå. Fikse på raw data}
 
 A different problem was that some column-header names was written with a big letter like \textit{"Time"} in some excel files and other contained \textit{"time"}. Our solution was to make every column header into lowercases using Pandas Dataframe own function, \textit{pandas.Series.str.lower()}.
 
@@ -597,21 +599,26 @@ A different problem was that some column-header names was written with a big let
 \subsection{Virtual Sensors} %\label{sec:imp_vsensor}
 \textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 Er de virtuelle sensorene servere eller client/publisher?}
-The virtual sensors are \textit{constructed/implemented} as functions/definitions, not threads or subprocesses (uavhengige prosesser - independent processes)... \textit{Discussed in discussion Section....}
 
-The OpenCV\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
+%\textit{constructed/implemented}
+The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because ...
 
+
+\textbf{Valgte å fokusere på 3 dyr (og alle dyr/ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
+\textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
+
+The OpenCV library is used to visualize/show pictures to the user in the user application. The library read the pictures it is given and display these on the screen to the user.
 
 \textit{John M.: lesere vil kanskje tenke at dette er overkill. Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus.}
 
-\textbf{Valgte å fokusere på 3 dyr ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting}
 
 
 \subsection{User application} \label{ssec:user}
-The user application is implemented as a ...
-There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about implementing this...\textit{(One user - one application, another user run another new application)}
+The user application is implemented as a interface in the terminal...
+There is currently no logging of a user's action. Nor is it possible for more than one user to be connected (in the same application) at a time. Because of lack of time, we have not thought about implementing this...\textit{(One user - one application, another user run another new application). Restricted to 3 animals and 4 places..}
 
-\textit{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
+
+
 
 
 
