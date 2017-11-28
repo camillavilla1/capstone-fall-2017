@@ -594,7 +594,7 @@ Samlet både metadata og annotations fra excel fil så kan de sammenlignes..
 Tar lang tid, mange bilder og mange rows i excel.. det som bruker mest tid..
 
 
-The extracted metadata from the images and the annotations in the excel files that matches is stored in a CSV-file (Comma-separated Values).
+The extracted metadata from the images and the annotations in the excel files that matches, is stored in a CSV-file (Comma-separated Values).
 
 \textbf{Why stored in a new CSV-file? begin somewhere.. no database.. because of number of images to process - takes time, solution is to make a csv-file to store aggregated data so we don't need to search through the whole data storage next time, but only the new csv file.. not optimal or best solution, but works and it's a start..}
 
@@ -610,21 +610,19 @@ The virtual sensors are implemented as functions, not threads or independent sub
 \textbf{Valgte å fokusere på 3 dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
 \textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
-We chose to focus on virtual sensors for three different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that were \textbf{most present/appeared the most} in the excel files that were extracted.
+We chose to focus on virtual sensors for three different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that were \textbf{most present/appeared the most} in the annotations in the excel files that were extracted.
 
 
 
-
-The OpenCV library is used to visualize/show images to the user in the user application. The library read the images it is given and display these on the screen to the user. Our focus was not on which library to visualize images.
+The OpenCV library is used to visualize images to the user in the user application/interface. The library read the images it is given and display these on the screen to the user. Our focus was not on which library to visualize images.
 
 \textit{John M.: Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus.}
-
 
 
 \subsection{User application} \label{ssec:user}
 The user application is implemented as a interface in the terminal that communicates with the virtual sensors.
 
-There is currently not possible for more than one user to be connected in the same application at a time. Because of lack of time, we have not thought about implementing this. Our focus has been making a prototype of the user interface to be easy to use for biologists/users and to show images that the user wants to see/on users request.
+There is currently not possible for more than one user to be connected in the same application at a time. Because of lack of time, we have not thought about implementing this. Our focus has been making a prototype of the user interface to be easy to use for biologists/users and to show images on the users request.
 
 
 \chapter{Evaluation} 
@@ -637,6 +635,14 @@ How to measure, where done, PSEUDOCODE
 
 \begin{itemize}
 %\item python -m cProfile -s cumtime find_folder_ok_concurrent.py 
+
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart.png}
+\caption{Figure showing time to execute different parts of the system (in minutes).}
+\label{fig:chart1}
+\end{figure}
 
 \item Time: \\
 Finding folders and metadata takes:  1:43:13.488799 (103,2167 minutes), \\
