@@ -567,6 +567,8 @@ The data storage contains raw data and prepossessed images that are structured a
 \subsection{Raw Data Information Extraction}
 The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
 
+\textbf{folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå..}
+
 \subsection{Excel files Extraction}
 The excel files contains annotations for each image. To read excel files, we use Pandas Dataframe, described in Section \ref{sssec:imp_df}. From the excel files, we extract information like date, time, animals, region, site and year. The necessary information about each animal is stored in a string.
 
@@ -674,7 +676,7 @@ FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit with gcc V6.3.0 compiler and Python V2.7.13.
 
 \section{Experimental Design}
-\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser. Pythoon process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module).}
+\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser. Python process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module).}
 
 
 \section{Results}
@@ -685,6 +687,7 @@ Each experiment, result, meaning
 
 \subsection{Measure time to execute}
 \textbf{Use long time}
+
 shown in Figure \ref{fig:time_chart}, Figure \ref{fig:time_chart2} and Figure \ref{fig:time_chart3}.
 Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!
 
@@ -717,18 +720,20 @@ Most time during finding folder and read metadata and comparing.. Read excel fil
 \chapter{Discussion}
 %Idea, architecture, design, results, other solutions, "arch have scale-problem?".
 
-\section{Architecture}
-\subsection{Other solutions}
+%\section{Architecture}
+%\subsection{Other solutions}
 \begin{itemize}
 \item Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 \item Updates of "database" in background, not on demand -> future work?
-\end{itemize}
+%\end{itemize}
 
-\section{Design}
-\subsection{Other solutions}
-\begin{itemize}
+%\section{Design}
+%\subsection{Other solutions}
+%\begin{itemize}
 \item hash-map instead of multiple lists with different animals. hash on animal and/or place
 \item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
+\item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand.
+\item 
 %\item FRA HÅVARDS MASTER: \textit{The csv files did not contain any filenames, only image metadata and animal classifications, so we had to get creative to find out which images the annotations corresponded to. Fortunately, each image had metadata stored in Exchangeable Image File Format ( exif ). We created a Python script to extract the date and time from each image, along with camera information, to match them with the annotations. This was quite a time-consuming task because of the number of images to process.}
 \end{itemize}
 
@@ -740,7 +745,16 @@ Combine with conclusion??
 \section{Contributions?}
 
 \chapter{Future Work}
-
+\begin{itemize}
+\item Concurrent lesing av excel-filer (alle sammen)
+\item Concurrent lesing av metadata og traversering..
+\item Concurrent sammneligning
+\item VS er subproseser/channels(?) i GO slik at man evt kan fjerne/legge til sensorer om man vil
+\item Gjøre i Golang?
+\item Concurrent VS: kan hente data fra flere sensorer eller kombinere flere VS.. Eks: ravn \& rev eller ravn | rev.
+\item Query for å hente bilder mellom 2 tidspunkt
+\item Oppdatere/sjekek frequent, ikke som nå (on-demand).
+\end{itemize}
 \chapter{Appendix?}
 readme, source code, dataset measurement RAW
 \backmatter
