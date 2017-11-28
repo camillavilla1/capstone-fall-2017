@@ -631,18 +631,10 @@ This chapter describes the experimental setup and metrics used to evaluate the i
 metrics, define (CPU, memory, latency.), benchmarks (micro, kernel...
 How to measure, where done, PSEUDOCODE
 
+\iffalse
 \ NOTATER:
-
 \begin{itemize}
 %\item python -m cProfile -s cumtime find_folder_ok_concurrent.py 
-
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{chart.png}
-\caption{Figure showing time to execute different parts of the system (in minutes).}
-\label{fig:chart1}
-\end{figure}
 
 \item Time: \\
 Finding folders and metadata takes:  1:43:13.488799 (103,2167 minutes), \\
@@ -675,19 +667,51 @@ Overall time is  5:38:59.541248 (= 338.9833 minutes)\\
 -- Pool(processes=100)\\
 FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 
-
 \end{itemize}
+\fi
+
 \section{Experimental Setup}
 All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit with gcc V6.3.0 compiler and Python V2.7.13.
 
-
-
 \section{Experimental Design}
+\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser. Pythoon process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module).}
+
+
 \section{Results}
 In this section we will discuss the results of the testing described in the sections above...
 
 What does the result say?
 Each experiment, result, meaning
+
+\subsection{Measure time to execute}
+\textbf{Use long time}
+shown in Figure \ref{fig:time_chart}, Figure \ref{fig:time_chart2} and Figure \ref{fig:time_chart3}.
+Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart.png}
+\caption{Figure showing time to execute different parts of the system (in minutes).}
+\label{fig:time_chart}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart2.png}
+\caption{Figure showing time to execute different parts of the system (in minutes).}
+\label{fig:time_chart2}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart3.png}
+\caption{Figure showing time to execute the system (in minutes).}
+\label{fig:time_chart3}
+\end{figure}
+
+
+\subsection{Measure CPU/memory??}
+
 
 
 \chapter{Discussion}
