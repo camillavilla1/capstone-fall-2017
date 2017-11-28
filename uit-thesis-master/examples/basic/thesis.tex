@@ -601,16 +601,16 @@ The extracted metadata from the images and the annotations in the excel files th
 
 \section{Virtual Sensors} \label{sec:imp_virsens}
 \subsection{Virtual Sensors} %\label{sec:imp_vsensor}
-\textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
-Er de virtuelle sensorene servere eller client/publisher?}
+%\textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
+%Er de virtuelle sensorene servere eller client/publisher?}
 
-%\textit{constructed/implemented}
+
 The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because ... \textbf{lack of time/wanted to show something.. start somewhere..}
 
 \textbf{Valgte å fokusere på 3 dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
 \textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
-We chose to focus on virtual sensors for \textbf{three/3} different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that \textbf{were most present} in the excel files that were extracted.
+We chose to focus on virtual sensors for three different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that were \textbf{most present/appeared the most} in the excel files that were extracted.
 
 
 
@@ -628,7 +628,7 @@ There is currently not possible for more than one user to be connected in the sa
 
 
 \chapter{Evaluation} 
-This chapter describes the experimental setup...
+This chapter describes the experimental setup and metrics used to evaluate the implemented system. 
 
 metrics, define (CPU, memory, latency.), benchmarks (micro, kernel...
 How to measure, where done, PSEUDOCODE
@@ -638,35 +638,37 @@ How to measure, where done, PSEUDOCODE
 \begin{itemize}
 %\item python -m cProfile -s cumtime find_folder_ok_concurrent.py 
 
-\item Time: Finding folders and metadata takes:  1:43:13.488799 (103,2167 minutes),
-Reading excel file takes:  0:00:17.413845 (0.2833 minutes),
-Comparing takes:  4:43:30.705587 (283.5 minutes),
-Overall time is  6:27:01.608355 (387.0167 minutes).
-Med alle bilder m/metadata og hele fotoboks2011\_nordkynn\_nordkynn.2011.xlsx.
+\item Time: \\
+Finding folders and metadata takes:  1:43:13.488799 (103,2167 minutes), \\
+Reading excel file takes:  0:00:17.413845 (0.2833 minutes),\\
+Comparing takes:  4:43:30.705587 (283.5 minutes),\\
+Overall time is  6:27:01.608355 (387.0167 minutes).\\
+Med alle bilder m/metadata og \\
+hele fotoboks2011\_nordkynn\_nordkynn.2011.xlsx.
 
-\item New time: Finding folders and metadata takes:  1:46:17.406581 (= 106.2833 minutes)
-Reading excel file takes:  0:01:07.686779 (= 1.1167 minutes)
-Comparing takes:  19:03:11.177869 (= 1143.1833 minutes)
-Overall time is  20:50:36.271415 (= 1250.6 minutes)
+\item New time: \\
+Finding folders and metadata takes:  1:46:17.406581(= 106.2833 minutes) \\
+Reading excel file takes:  0:01:07.686779 (= 1.1167 minutes) \\
+Comparing takes:  19:03:11.177869 (= 1143.1833 minutes) \\
+Overall time is  20:50:36.271415 (= 1250.6 minutes) \\
 Med alle bilder m/mETADATA og hele nordkynn og varanger
 
-\item "Concurrent" python find\_folder\_ok\_concurrent.py 
-Finding folders and metadata takes:  1:30:50.250732 (= 90.8333 minutes)
-Reading excel file takes:  0:00:18.127597 (= 0.3 minutes)
-Comparing takes:  4:18:33.368199 (= 258.55 minutes)
-Overall time is  5:49:41.746759 (= 349.6833 minutes)
-\\ -- Pool(processes=4)
+\item "Concurrent" python find\_folder\_ok\_concurrent.py \\
+Finding folders and metadata takes:  1:30:50.250732 (= 90.8333 minutes) \\
+Reading excel file takes:  0:00:18.127597 (= 0.3 minutes)\\
+Comparing takes:  4:18:33.368199 (= 258.55 minutes)\\
+Overall time is  5:49:41.746759 (= 349.6833 minutes)\\
+-- Pool(processes=4) \\
 FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 
-\item "Concurrent" igjen
-Finding folders and metadata takes:  1:44:18.788013 (= 104.3 minutes)
-Reading excel file takes:  0:00:17.269817 (= 0.2833 minutes)
-Comparing takes:  3:54:23.483186 (= 234.3833 minutes)
-Overall time is  5:38:59.541248 (= 338.9833 minutes)
--- Pool(processes=100)
-\\ FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
+\item "Concurrent" igjen \\
+Finding folders and metadata takes:  1:44:18.788013 (= 104.3 minutes)\\
+Reading excel file takes:  0:00:17.269817 (= 0.2833 minutes)\\
+Comparing takes:  3:54:23.483186 (= 234.3833 minutes)\\
+Overall time is  5:38:59.541248 (= 338.9833 minutes)\\
+-- Pool(processes=100)\\
+FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 
-This chapter describes the experimental setup and metrics used to evaluate the implemented system. 
 
 \end{itemize}
 \section{Experimental Setup}
