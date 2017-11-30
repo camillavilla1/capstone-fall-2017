@@ -294,7 +294,7 @@ The dataset contains pictures during night- and daytime. The cameras have infrar
 The pictures in the dataset is structured in directories and folders. The dataset is first divided into different years going from 2011 to 2015. Each of these folders are then again divided into the areas of the 5 camera traps in the Arctic Tundra. Inside each of these folders specified by the area, they contain folders from each site inside the specific area.
 Figure \ref{fig:directories} shows a cropped screenshot of the directories.
 
-\textbf{(In total 1976 directories, men alle er ikke i bruk/relevant)}
+\textbf{NOTES: (In total 1976 directories, men alle er ikke i bruk/relevant)}
 
 \begin{figure}
 \centering
@@ -304,20 +304,20 @@ Figure \ref{fig:directories} shows a cropped screenshot of the directories.
 \end{figure}
 
 \section{Image Annotations}
-\textit{Biologist working on the COAT project have detected animals in each image and made annotations stored in excel-files containing metadata and animal classification.}
+\textit{NOTES: Biologist working on the COAT project have detected animals in each image and made annotations stored in excel-files containing metadata and animal classification.}
 
 COAT provided annotations stored in excel-files with information about all of the images in the dataset that biologist working at the COAT project have detected. The biologist have used these annotations to see what animal was present at a specific time and to see statistics. The biologist have not made these annotations to go back in time and look at the images, and the dataset is then not made for...
 
  
 The excel-files are structured in their own folder and each file is named as a combination of the camera traps area, it's year and the site. An example is \textit{"fotoboks2011\_nordkynn\_nordkynn.2011.xlsx"}.
 
-\textbf{Ta med hvordan/hva slags metadata som ligger i excel-filen? Evt i bildene.}
+\textbf{NOTES: Ta med hvordan/hva slags metadata som ligger i excel-filen? Evt i bildene.}
 
 The dataset contains the images metadata and animal classification, but did not contain any filenames or a filepath. We then had to find a method to find out which images correspond to the metadata in the excel-files. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where images are located and read date-time from the metadata and store it in a new CSV-file (Comma-separated Values).
 %/dictionary with date-time as key and image-path as value.
 This was quite a time-consuming task because of the number of images to process.
 
-\textbf{Forklare mer hvordan dette er gjort i design/implementasjon. Skal jeg si noe som ".. explained in details in Chapter/Section ...??}
+\textbf{NOTES: Forklare mer hvordan dette er gjort i design/implementasjon. Skal jeg si noe som ".. explained in details in Chapter/Section ...??}
 
 
 
@@ -363,7 +363,7 @@ The fused data retrieves it's data and on demand. The fused data is the physical
 \section{Virtual Sensors} \label{sec:arch_vs}
 The virtual sensors are divided into multiple sensors where each virtual sensor represents a different animal that scientists are interested in, like ravens, red foxes, golden eagles or polar foxes.
 
-\textbf{UTDYP DE VIRTUELLE SENSORENE} 
+\textbf{NOTES: UTDYP DE VIRTUELLE SENSORENE} 
 These virtual sensors have the same functionalities...?
 
 The virtual sensors offers interaction between the fused data and the user interface. A user tells the user interface, described in Section \ref{sec:arch_user_int}, a task and forwards the task to the desired virtual sensor. The virtual sensor will then retrieve its results from the fused data.
@@ -378,7 +378,7 @@ The virtual sensors offers interaction between the fused data and the user inter
 \section{User Interface} \label{sec:arch_user_int}
 A user wants to retrieve fused data about animals. The user interacts with the virtual sensor user interface. This takes care of the interaction with the virtual sensor. When a user gives a command, the desired virtual sensor retrieve data from the fused data as described in Section \ref{sec:arch_vs}, and presents the result back to the user.
 
-\textbf{utdype query språk - utdype mer i design/implementation?}
+\textbf{NOTES: utdype query språk - utdype mer i design/implementation?}
 
 
 
@@ -426,7 +426,7 @@ As mentioned earlier, was this quite a time-consuming task because of the number
 %\textbf{Otto: I design: The image(s) are displayed through an image-vision.}
 
 \subsection{Virtual Sensors} \label{ssec:des_vs}
-\textbf{Divided into multiple virtual sensors depending on animal.}
+\textbf{NOTES: Divided into multiple virtual sensors depending on animal.}
 
 The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
 
@@ -563,7 +563,7 @@ The data storage contains raw data and prepossessed images that are structured a
 The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
 
 
-\textbf{folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
+\textbf{NOTES: folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
 
 During implementation we came across a problem with the folders containing space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. This makes it difficult to extract images. 
 ...Our solution was to change the folder-names to not contain space and UTF-8 characters.
@@ -591,7 +591,7 @@ A different problem was that some column-header names was written with a big let
 
 ---------------------
 
-\textbf{..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn..Biologer brukte Windows, jeg Ubuntu.. kanskje noe rot der.. men burde egentlig fikse på raw data uansett?}
+\textbf{NOTES: ..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn..Biologer brukte Windows, jeg Ubuntu.. kanskje noe rot der.. men burde egentlig fikse på raw data uansett?}
 
 One more problem arose when the excel-file contained table-headers with UTF-8 characters, as seen in Figure \ref{fig:utf8}.
 
@@ -619,16 +619,17 @@ The extracted metadata from the images and the annotations in the excel files th
 
 The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because ... \textbf{lack of time/wanted to show something.. start somewhere..}
 
-\textbf{NOTES: Valgte å fokusere på 3 dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
+\textbf{NOTES: Valgte å fokusere på tre dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
 \textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
 We also chose to focus on virtual sensors for three different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that were \textbf{most present/appeared the most} in the annotations in the excel files that were extracted.
 
 
-
-The OpenCV library is used to visualize images to the user in the user application/interface. The library read the images it is given and display these on the screen to the user. Our focus was not on which library to visualize images.
-
 \textit{NOTES: John M.: "Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus."}
+
+The OpenCV library is used to visualize images to the user in the user application/interface. The library read the images it is given and display these on the screen to the user. The reason for choosing this visualization library was because of experience with this in previous projects and also that our focus was not primarily on which library to visualize images.
+
+
 
 
 \subsection{User application} \label{ssec:user}
