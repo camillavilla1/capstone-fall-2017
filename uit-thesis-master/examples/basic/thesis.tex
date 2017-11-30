@@ -562,7 +562,14 @@ The data storage contains raw data and prepossessed images that are structured a
 \subsection{Raw Data Information Extraction}
 The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
 
-\textbf{folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå..}
+
+\textbf{folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
+
+During implementation we came across a problem with the folders containing space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. This makes it difficult to extract images. 
+...Our solution was to change the folder-names to not contain space and UTF-8 characters.
+
+%'/home/camilla/Documents/daoshare/COAT/camtraps/COAT/fra-COAT/Bilder til institutt for informatikk/åtekamera (Siw)'
+    
 
 \subsection{Excel files Extraction}
 The excel files contains annotations for each image. To read excel files, we use Pandas Dataframe, described in Section \ref{sssec:imp_df}. From the excel files, we extract information like date, time, animals, region, site and year. The necessary information about each animal is stored in a string.
@@ -576,18 +583,23 @@ During implementation we came across a problem with inconsistency between cells 
 \label{fig:inconsistency}
 \end{figure}
 
+%\textbf{NOTES: Solution: overwrite moth to month? Not done, though about it while writing this now... Only tried with two excel files that contains "moth", time restrictions and wanted to find some pictures instead of nothing}
 
-Another problem was that the cells containing column-names was different. One example is that month was written \textit{"moth"} in some excel files and \textit{"month"} in others.
-
-\textbf{NOTES: Solution: overwrite moth to month? Not done, though about it while writing this now... Only tried with two excel files that contains "moth", time restrictions and wanted to find some pictures instead of nothing..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn.. og unngå æøå? Eller bare fikse på raw data?}
+Another problem was that the cells containing column-names was different. One example is that month was written \textit{"moth"} in some excel files and \textit{"month"} in others. Because of time constraints, we only used the excel files containing the word "moth" since this was the first excel-file to be extracted and our intent was to get images to visualize. 
 
 A different problem was that some column-header names was written with a big letter like \textit{"Time"} in some excel files and other contained \textit{"time"}. Our solution was to make every column header into lowercases using Pandas Dataframe function, \textit{pandas.Series.str.lower()}.
+
+---------------------
+
+\textbf{..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn..Biologer brukte Windows, jeg Ubuntu.. kanskje noe rot der.. fikse på raw data?}
+
+One more problem arose when the excel-file contained column-headers with UTF-8 characters...
+
 
 
 \subsection{Comparing/Comparison}
 %\textit{Disse sammenlignes og de som matcher blir skrevet til en ny CSV fil med nødvendig info for å finne bilde. Samlet både metadata og annotations fra excel fil så kan de sammenlignes.. 
 %Tar lang tid, mange bilder og mange rows i excel.. det som bruker mest tid..}
-
 
 The extracted metadata from the images and the annotations in the excel files that matches, is stored in a CSV-file (Comma-separated Values). We chose to store the aggregated/merged/fused data in a new CSV-file because...
 
@@ -669,7 +681,7 @@ FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit with gcc V6.3.0 compiler and Python V2.7.13.
 
 \section{Experimental Design}
-\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser. Python process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module).}
+\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser (for concurrent compare). Python process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module).}
 
 
 \section{Results}
