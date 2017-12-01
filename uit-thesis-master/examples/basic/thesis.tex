@@ -386,7 +386,7 @@ A user wants to retrieve fused data about animals. The user interacts with the v
 %\textbf{Client/Server, p2p, put/get, pub/sub, protokoller, FTP etc..
 %BESKRIV INTERAKSJONEN MELLOM ENHETENE!!}
 
-In this chapter we will look at the design of the system and present the design of each component of the architecture. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures. \textbf{Få med direction of arrows/active side?}
+In this chapter we will look at the design of the system and present the design of each component of the architecture. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines/dataflow between each component in the system. The dotted arrows show how the data storage is structured with files and pictures. \textbf{Få med direction of arrows/active side?}
 
 %\ OLD
 %\textit{In this chapter we will look at the design of the environment. We will present the design of the data storage, the fused data the virtual sensors and the user application. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures.}
@@ -559,14 +559,10 @@ The data storage contains raw data and prepossessed images that are structured a
 
 
 \section{Sensor Fusion} \label{sec:imp_senfus}
-\subsection{Raw Data Information Extraction}
+\subsection{Raw Data Information Extraction} \label{ssec:imp_rawdata}
 The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
 
-
-\textbf{NOTES: folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
-
-During implementation we came across a problem with the folders containing space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. This makes it difficult to extract images because/considering/due to/for the reason that...  
-...Our solution was to change the folder-names to not contain space and UTF-8 characters.
+During implementation we came across a problem with the folders containing white-space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. This makes it difficult to extract images due to the reason that the new CSV-file had white-space between each characters. This is described further in Section \ref{ssec:imp_compare}. Our solution was to change the folder-names to not contain whitespace and UTF-8 characters.
 
 %'/home/camilla/Documents/daoshare/COAT/camtraps/COAT/fra-COAT/Bilder til institutt for informatikk/åtekamera (Siw)'
 
@@ -589,11 +585,11 @@ Another problem was that the cells containing column-names was different. One ex
 
 A different problem was that some column-header names was written with a big letter like \textit{"Time"} in some excel files and other contained \textit{"time"}. Our solution was to make every column header into lowercases using Pandas Dataframe function, \textit{pandas.Series.str.lower()}.
 
----------------------
 
-\textbf{NOTES: ..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn..Biologer brukte Windows, jeg Ubuntu.. kanskje noe rot der.. men burde egentlig fikse på raw data uansett?}
+%\textbf{NOTES: ..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn.. Biologer brukte Windows, jeg Ubuntu.. kanskje noe rot der.. men burde egentlig fikse på raw data uansett?}
 
-One more problem arose when the excel-file contained table-headers with UTF-8 characters, as seen in Figure \ref{fig:utf8}.
+One more problem arose when some of the excel-file contained table-headers with UTF-8 characters, as seen in Figure \ref{fig:utf8}. These characters won't be interpreted by the system and the table-headers will not be readable.
+
 
 \begin{figure}[b]
 \centering
@@ -602,17 +598,22 @@ One more problem arose when the excel-file contained table-headers with UTF-8 ch
 \label{fig:utf8}
 \end{figure}
 
-\subsection{Comparing/Comparison}
+\subsection{Comparing/Comparison} \label{ssec:imp_compare}
 %\textit{Disse sammenlignes og de som matcher blir skrevet til en ny CSV fil med nødvendig info for å finne bilde. Samlet både metadata og annotations fra excel fil så kan de sammenlignes.. 
 %Tar lang tid, mange bilder og mange rows i excel.. det som bruker mest tid..}
 
-The extracted metadata from the images and the annotations in the excel files that matches, is stored in a CSV-file (Comma-separated Values). We chose to store the aggregated/merged/fused data in a new CSV-file because...
 
-\textbf{NOTES: Why stored in a new CSV-file? begin somewhere, simplify search next time.. no database.. because of number of images to process - takes time, solution is to make a csv-file to store aggregated data so we don't need to search through the whole data storage next time, but only the new csv file.. not optimal or best solution, but works and it's a start..}
+The extracted metadata from the images and the annotations in the excel files that matches, is stored in a CSV-file (Comma-separated Values). We chose to store the fused data in a new CSV-file because of the large number of images to process. It will simplify search in the future since it will be faster to search through the fused data in the CSV instead of searching through the raw data and compare them with the annotations. This is not the best choice, however it is a introduction to a solution.
 
+%\textbf{NOTES: Why stored in a new CSV-file? begin somewhere, simplify search next time.. no database.. because of number of images to process - takes time, solution is to make a csv-file to store aggregated data so we don't need to search through the whole data storage next time, but only the new csv file.. not optimal or best solution, but works and it's a start..}
+
+
+\textbf{NOTES: folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
+
+As described in Section \ref{ssec:imp_rawdata}, the folder-names contained white-spaces and UTF-8 characters. 
 
 \section{Virtual Sensors} \label{sec:imp_virsens}
-\subsection{Virtual Sensors} %\label{sec:imp_vsensor}
+\subsection{Virtual Sensors} %\label{ssec:imp_vsensor}
 %\textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 %Er de virtuelle sensorene servere eller client/publisher?}
 
@@ -745,6 +746,7 @@ Most time during finding folder and read metadata and comparing.. Read excel fil
 \item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
 \item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand.
 \item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency
+\item Burde lage egne gorutiner/subprocesser/classer for hvert dyr. alle er en basic class med f. eks ID, TYPE, CAPABILITIES, HISTORIKK?, QUERIES/RAW DATA..
 %\item FRA HÅVARDS MASTER: \textit{The csv files did not contain any filenames, only image metadata and animal classifications, so we had to get creative to find out which images the annotations corresponded to. Fortunately, each image had metadata stored in Exchangeable Image File Format ( exif ). We created a Python script to extract the date and time from each image, along with camera information, to match them with the annotations. This was quite a time-consuming task because of the number of images to process.}
 \end{itemize}
 
