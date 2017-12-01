@@ -565,7 +565,7 @@ The raw data in the data storage is traversed by walking the OS directories. If 
 
 \textbf{NOTES: folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
 
-During implementation we came across a problem with the folders containing space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. This makes it difficult to extract images. 
+During implementation we came across a problem with the folders containing space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. This makes it difficult to extract images because/considering/due to/for the reason that...  
 ...Our solution was to change the folder-names to not contain space and UTF-8 characters.
 
 %'/home/camilla/Documents/daoshare/COAT/camtraps/COAT/fra-COAT/Bilder til institutt for informatikk/åtekamera (Siw)'
@@ -616,16 +616,16 @@ The extracted metadata from the images and the annotations in the excel files th
 %\textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 %Er de virtuelle sensorene servere eller client/publisher?}
 
+The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because ... \textbf{..start somewhere and eventually lack of time/time constraints and wanted to show something instead of nothing..}
 
-The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because ... \textbf{lack of time/wanted to show something.. start somewhere..}
 
-\textbf{NOTES: Valgte å fokusere på tre dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
-\textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
+%\textbf{NOTES: Valgte å fokusere på tre dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
+%\textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
 We also chose to focus on virtual sensors for three different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that were \textbf{most present/appeared the most} in the annotations in the excel files that were extracted.
 
 
-\textit{NOTES: John M.: "Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus."}
+%\textit{NOTES: John M.: "Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus."}
 
 The OpenCV library is used to visualize images to the user in the user application/interface. The library read the images it is given and display these on the screen to the user. The reason for choosing this visualization library was because of experience with this in previous projects and also that our focus was not primarily on which library to visualize images.
 
