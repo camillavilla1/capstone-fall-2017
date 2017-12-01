@@ -554,7 +554,7 @@ OpenCV V2.4.9.1\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/l
 
 
 \section{Data Storage} \label{sec:imp_storage}
-The data storage contains raw data and prepossessed images that are structured and sorted by animals. Unfortunately, these preprossesed images don't consists of any image metadata so we don't have any information of when the image is taken. Therefore, the solution is to traverse the whole data storage and find the original images/raw data with metadata and compare these to the excel-files containing information like date, time, location and site.
+The data storage contains raw data and prepossessed images that are structured and sorted by animals. Unfortunately, these preprossesed images don't consists of any image metadata so we don't have any information of when the image is taken. Therefore, the solution is to traverse the whole data storage and find the raw data with metadata and compare these to the excel-files containing information like date, time, location and site.
 %\textbf{HOW DID I TRAVERSE}
 
 
@@ -569,7 +569,7 @@ During implementation we came across a problem with the folders containing space
 ...Our solution was to change the folder-names to not contain space and UTF-8 characters.
 
 %'/home/camilla/Documents/daoshare/COAT/camtraps/COAT/fra-COAT/Bilder til institutt for informatikk/åtekamera (Siw)'
-    
+
 
 \subsection{Excel files Extraction}
 The excel files contains annotations for each image. To read excel files, we use Pandas Dataframe, described in Section \ref{sssec:imp_df}. From the excel files, we extract information like date, time, animals, region, site and year. The necessary information about each animal is stored in a string.
