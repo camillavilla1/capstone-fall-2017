@@ -394,7 +394,7 @@ In this chapter we will look at the design of the system and present the design 
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{Design4.png}
+\includegraphics[width=\textwidth]{Design.png}
 \caption{Figure showing the system design.}
 \label{fig:design}
 \end{figure}
@@ -628,13 +628,12 @@ We also chose to focus on virtual sensors for three different animals and images
 
 %\textit{NOTES: John M.: "Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus."}
 
-The OpenCV library is used to visualize images to the user in the user application/interface. The library read the images it is given and display these on the screen to the user. The reason for choosing this visualization library was because of experience with this in previous projects and also that our focus was not primarily on which library to visualize images.
-
+The OpenCV library is used to visualize images to the user. The library read the images it is given and display these on the screen to the user. The reason for choosing this visualization library was because of experience with this in previous projects and also that our focus was not primarily on which library to use when visualizing images.
 
 
 
 \subsection{User application} \label{ssec:user}
-The user application is implemented as a interface in the terminal that communicates with the virtual sensors.
+The user application is implemented as an interface in the terminal that communicates with the virtual sensors.
 
 There is currently not possible for more than one user to be connected in the same application at a time. Because of lack of time, we have not thought about implementing this. Our focus has been making a prototype of the user interface to be easy to use for biologists/users and to show images on the users request.
 
