@@ -108,40 +108,37 @@ This dissertation present/describe ...
 \mainmatter
 
 \chapter{Introduction}
-%There are increasing numbers of physical sensors used for various purposes. For example, ...
-
 The Arctic tundra in the far northern hemisphere is challenged by climate changes in the world today and is one of the ecosystems that are most affected by these changes \cite{coat2016}. The \textit{Climate-ecological Observatory for Arctic Tundra - COAT} is a long-term research project developed by five Fram Center\footnote{\url{http://www.framsenteret.no/english}} institutions. Their goal is to create robust observation systems which enable documentation and understanding of climate change impacts on the Arctic tundra ecosystems. In autumn 2015, COAT was granted substantial funding to establish research infrastructure which allowed them to start up a research infrastructure during 2016-2020 \cite{coat2016}. 
 
-Every year, COAT deploys several camera traps in eastern Finnmark, Norway for roughly one month during the winter. The main purpose of these cameras is to study predator populations, with especially a focus on the redlisted arctic fox which is the most endagered mammal species in Norway  \cite{coatplan2016}.
-
+Every year, COAT deploys several camera traps in eastern Finnmark, Norway for roughly one month during the winter. The main purpose of these cameras is to study predator populations, with especially a focus on the redlisted arctic fox which is the most endagered mammal species in Norway  \cite{coatplan2016}. 
 The camera traps are set up to take a time-lapsed photo every fifth minute during day and night which adds up to over 300 000 images per year \cite{methodseco}. Collecting this high volume of images gives Big Data challenges in the ecology field. 
 %The images are also manually examined and annotated, which is a enormously exhausting approach that requires months of human labor and resources.
 
+\textbf{Hvordan komme inn på virtuelle sensorer? Og til "this project will develop an abstraction" eller noe lignende...}
+
 In this project we will describe a system that simplifies biologists need  to look at images from different locations in the Arctic tundra in one view...
 
-Assume biologists want to search for image of a specific animal from different locations in the Arctic Tundra. A virtual sensor would locate data from the data storage and then return those images that matches to the biologists request.
+Assume biologists want to search for image of a specific animal from different locations in the Arctic Tundra. A virtual sensor would locate data from the data storage and then return those images that matches to the biologists request...
 
-This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
+%This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
 
 
 \section{Motivation}
-The motivation!
-\begin{itemize}
-\item W3
-\item Problem definition: This project investigated ... x, with the purpose of y.
-\end{itemize}
+%\textbf{Problem definition: This project investigated ... x, with the purpose of y.}
 
 The motivation  behind this project is that no single sensor may cover the sensing needs, and that sensing needs can change rapidly over time. Consequently, there is a need for sensor fusion, and allow for combining sensors at different computers.
 
+This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
+
 \section{Contributions}
-\textbf{What was the contribution? Ta enten her eller i conclusion? Eller begge steder}
+%\textbf{What was the contribution? Ta enten her eller i conclusion? Eller begge steder}
 
 The dissertation makes the following contributions:
 \begin{itemize}
-\item Introduction to virtual sensors
-\item Description of data set preparation
-\item An implementation and description of a system
-\item An evaluation of the system 
+\item An introduction to virtual sensors.
+\item A description of data set preparation from the camera traps in the Arctic tundra.
+\item An implementation and description of a system that fuse raw data from different physical sensors into one virtual sensor.
+\item An evaluation of the system.
 \end{itemize}
 
 %OTTO: Principles, models, artifact and evaluation of it. Lessons learned/insights. Conclusion
@@ -156,8 +153,11 @@ AVGRENSE, VIKTIG!!
 \begin{itemize}
 \item Mention focus on camera-sensors/data, and not other sensors?!
 \item Hvorfor fokus på bilder - forenkle, begrense, starte et sted
+\item Limiting search for animals - "predefined" what user can search
 \end{itemize}
 
+
+%Instead of supporting all possible services, we give a predefined..
 
 
 %\begin{itemize}
@@ -233,15 +233,22 @@ DOI: http://dx.doi.org/10.1145/2509434
 \section{Virtual Sensors}
 A virtual sensor is a constructed sensor in contrary to a physical sensor \cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
 
-Previous research have focused on simple in-network data aggregation techniques and the sensor networks are often represented as a database. Two examples of such approaches are TinyDB \cite{tinyDB} and Cougar \cite{cougar}, which enable applications to have a central point (base station) and create routing trees  to funnel replies back to this root. The main focus on these approaches are operating intelligent in-network aggregation and routing to reduce  the overall energy cost while still keep the semantic value of data high.
+Previous research have focused on simple in-network data aggregation techniques and the sensor networks are often represented as a database. Two examples of such approaches are TinyDB \cite{tinyDB} and Cougar \cite{cougar}, which enable applications to have a central point (base station) and create routing trees  to funnel replies back to this root. The main focus on these approaches are operating intelligent in-network aggregation and routing to reduce  the overall energy cost.
+%while still keep the semantic value of data high.
 In both examples, the data aggregation is specified using an SQL-like language. However, queries cannot be used to merge different data types, only homogeneous data aggregation is achievable.
-Their virtual sensors approach is  offering a simple interface and heterogeneous in-network data aggregation. Yet, our virtual sensors have no SQL-like language or a database to store the aggregated data. Our work also relies on physical sensor data which is already in a data storage, and not directly from the physical sensors.
+Their virtual sensors approach is  offering a simple interface and heterogeneous in-network data aggregation. Our virtual sensors have no SQL-like language or a database to store the aggregated data. Our work also fuses physical sensor data which is already in a data storage, and not consuming directly from the physical sensors.
 
 
-A virtual node\cite{Ciciriello} is a set of physical sensors that a programmer can interact with as a single sensor. Their virtual nodes are implemented using TinyOS \cite{TinyOS} and their physical nodes are abstracted and specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}. The nodes are combined in a logical neighborhood that are specified based on their characteristics by the programmer. 
+A virtual node\cite{Ciciriello} is a development of a set of physical sensors that a programmer can interact with as a single sensor. Their virtual nodes are implemented using TinyOS \cite{TinyOS} and is specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}. 
+%Their physical nodes are abstracted and specified using logical neighborhoods \cite{Mottola2006}\cite{Mottola2006_2}.
+The nodes in the logical neighborhood are specified based on their characteristics by the programmer.
+Our approach of virtual sensors are not specified by the use of logical neighborhoods. There are no communication between the virtual nodes.
 
 
-It is a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data. 
+It is a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data\cite{hill}. 
+
+\textit{The users can leverage deployed virtual sensor types, interactively creating and sharing new customized virtual sensors at required locations and with parameters best suited to the researcher's purpose.}
+
 The system can provide point-averaged radar-rainfall products at either temporal resolution of the radar or as a temporal average of a fixed time period, which is illustrated in Figure \ref{fig:rainfall_sensor}
 In contrast, our virtual sensors system is running on-demand, not in real-time. \textbf{OGSÅ ANDRE ULIKHETER}
 
@@ -254,7 +261,7 @@ In contrast, our virtual sensors system is running on-demand, not in real-time. 
 
 
 %\subsection{dice - expand!}
-%Dice??
+Dice?? \cite{dice}
 %\textit{"Improve network lifetime -> routing protocol for many-2-many communication". Talking about TinyOS and CTP.
 %In this article we present DICE, a system enabling WSN-based distributed monitoring of global invariants. A DICE invariant is expressed by predicates defined over the state of multiple WSN nodes, such as the expected state of actuators based on given sensed environmental conditions.}
 
@@ -277,10 +284,10 @@ In contrast, our virtual sensors system is running on-demand, not in real-time. 
 \chapter{The Dataset} \label{chap:data_set}
 \textbf{HVORDAN DE ER SAMLET, HVORDAN DE ER ORGANISERT?}
 
-The dataset is provided by COAT and contains over 1.6 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The camera traps are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
+The dataset is provided by COAT and contains over 1.6 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The wildlife camera traps from Reconyx are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
 The dataset contains pictures during night- and daytime. The cameras have infrared flash so the cameras can take pictures at nighttime. These pictures are without color while the pictures taken at daytime are with color, as shown in Figure \ref{fig:pictures}.
 
-\textbf{Wildlife camera Reconyx}
+%\textbf{Wildlife camera Reconyx}
 
 \begin{figure*}[t!]
     \centering
@@ -314,9 +321,9 @@ Figure \ref{fig:directories} shows a cropped screenshot of the directories.
 \end{figure}
 
 \section{Image Annotations}
-\textit{NOTES: Biologist working on the COAT project have detected animals in each image and made annotations stored in excel-files containing metadata and animal classification.}
+%\textit{NOTES: Biologist and ecologists working on the COAT project have detected animals in each image and made annotations stored in excel-files containing metadata and animal classification.}
 
-COAT provided annotations stored in excel-files with information about all of the images in the dataset that biologist working at the COAT project have detected. The biologist have used these annotations to see what animal was present at a specific time and to see statistics. The biologist have not made these annotations to go back in time and look at the images, and the dataset is then not made for...
+COAT provided annotations stored in excel-files with information about all of the images in the dataset that biologist and ecologists working at the COAT project have detected. The biologist have used these annotations to see what animal was present at a specific time and to see statistics. The biologist have not made these annotations to go back in time and look at the images, and the dataset is then not made for...
 
  
 The excel-files are structured in their own folder and each file is named as a combination of the camera traps area, it's year and the site. An example is \textit{"fotoboks2011\_nordkynn\_nordkynn.2011.xlsx"}.
@@ -351,12 +358,12 @@ The architecture of the system is presented in Figure \ref{fig:architecture1}. T
 The physical sensors produce raw data. The raw data consists of images from different bait-camera sensors.
 The data also contains metadata about each image, as described in Chapter \ref{chap:data_set}. 
 
-\textbf{Hva mer??}
+%\textbf{Hva mer??}
 
 \section{Raw Data, Analytics and Labeled Data}
 The raw data contains images from the physical sensors and annotations in excel-files containing metadata about each image alongside labeled data, as described in Chapter \ref{chap:data_set}.
 
-\textbf{Hva mer??}
+%\textbf{Hva mer??}
 %\section{Analytics and Labeled Data}
 
 
@@ -364,7 +371,7 @@ The raw data contains images from the physical sensors and annotations in excel-
 \section{Fusing Of Data}%\subsection{Fusing of data}
 Get analytics and classified data from raw data (excel) and the raw-data and fuse/aggregate correlated/corresponding(?) data.
 
-\textbf{Hva mer??}
+%\textbf{Hva mer??}
 
 \section{Fused Data}%\subsection{Fused Data}
 The fused data retrieves it's data and on demand. The fused data is the physical sensors location combined with necessary metadata such as date-time, location, site, year, what kind of animal there as in the image and also how many animals there was/\textbf{and animal classification}.
@@ -865,6 +872,14 @@ S. Hamel, S. T. Killengreen, J.-A. Henden, N. E. Eide, L. Roed-Eriksen, R. A. Im
 \newblock {\em “Towards good practice guidance in using camera-traps in ecology: influence of sampling design on validity of ecological inferences}, 2013,
 \newblock in {\em Methods in Ecology and Evolution, vol. 4, no. 2. pp. 105-113}
 %\newblock {\em \url{http://www.framsenteret.no/getfile.php/2435814.1574.xyxruwywpp/FinalPDF_COAT.pdf}}.
+
+%12
+\bibitem{dice}
+Gun\u{a}, \c{S}tefan and Mottola, Luca and Picco, Gian Pietro,
+\newblock {\em DICE: Monitoring Global Invariants with Wireless Sensor Networks}, June 2014,
+\newblock in {\em ACM, vol. 10, no. 4. pp. 54:1--54:34}
+\newblock {\em \url{http://doi.acm.org/10.1145/2509434}}.
+
 
 \end{thebibliography}
 
