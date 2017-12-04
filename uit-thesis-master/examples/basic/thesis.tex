@@ -108,28 +108,20 @@ This dissertation present/describe ...
 \mainmatter
 
 \chapter{Introduction}
-\begin{itemize}
-\item Mention focus on camera-sensors/data, and not other sensors?!
-\textit{John M.: Hvorfor fokus på bilder - forenkle, begrense, starte et sted}
-\end{itemize}
-
-\textbf{This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors.}
-
-\textbf{The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.}
-
-
 %There are increasing numbers of physical sensors used for various purposes. For example, ...
 
-%OTTO RETTING: Assume biologists want to search for pictures of a specific animal from different locations in the Arctic Tundra. A virtual sensor would collect/\textbf{locate} data from the physical/\textbf{storage} sensors and then return those images that matches to the biologists request.
-
-The Arctic tundra in the far northern hemisphere is challenged by climate changes in the world today and is one of the ecosystems that are most affected by these changes \cite{coat2016}.
-
-The \textit{Climate-ecological Observatory for Arctic Tundra - COAT} is a long-term research project developed by five Fram Center\footnote{\url{http://www.framsenteret.no/english}} institutions. Their goal is to create robust observation systems which enable documentation and understanding of climate change impacts on the Arctic tundra ecosystems. In autumn 2015, COAT was granted substantial funding to establish research infrastructure which allowed them to start up a research infrastructure during 2016-2020 \cite{coat2016}. 
+The Arctic tundra in the far northern hemisphere is challenged by climate changes in the world today and is one of the ecosystems that are most affected by these changes \cite{coat2016}. The \textit{Climate-ecological Observatory for Arctic Tundra - COAT} is a long-term research project developed by five Fram Center\footnote{\url{http://www.framsenteret.no/english}} institutions. Their goal is to create robust observation systems which enable documentation and understanding of climate change impacts on the Arctic tundra ecosystems. In autumn 2015, COAT was granted substantial funding to establish research infrastructure which allowed them to start up a research infrastructure during 2016-2020 \cite{coat2016}. 
 
 Every year, COAT deploys several camera traps in eastern Finnmark, Norway for roughly one month during the winter. The main purpose of these cameras is to study predator populations, with especially a focus on the redlisted arctic fox which is the most endagered mammal species in Norway  \cite{coatplan2016}.
 
+The camera traps are set up to take a time-lapsed photo every fifth minute during day and night which adds up to over 300 000 images per year \cite{methodseco}. Collecting this high volume of images gives Big Data challenges in the ecology field. 
+%The images are also manually examined and annotated, which is a enormously exhausting approach that requires months of human labor and resources.
 
-%\textit{HÅVARD: Currently, the images are manually examined and annotated, which is an extremely tedious approach that requires months of human labor and resources. This expensive and time-consuming task is often performed by ecologists, hired technicians, or crowdsourced teams of volunteers [7][8]. There is no doubt that this workforce could be more useful elsewhere.}
+In this project we will describe a system that simplifies biologists need  to look at images from different locations in the Arctic tundra in one view...
+
+Assume biologists want to search for image of a specific animal from different locations in the Arctic Tundra. A virtual sensor would locate data from the data storage and then return those images that matches to the biologists request.
+
+This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
 
 
 \section{Motivation}
@@ -142,12 +134,14 @@ The motivation!
 The motivation  behind this project is that no single sensor may cover the sensing needs, and that sensing needs can change rapidly over time. Consequently, there is a need for sensor fusion, and allow for combining sensors at different computers.
 
 \section{Contributions}
-\textbf{What was the contribution?}
+\textbf{What was the contribution? Ta enten her eller i conclusion? Eller begge steder}
 
 The dissertation makes the following contributions:
 \begin{itemize}
-\item One
-\item Two
+\item Introduction to virtual sensors
+\item Description of data set preparation
+\item An implementation and description of a system
+\item An evaluation of the system 
 \end{itemize}
 
 %OTTO: Principles, models, artifact and evaluation of it. Lessons learned/insights. Conclusion
@@ -161,21 +155,22 @@ AVGRENSE, VIKTIG!!
 
 \begin{itemize}
 \item Mention focus on camera-sensors/data, and not other sensors?!
+\item Hvorfor fokus på bilder - forenkle, begrense, starte et sted
 \end{itemize}
+
+
 
 %\begin{itemize}
 %\item The first item .
 %\end{itemize}
-
 %\begin{enumerate}
 %\item The first item
 %\end{enumerate}
-
 %\begin{description}
 %\item[Entry A] with definition A.
 %\end{description}
-
 %\newpage
+
 
 \iffalse
 \subsection{A subsection - example}
@@ -862,6 +857,13 @@ Ims, R.A., Jepsen, J.U., Stien, A. \& Yoccoz, N.G. 2013,
 Åshild Ø. Pedersen, A. Stien, E. Soininen, and R. A. Ims,
 \newblock {\em Climate-ecological observatory for arctic tundra-status 2016}, Mars 2016,
 \newblock in {\em  Fram Forum 2016, pages 36-43.}
+%\newblock {\em \url{http://www.framsenteret.no/getfile.php/2435814.1574.xyxruwywpp/FinalPDF_COAT.pdf}}.
+
+%11
+\bibitem{methodseco}
+S. Hamel, S. T. Killengreen, J.-A. Henden, N. E. Eide, L. Roed-Eriksen, R. A. Ims, and N. G. Yoccoz,
+\newblock {\em “Towards good practice guidance in using camera-traps in ecology: influence of sampling design on validity of ecological inferences}, 2013,
+\newblock in {\em Methods in Ecology and Evolution, vol. 4, no. 2. pp. 105-113}
 %\newblock {\em \url{http://www.framsenteret.no/getfile.php/2435814.1574.xyxruwywpp/FinalPDF_COAT.pdf}}.
 
 \end{thebibliography}
