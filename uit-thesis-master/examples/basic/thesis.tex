@@ -282,14 +282,14 @@ Dice?? \cite{dice}
 
 
 \chapter{The Dataset} \label{chap:data_set}
-\textbf{HVORDAN DE ER SAMLET, HVORDAN DE ER ORGANISERT?}
+%\textbf{HVORDAN DE ER SAMLET, HVORDAN DE ER ORGANISERT?}
 
 The dataset is provided by COAT and contains over 1.6 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The wildlife camera traps from Reconyx are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
 The dataset contains pictures during night- and daytime. The cameras have infrared flash so the cameras can take pictures at nighttime. These pictures are without color while the pictures taken at daytime are with color, as shown in Figure \ref{fig:pictures}.
 
 %\textbf{Wildlife camera Reconyx}
 
-\begin{figure*}[t!]
+\begin{figure*} %[t!]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
         %\centering
@@ -701,7 +701,7 @@ All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-64
 \section{Experimental Design}
 %\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser (for concurrent compare). Python process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module). Prøvde også med over 500 processer, men ga ikke noe bedre resultat.. Tror det blir mye overhead..}
 
-We decided to measure execution time on the five different experiments. We measured execution time on the new csv-file that contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. We also tried to run three experiments where we tried to run the comparing concurrently with 4, 100 and 500 processes by using a multiprocessing library in Python that supports spawning processes using an API similar to the threading module.
+We decided to measure execution time on the five different experiments. We measured execution time on the new csv-file that contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. We also ran three experiments where we tried to run the comparison between images and annotations concurrently with 4, 100 and 500 processes by using a multiprocessing library in Python that supports spawning processes using an API similar to the threading module.
 
 \section{Results}
 In this section we will discuss the results of the testing described in the sections above...
@@ -761,13 +761,8 @@ This chapter discusses...
 %\section{Architecture}
 %\subsection{Other solutions}
 \begin{itemize}
-\item Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
+\item Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen.. HVORFOR valgte jeg løsningen som jeg gjorde, og er dette er andre løsninger..
 \item Updates of "database" in background, not on demand -> future work?
-%\end{itemize}
-
-%\section{Design}
-%\subsection{Other solutions}
-%\begin{itemize}
 \item hash-map instead of multiple lists with different animals. hash on animal and/or place
 \item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
 \item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand.
