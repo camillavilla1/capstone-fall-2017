@@ -265,7 +265,7 @@ Dice?? \cite{dice}
 %\textit{"Improve network lifetime -> routing protocol for many-2-many communication". Talking about TinyOS and CTP.
 %In this article we present DICE, a system enabling WSN-based distributed monitoring of global invariants. A DICE invariant is expressed by predicates defined over the state of multiple WSN nodes, such as the expected state of actuators based on given sensed environmental conditions.}
 
-%\textit{We presented DICE (Distributed Invariant CheckEr), a system for WSN-based distributed monitoring of global invariants in physical processes. DICE provides a declarative language to specify invariants and a runtime support enabling efficient monitoring of their violations.}
+\textit{FROM PAPER: We presented DICE (Distributed Invariant CheckEr), a system for WSN-based distributed monitoring of global invariants in physical processes. DICE provides a declarative language to specify invariants and a runtime support enabling efficient monitoring of their violations.}
 
 %\textit{\textbf{SYSTEM ARCHITECTURE}
 %We describe the toolchain and runtime architecture of DICE. Our prototype targets TinyOS [Hill et al. 2000], and relies on CTP [Gnawali et al. 2009 - Collection tree protocol: two principles of wireless routing protocols] for the tree-based forwarding necessary to the TREE dissemination strategy. Nevertheless, the techniques we describe do not depend on either.
@@ -403,7 +403,7 @@ A user wants to retrieve fused data about animals. The user interacts with the v
 %\textbf{Client/Server, p2p, put/get, pub/sub, protokoller, FTP etc..
 %BESKRIV INTERAKSJONEN MELLOM ENHETENE!!}
 
-In this chapter we will look at the design of the system and present the design of each component of the architecture. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines/dataflow between each component in the system. The dotted arrows show how the data storage is structured with files and pictures. \textbf{Få med direction of arrows/active side?}
+In this chapter we will look at the design of the system and present the design of each component of the architecture. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines and dataflow between each component in the system. The dotted arrows show how the data storage is structured with files and raw data.
 
 %\ OLD
 %\textit{In this chapter we will look at the design of the environment. We will present the design of the data storage, the fused data the virtual sensors and the user application. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures.}
@@ -441,17 +441,12 @@ As mentioned earlier, was this quite a time-consuming task because of the number
 %Er de virtuelle sensorene servere eller client/publisher?}
 
 %\textbf{Otto: I design: The image(s) are displayed through an image-vision.}
+%\textbf{NOTES: Divided into multiple virtual sensors depending on animal.}
 
 \subsection{Virtual Sensors} \label{ssec:des_vs}
-\textbf{NOTES: Divided into multiple virtual sensors depending on animal.}
+The virtual sensors are divided into multiple sensors depending on animals. The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
 
-The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
-
-The virtual sensors are divided into multiple sensors depending on animals...
-
-The virtual sensors in this approach are functions in a sequential \textbf{system/program}. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes.
-
-\textbf{Mer i implementasjon?}
+The virtual sensors in this approach are functions in a sequential \textbf{system/program}. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes. \textit{Er dette mer diskusjonsmateriale? Eller ha det med her også?}
 
 
 %\subsubsection{Raven Sensor}
@@ -550,7 +545,7 @@ This chapter will elaborate on how we implemented the system, general implementa
 %In the rest of this chapter 
 We will first look at some libraries used in this implementation, then we will take a look at the data storage in Section \ref{sec:imp_storage} and the sensor fusion in Section \ref{sec:imp_senfus}. At last, we will describe the virtual sensors and the user application in Section \ref{sec:imp_virsens}.
 
-The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. \textbf{ This was a practical ...choice/language because ... reason 1 (kjent med det fra før av), reason 2(object orientert), reason 3...(offers many/different (open-source) libraries)}. ...The libraries are mentioned below.
+The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. \textbf{ This was a practical ...choice/language because ... reason 1 (kjent med det fra før av), reason 2(object orientert), reason 3...(offers many/different (open-source) libraries)}. The libraries are mentioned below.
 %We made this choice because Python is object oriented and it offers different frameworks that are relevant for this implementation.
 
 
@@ -615,7 +610,7 @@ One more problem arose when some of the excel-file contained table-headers with 
 \label{fig:utf8}
 \end{figure}
 
-\subsection{Comparing/Comparison} \label{ssec:imp_compare}
+\subsection{Comparison of data} \label{ssec:imp_compare}
 %\textit{Disse sammenlignes og de som matcher blir skrevet til en ny CSV fil med nødvendig info for å finne bilde. Samlet både metadata og annotations fra excel fil så kan de sammenlignes.. 
 %Tar lang tid, mange bilder og mange rows i excel.. det som bruker mest tid..}
 
@@ -658,12 +653,12 @@ There is currently not possible for more than one user to be connected in the sa
 \chapter{Evaluation} 
 This chapter describes the experimental setup and metrics used to evaluate the implemented system. 
 
-metrics, define (CPU, memory, latency.), benchmarks (micro, kernel...
-How to measure, where done, PSEUDOCODE
+%metrics, define (CPU, memory, latency.), benchmarks (micro, kernel...
+%How to measure, where done, PSEUDOCODE
 
 \iffalse
 \ NOTATER:
-\begin{itemize}
+%\begin{itemize}
 %\item python -m cProfile -s cumtime find_folder_ok_concurrent.py 
 
 \item Time: \\
@@ -704,8 +699,9 @@ FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit with gcc V6.3.0 compiler and Python V2.7.13.
 
 \section{Experimental Design}
-\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser (for concurrent compare). Python process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module).}
+%\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser (for concurrent compare). Python process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module). Prøvde også med over 500 processer, men ga ikke noe bedre resultat.. Tror det blir mye overhead..}
 
+We decided to measure execution time on the five different experiments. We measured execution time on the new csv-file that contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. We also tried to run three experiments where we tried to run the comparing concurrently with 4, 100 and 500 processes by using a multiprocessing library in Python that supports spawning processes using an API similar to the threading module.
 
 \section{Results}
 In this section we will discuss the results of the testing described in the sections above...
@@ -714,10 +710,7 @@ What does the result say?
 Each experiment, result, meaning
 
 \subsection{Measure time to execute}
-\textbf{Use long time}
-
-shown in Figure \ref{fig:time_chart}, Figure \ref{fig:time_chart2} and Figure \ref{fig:time_chart3}.
-Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!
+\textbf{Use long time. Have 4 figures showing execution time in minutes.. Figures \ref{fig:time_chart}, \ref{fig:time_chart2}, \ref{fig:time_chart3}, \ref{fig:time_chart500}, \ref{fig:time_chart500new}. Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
 
 \begin{figure}
 \centering
@@ -741,12 +734,29 @@ Most time during finding folder and read metadata and comparing.. Read excel fil
 \end{figure}
 
 
-\subsection{Measure CPU/memory??}
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart_500proc.png}
+\caption{Figure showing time to execute the system (in minutes).}
+\label{fig:time_chart500}
+\end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart_500proc_new.png}
+\caption{Figure showing time to execute the system (in minutes).}
+\label{fig:time_chart500new}
+\end{figure}
+
+
+
+\subsection{Measure CPU/memory??}
+Doing the experiments now..
 
 
 \chapter{Discussion}
 %Idea, architecture, design, results, other solutions, "arch have scale-problem?".
+This chapter discusses...
 
 %\section{Architecture}
 %\subsection{Other solutions}
@@ -763,8 +773,9 @@ Most time during finding folder and read metadata and comparing.. Read excel fil
 \item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand.
 \item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency
 \item Burde lage egne gorutiner/subprocesser/classer for hvert dyr. alle er en basic class med f. eks ID, TYPE, CAPABILITIES, HISTORIKK?, QUERIES/RAW DATA..
-%\item FRA HÅVARDS MASTER: \textit{The csv files did not contain any filenames, only image metadata and animal classifications, so we had to get creative to find out which images the annotations corresponded to. Fortunately, each image had metadata stored in Exchangeable Image File Format ( exif ). We created a Python script to extract the date and time from each image, along with camera information, to match them with the annotations. This was quite a time-consuming task because of the number of images to process.}
 \end{itemize}
+
+%We did not choose this approach because...
 
 
 
@@ -772,6 +783,10 @@ Most time during finding folder and read metadata and comparing.. Read excel fil
 %Combine with conclusion??
 
 \chapter{Conclusion}
+In this project, we have implemented a system...
+
+Our experiments showed that ...
+
 \section{Contributions?}
 
 \chapter{Future Work}
@@ -785,6 +800,8 @@ Most time during finding folder and read metadata and comparing.. Read excel fil
 \item Query for å hente bilder mellom 2 tidspunkt
 \item Oppdatere/sjekek frequent, ikke som nå (on-demand).
 \end{itemize}
+
+
 \chapter{Appendix?}
 readme, source code, dataset measurement RAW
 \backmatter
