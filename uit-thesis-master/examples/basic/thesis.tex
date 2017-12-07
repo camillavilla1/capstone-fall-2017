@@ -710,8 +710,7 @@ What does the result say?
 Each experiment, result, meaning
 
 \subsection{Measure time to execute}
-%MANGLER NAVN PÅ X, Y LINJER!!!!!
-\textbf{Use long time. Have 4 figures showing execution time in minutes..  Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
+\textbf{Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
 
 %followed/pursued
 
@@ -744,7 +743,7 @@ Figure \ref{fig:time_chart500} shows the time to execute different parts of the 
 
 \textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
 
-Figure \ref{fig:time_chart_overall} show the time for the whole system to run. As we can see, w
+Figure \ref{fig:time_chart_overall} show the time for the whole system to run. As we can see, ...
 
 \begin{figure}
 \centering
@@ -769,26 +768,28 @@ Doing the experiments now..
 
 \chapter{Discussion}
 %Idea, architecture, design, results, other solutions, "arch have scale-problem?".
-This chapter discusses...
-
-%\section{Architecture}
-%\subsection{Other solutions}
 \begin{itemize}
 \item Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen.. HVORFOR valgte jeg løsningen som jeg gjorde, og er dette er andre løsninger..
+\item Burde lage egne gorutiner/subprocesser/classer for hvert dyr. alle er en basic class med f. eks ID, TYPE, CAPABILITIES, HISTORIKK?, QUERIES/RAW DATA..
 \item Updates of "database" in background, not on demand -> future work?
 \item hash-map instead of multiple lists with different animals. hash on animal and/or place
 \item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
 \item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand.
 \item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency
-\item Burde lage egne gorutiner/subprocesser/classer for hvert dyr. alle er en basic class med f. eks ID, TYPE, CAPABILITIES, HISTORIKK?, QUERIES/RAW DATA..
+\item Forskjellig språk har focus på forskjellig ting og er gode forskjellige ting.. Uansett hvilket språk man velger pga en fordel, vil det mest sannsnylig være et annet språk som er bedre på en annenn ting du skal implementere.. som f. eks. Golang bedre concurrent enn Python..
 \end{itemize}
+
+%some of the points where we met problems
+This chapter discusses our approach, experience and why we chose the solution we ended up with...
+
+\section{Virtual Sensors}
+\section{BBB}
+\section{CCC}
 
 %We did not choose this approach because...
 
 
 
-%\chapter{Contributions}
-%Combine with conclusion??
 
 \chapter{Conclusion}
 In this project, we have implemented a system...
@@ -796,6 +797,7 @@ In this project, we have implemented a system...
 Our experiments showed that ...
 
 \section{Contributions?}
+Har denne i introen også..
 
 \chapter{Future Work}
 \begin{itemize}
