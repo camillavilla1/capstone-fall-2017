@@ -710,44 +710,57 @@ What does the result say?
 Each experiment, result, meaning
 
 \subsection{Measure time to execute}
-\textbf{Use long time. Have 4 figures showing execution time in minutes.. Figures \ref{fig:time_chart}, \ref{fig:time_chart2}, \ref{fig:time_chart3}, \ref{fig:time_chart500}, \ref{fig:time_chart500new}. Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
+%MANGLER NAVN PÅ X, Y LINJER!!!!!
+\textbf{Use long time. Have 4 figures showing execution time in minutes..  Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
 
-\begin{figure}
+%followed/pursued
+
+Figure \ref{fig:time_chart500} shows the time to execute different parts of the system in minutes... We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data.
+
+\iffalse
+%\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart.png}
 \caption{Figure showing time to execute different parts of the system (in minutes).}
 \label{fig:time_chart}
 \end{figure}
+\fi
 
-\begin{figure}
+\iffalse
+%\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart2.png}
 \caption{Figure showing time to execute different parts of the system (in minutes).}
 \label{fig:time_chart2}
 \end{figure}
+\fi
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{chart3.png}
-\caption{Figure showing time to execute the system (in minutes).}
-\label{fig:time_chart3}
-\end{figure}
-
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{chart_500proc.png}
+\includegraphics[width=\textwidth]{chart500proc_new.png}
 \caption{Figure showing time to execute the system (in minutes).}
 \label{fig:time_chart500}
 \end{figure}
 
+\textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
+
+Figure \ref{fig:time_chart_overall} show the time for the whole system to run. As we can see, w
+
 \begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart3_new.png}
+\caption{Figure showing time to execute the system (in minutes).}
+\label{fig:time_chart_overall}
+\end{figure}
+
+\iffalse
+%\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart_500proc_new.png}
 \caption{Figure showing time to execute the system (in minutes).}
 \label{fig:time_chart500new}
 \end{figure}
-
+\fi
 
 
 \subsection{Measure CPU/memory??}
