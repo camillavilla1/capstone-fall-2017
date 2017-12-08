@@ -230,7 +230,7 @@ DOI: http://dx.doi.org/10.1145/2509434
 \end{itemize}
 \fi
 
-\section{Virtual Sensors}
+%\section{Virtual Sensors}
 A virtual sensor is a constructed sensor in contrary to a physical sensor \cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
 
 Previous research have focused on simple in-network data aggregation techniques and the sensor networks are often represented as a database. Two examples of such approaches are TinyDB \cite{tinyDB} and Cougar \cite{cougar}, which enable applications to have a central point (base station) and create routing trees  to funnel replies back to this root. The main focus on these approaches are operating intelligent in-network aggregation and routing to reduce  the overall energy cost.
@@ -245,12 +245,9 @@ The nodes in the logical neighborhood are specified based on their characteristi
 Our approach of virtual sensors are not specified by the use of logical neighborhoods. There are no communication between the virtual nodes.
 
 
-It is a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data\cite{hill}. 
-
-\textit{The users can leverage deployed virtual sensor types, interactively creating and sharing new customized virtual sensors at required locations and with parameters best suited to the researcher's purpose.}
-
+It is a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data\cite{hill}. Users can exploit deployed virtual sensor types and interactively create and share new customized virtual sensors at different locations and suitable parameters to the researcher's desire.
 The system can provide point-averaged radar-rainfall products at either temporal resolution of the radar or as a temporal average of a fixed time period, which is illustrated in Figure \ref{fig:rainfall_sensor}
-In contrast, our virtual sensors system is running on-demand, not in real-time. \textbf{OGSÅ ANDRE ULIKHETER}
+In contrast, our virtual sensors system is running on-demand, not in real-time. Our approach has neither the ability to provide users to create and share new customized virtual sensor. 
 
 \begin{figure}
 \centering
@@ -268,7 +265,7 @@ Dice?? \cite{dice}
 \textit{FROM PAPER: We presented DICE (Distributed Invariant CheckEr), a system for WSN-based distributed monitoring of global invariants in physical processes. DICE provides a declarative language to specify invariants and a runtime support enabling efficient monitoring of their violations.}
 
 %\textit{\textbf{SYSTEM ARCHITECTURE}
-%We describe the toolchain and runtime architecture of DICE. Our prototype targets TinyOS [Hill et al. 2000], and relies on CTP [Gnawali et al. 2009 - Collection tree protocol: two principles of wireless routing protocols] for the tree-based forwarding necessary to the TREE dissemination strategy. Nevertheless, the techniques we describe do not depend on either.
+%We describe the toolchain and runtime architecture of DICE. Our prototype targets TinyOS [Hill et al. 2000]\cite{TinyOS}, and relies on CTP [Gnawali et al. 2009 - Collection tree protocol: two principles of wireless routing protocols] for the tree-based forwarding necessary to the TREE dissemination strategy. Nevertheless, the techniques we describe do not depend on either.
 %We use our TinyOS implementation of DICE, described in Section 4, to run both simulation and tested experiments.
 %In computer science, an invariant is a condition that can be relied upon to be true during execution of a program, or during some portion of it. It is a logical assertion that is held to always be true during a certain phase of execution.}
 
@@ -277,7 +274,7 @@ Dice?? \cite{dice}
 %Physical Sensor Management with Virtualized Sensors on Cloud Computing
 %http://ieeexplore.ieee.org/document/5635688/\#}
 
-
+Eller et annet paper???
 
 
 
@@ -768,19 +765,20 @@ Doing the experiments now..
 
 \chapter{Discussion}
 %Idea, architecture, design, results, other solutions, "arch have scale-problem?".
-\begin{itemize}
+
+%\begin{itemize}
 %\item Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen.. HVORFOR valgte jeg løsningen som jeg gjorde, og er dette er andre løsninger..
 %\item Burde lage egne gorutiner/subprocesser/classer for hvert dyr. alle er en basic class med f. eks ID, TYPE, CAPABILITIES, HISTORIKK?, QUERIES/RAW DATA..
 %\item Kombinere VS søke på "ravn \& rev eller ravn | rev.. mellom 2 tidspunkt, nordkynn | varanger... etc..
-\item hash-map instead of multiple lists with different animals. hash on animal and/or place
+%!!!!!!!!!!!!\item hash-map instead of multiple lists with different animals. hash on animal and/or place
 %\item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
 %\item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency. Gjør GOlang when performance is critical..
 %\item Forskjellig språk har focus på forskjellig ting og er gode forskjellige ting.. Uansett hvilket språk man velger pga en fordel, vil det mest sannsnylig være et annet språk som er bedre på en annenn ting du skal implementere.. som f. eks. Golang bedre concurrent enn Python..
 %\item Updates of "database" in background, not on demand -> future work?
 %\item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand. Filer som slutter på .xlsx leses og evt. legges i en liste som kan sjekke senere om filen er blitt lest eller ikke..
-\item Brukte mye tid på data behandlingen og datasettet.. mye tull med utf-8 og whitespace osv, og forskjellige datoer i excel-fil..
-\item Og mye tid på excel-fil som inneholdt forskjellige datoer etc. som gjorde at jeg måtte trikse og mikse for å få riktig dato så jeg fikk opp riktig bildet/få opp bildet i det hele tatt..
-\end{itemize}
+%\item Brukte mye tid på data behandlingen og datasettet.. mye tull med utf-8 og whitespace osv, og forskjellige datoer i excel-fil..
+%\item Og mye tid på excel-fil som inneholdt forskjellige datoer etc. som gjorde at jeg måtte trikse og mikse for å få riktig dato så jeg fikk opp riktig bildet/få opp bildet i det hele tatt..
+%\end{itemize}
 
 %some of the points where we met problems
 This chapter discusses our approach, experience and why we chose the solution we ended up with...
@@ -803,9 +801,9 @@ A virtual sensor could also be implemented as an abstraction or a general class 
 \fi
 
 \section{Queries}
-Our approach support queries with only one option per animal, location and datetime, described in Section \ref{ssec:des_user}. The reason for this choice is because \textbf{start simple, expand later, time limitations/constraints..}
+Our approach support queries with only one option per animal, location and datetime, described in Section \ref{ssec:des_user}. The reason for this choice is because we started with a simple implementation with intent to expand at a later point. The first implementation only contained what kind of animal the user wanted to see. At later point, both location and datetime was added to narrow the search result. Due to time constraints, we didn't have time to implement more advanced search functionalities.
 
-An improvement would be to support operations like AND and OR for all three options in the user interface.
+An improvement would then be to support operations like AND and OR for all three options in the user interface.
 Then the user could for example search for \textit{"fox || raven"}, \textit{"fox \&\& raven"}, \textit{"Nordkynn || Stjernevann"} or to choose an interval between two datetimes like \textit{"26-04-2016 - 30-04-2016"}. This would make image search more flexible and add more advanced search queries for the users.
 %This would open the possibility for a combination/fusing of different virtual sensors...
 
@@ -815,28 +813,27 @@ As described in Chapter \ref{chap:evaluation}, the execution time of system is n
 
 Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP \cite{hoare}. Go is built with concurrency in mind and has goroutines instead of threads. Another advantages of goroutines is that it comes with a built-in primitive to communicate between themselves by using something called channels. There is also no need for some kind of mutex locking when sharing data structures compared to threads.
 
-%\subsection{Language}
-%https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
-
-%Threads within a process can share the same data space and can communicate with each other more easily than processes. .. Potential for race conditions and need locking or similar.
-
 
 \section{On-demand vs. background "updates" from datastorage}
 %Search server for new radar measurements in. If new data found, send to radar rainfall estimator.. \cite{hill}.
-Current solution does not support the ability to traverse the data storage with multiple excel-files. It only takes one and one excel-files that is "allerede bestemt"..
+Current solution does not support the ability to traverse the data storage with multiple excel-files. It only takes one and one excel-files that is predefined and extracts it's data.
 
 A quick fix to this problem is to traverse the directory where the files are located and then check if the files ends with \textit{".xlsx"}. These files will then be extracted and stored in for example a Pandas Dataframe like the current approach. The file-names could also be stored in the system to prevent to read the same files again if any new files is stored in the data storage.
 
-We did not choose this approach because the comparing of images and annotations is a time-consuming task where one file took several hours and comparing with two excel-files took over 20 hours as described in Chapter \ref{chap:evaluation}.
+We did not choose this approach because the comparing of images and annotations is a time-consuming task where one file took several hours and comparing with two excel-files took over 20 hours as described in Chapter \ref{chap:evaluation}. %scale problem - kan man si det??
 
 Another challenge with this approach is that some data in the excel-files contains characters with UTF-8 encoding. The challenge is then to interpret the data, described in Section \ref{ssec:imp_excel}.
 
 %A solution would be to search the data storage for new information and if new data is found, send it to the fusion of data
 
 
+%Brukte mye tid på data behandlingen og datasettet.. mye tull med utf-8 og whitespace osv, og forskjellige datoer i excel-fil..
 
+%Og mye tid på excel-fil som inneholdt forskjellige datoer etc. som gjorde at jeg måtte trikse og mikse for å få riktig dato så jeg fikk opp riktig bildet/få opp bildet i det hele tatt..
 
 \chapter{Conclusion}
+\textbf{NOTES: Focus on showing an image to user, spent lot of time with dataset and modify so data could be extracted, many improvements - also described in future work.. Experiment show need for concurrent system, a lot of data/big data to process}
+
 In this project, we have implemented a system...
 
 Our experiments showed that ...
