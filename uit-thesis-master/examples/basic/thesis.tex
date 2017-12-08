@@ -579,7 +579,7 @@ During implementation we came across a problem with the folders containing white
 %'/home/camilla/Documents/daoshare/COAT/camtraps/COAT/fra-COAT/Bilder til institutt for informatikk/åtekamera (Siw)'
 
 
-\subsection{Excel files Extraction}
+\subsection{Excel files Extraction} \label{ssec:imp_excel}
 The excel files contains annotations for each image. To read excel files, we use Pandas Dataframe, described in Section \ref{sssec:imp_df}. From the excel files, we extract information like date, time, animals, region, site and year. The necessary information about each animal is stored in a string.
 
 During implementation we came across a problem with inconsistency between cells in the same row. The problem was that the datetime cells information was inconsistent with the information in cells day, month, year, hours and minutes, shown in Figure \ref{fig:inconsistency}. Our solution was to alter and concatenate the correct values to make a new datetime.
@@ -776,8 +776,8 @@ Doing the experiments now..
 %\item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
 %\item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency. Gjør GOlang when performance is critical..
 %\item Forskjellig språk har focus på forskjellig ting og er gode forskjellige ting.. Uansett hvilket språk man velger pga en fordel, vil det mest sannsnylig være et annet språk som er bedre på en annenn ting du skal implementere.. som f. eks. Golang bedre concurrent enn Python..
-\item Updates of "database" in background, not on demand -> future work?
-\item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand. Filer som slutter på .xlsx leses og evt. legges i en liste som kan sjekke senere om filen er blitt lest eller ikke..
+%\item Updates of "database" in background, not on demand -> future work?
+%\item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand. Filer som slutter på .xlsx leses og evt. legges i en liste som kan sjekke senere om filen er blitt lest eller ikke..
 \item Brukte mye tid på data behandlingen og datasettet.. mye tull med utf-8 og whitespace osv, og forskjellige datoer i excel-fil..
 \item Og mye tid på excel-fil som inneholdt forskjellige datoer etc. som gjorde at jeg måtte trikse og mikse for å få riktig dato så jeg fikk opp riktig bildet/få opp bildet i det hele tatt..
 \end{itemize}
@@ -827,10 +827,12 @@ Current solution does not support the ability to traverse the data storage with 
 
 A quick fix to this problem is to traverse the directory where the files are located and then check if the files ends with \textit{".xlsx"}. These files will then be extracted and stored in for example a Pandas Dataframe like the current approach. The file-names could also be stored in the system to prevent to read the same files again if any new files is stored in the data storage.
 
-A solution would be to search the data storage for new information and if new data is found, send it to the fusion of data
-%We did not choose this approach because...
+We did not choose this approach because the comparing of images and annotations is a time-consuming task where one file took several hours and comparing with two excel-files took over 20 hours as described in Chapter \ref{chap:evaluation}.
 
-\section{UTF-8 problems..}
+Another challenge with this approach is that some data in the excel-files contains characters with UTF-8 encoding. The challenge is then to interpret the data, described in Section \ref{ssec:imp_excel}.
+
+%A solution would be to search the data storage for new information and if new data is found, send it to the fusion of data
+
 
 
 
