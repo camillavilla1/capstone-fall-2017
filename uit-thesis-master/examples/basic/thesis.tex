@@ -453,7 +453,7 @@ The virtual sensors in this approach are functions in a sequential \textbf{syste
 %\subsubsection{Golden Eagle Sensor}
 %\subsubsection{Red Fox Sensor}
 
-\subsection{User Application}
+\subsection{User Application} \label{ssec:des_user}
 The user-application is the connection between the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see. The main menu is shown in Listing \ref{lst:mainmenu}.
 The user only need to specify the following 3 parameters for the virtual sensor:
 
@@ -777,18 +777,20 @@ Doing the experiments now..
 \item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency. Gjør GOlang when performance is critical..
 \item Forskjellig språk har focus på forskjellig ting og er gode forskjellige ting.. Uansett hvilket språk man velger pga en fordel, vil det mest sannsnylig være et annet språk som er bedre på en annenn ting du skal implementere.. som f. eks. Golang bedre concurrent enn Python..
 \item Updates of "database" in background, not on demand -> future work?
-\item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand.
+\item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand. Filer som slutter på .xlsx leses og evt. legges i en liste som kan sjekke senere om filen er blitt lest eller ikke..
+\item Brukte mye tid på data behandlingen og datasettet.. mye tull med utf-8 og whitespace osv, og forskjellige datoer i excel-fil..
+\item Og mye tid på excel-fil som inneholdt forskjellige datoer etc. som gjorde at jeg måtte trikse og mikse for å få riktig dato så jeg fikk opp riktig bildet/få opp bildet i det hele tatt..
 \end{itemize}
 
 %some of the points where we met problems
 This chapter discusses our approach, experience and why we chose the solution we ended up with...
 
 \section{Virtual Sensors}
-As mentioned in previous chapters, are the virtual sensors functions in this approach. We choose this approach because of we firstly wanted to find images from the fused data and show them to the users. Another reason is because of time limitations.
+As mentioned in previous chapters, are the virtual sensors functions in our approach. We choose this approach because of we firstly wanted to find images from the fused data and show them to the users. Another reason is because of time limitations.
 
 Another solution to this approach of virtual sensors is to implement them as threads. This would again not be the best solution if for example the system should be able to add more virtual sensors during run-time. To solve this problem, we could have implemented the virtual sensors as independent processes which would not be affected when another virtual sensors is added, removed or at worst crash/fail.
 
-A virtual sensor could also be implemented as an abstraction or a general class with parameters such as \textit{id, type, capabilities, history and queries or raw data}. This parameters will then say something about what kind of virtual sensor it is, what it can do (show images, find new data if any etc.) and a support for queries from user.
+A virtual sensor could also be implemented as an abstraction or a general class with parameters such as \textit{id, type, capabilities, history and queries or raw data}. This parameters will then say something about what kind of virtual sensor it is, what it can do (show images, find new data if any etc.) and support for queries from user.
 
 \iffalse
 \begin{itemize}
@@ -801,20 +803,19 @@ A virtual sensor could also be implemented as an abstraction or a general class 
 \fi
 
 \section{Queries}
-Our approach only support queries that are only one option per animal, location and datetime. The reason for this choice is because \textbf{start simple, expand later, time limitations..}
+Our approach support queries with only one option per animal, location and datetime, described in Section \ref{ssec:des_user}. The reason for this choice is because \textbf{start simple, expand later, time limitations/constraints..}
 
 An improvement would be to support operations like AND and OR for all three options in the user interface.
-Then the user could for example search for \textit{"fox || raven"}, \textit{"fox \&\& raven"}, \textit{"Nordkynn || Stjernevann"} or to choose an interval between two datetimes like \textit{"26-04-2016 - 30-04-2016"}. 
+Then the user could for example search for \textit{"fox || raven"}, \textit{"fox \&\& raven"}, \textit{"Nordkynn || Stjernevann"} or to choose an interval between two datetimes like \textit{"26-04-2016 - 30-04-2016"}. This would make image search more flexible and add more advanced search queries for the users.
 %This would open the possibility for a combination/fusing of different virtual sensors...
 
 \section{Sequential vs. concurrent implementation??}
-As described in Chapter \ref{chap:evaluation}, the execution time of system is not satisfying (or something...). Using Pythons multiprocessing library did not solve any problem with time spent on comparing images and annotations.
+As described in Chapter \ref{chap:evaluation}, the execution time of system is not satisfying (or something...). Using Pythons multiprocessing library did not solve any problem with time spent on comparing images and annotations. The reason we tried Pythons multiprocessing library was to see if it made any performance-improvement on execution time compared to the sequential system. If it haven't been for the time constraints, we would try to implement another solution with threads.
 
-\textbf{Reasons for using Python multiprocessing: try it out just to see if it made any difference and it didn't.. didn't have time to try anything else like threads..}
+Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP[HOARE PAPER??]. Go is built with concurrency in mind and has goroutines instead of threads.
 
 %\subsection{Language}
 %https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
-A solution to this problem/challenge, is to use threading instead of processes. 
 
 %Threads within a process can share the same data space and can communicate with each other more easily than processes. .. Potential for race conditions and need locking or similar.
 
@@ -839,9 +840,9 @@ Har denne i introen også..
 
 \chapter{Future Work}
 \begin{itemize}
-\item Concurrent lesing av excel-filer (alle sammen)
-\item Concurrent lesing av metadata og traversering..
-\item Concurrent sammneligning
+\item Concurrent lesing av excel-filer (alle sammen). Lesing går egentlig greit, men burde hatt en løsning som leste alle filer som sluttet på .xsls eller noe lignende og så evt legge navne til filene i en liste slik at man kan sjekke om det filen er lest fra før av hvis man legger til nye filer i data storage..
+\item Concurrent lesing av metadata og traversering
+\item Concurrent sammneligning!!!
 \item VS er subproseser/channels(?) i GO slik at man evt kan fjerne/legge til sensorer om man vil
 \item Gjøre i Golang?
 \item Concurrent VS: kan hente data fra flere sensorer eller kombinere flere VS.. Eks: ravn \& rev eller ravn | rev.
