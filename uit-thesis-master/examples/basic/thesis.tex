@@ -773,9 +773,9 @@ Doing the experiments now..
 %\item Burde lage egne gorutiner/subprocesser/classer for hvert dyr. alle er en basic class med f. eks ID, TYPE, CAPABILITIES, HISTORIKK?, QUERIES/RAW DATA..
 %\item Kombinere VS søke på "ravn \& rev eller ravn | rev.. mellom 2 tidspunkt, nordkynn | varanger... etc..
 \item hash-map instead of multiple lists with different animals. hash on animal and/or place
-\item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
-\item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency. Gjør GOlang when performance is critical..
-\item Forskjellig språk har focus på forskjellig ting og er gode forskjellige ting.. Uansett hvilket språk man velger pga en fordel, vil det mest sannsnylig være et annet språk som er bedre på en annenn ting du skal implementere.. som f. eks. Golang bedre concurrent enn Python..
+%\item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
+%\item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency. Gjør GOlang when performance is critical..
+%\item Forskjellig språk har focus på forskjellig ting og er gode forskjellige ting.. Uansett hvilket språk man velger pga en fordel, vil det mest sannsnylig være et annet språk som er bedre på en annenn ting du skal implementere.. som f. eks. Golang bedre concurrent enn Python..
 \item Updates of "database" in background, not on demand -> future work?
 \item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand. Filer som slutter på .xlsx leses og evt. legges i en liste som kan sjekke senere om filen er blitt lest eller ikke..
 \item Brukte mye tid på data behandlingen og datasettet.. mye tull med utf-8 og whitespace osv, og forskjellige datoer i excel-fil..
@@ -810,9 +810,10 @@ Then the user could for example search for \textit{"fox || raven"}, \textit{"fox
 %This would open the possibility for a combination/fusing of different virtual sensors...
 
 \section{Sequential vs. concurrent implementation??}
+%Use a language more suitable for performance (execution time), like Golang..
 As described in Chapter \ref{chap:evaluation}, the execution time of system is not satisfying (or something...). Using Pythons multiprocessing library did not solve any problem with time spent on comparing images and annotations. The reason we tried Pythons multiprocessing library was to see if it made any performance-improvement on execution time compared to the sequential system. If it haven't been for the time constraints, we would try to implement another solution with threads.
 
-Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP[HOARE PAPER??]. Go is built with concurrency in mind and has goroutines instead of threads.
+Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP \cite{hoare}. Go is built with concurrency in mind and has goroutines instead of threads. Another advantages of goroutines is that it comes with a built-in primitive to communicate between themselves by using something called channels. There is also no need for some kind of mutex locking when sharing data structures compared to threads.
 
 %\subsection{Language}
 %https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
@@ -820,13 +821,16 @@ Another solution is to change the language from Python to The Go Programming Lan
 %Threads within a process can share the same data space and can communicate with each other more easily than processes. .. Potential for race conditions and need locking or similar.
 
 
-Use a language more suitable for performance (execution time), like Golang..
+\section{On-demand vs. background "updates" from datastorage}
+%Search server for new radar measurements in. If new data found, send to radar rainfall estimator.. \cite{hill}.
+Current solution does not support the ability to traverse the data storage with multiple excel-files. It only takes one and one excel-files that is "allerede bestemt"..
 
-\section{On-demand vs. background "updates"}
+A quick fix to this problem is to traverse the directory where the files are located and then check if the files ends with \textit{".xlsx"}. These files will then be extracted and stored in for example a Pandas Dataframe like the current approach. The file-names could also be stored in the system to prevent to read the same files again if any new files is stored in the data storage.
 
-
+A solution would be to search the data storage for new information and if new data is found, send it to the fusion of data
 %We did not choose this approach because...
 
+\section{UTF-8 problems..}
 
 
 
@@ -945,6 +949,13 @@ Gun\u{a}, \c{S}tefan and Mottola, Luca and Picco, Gian Pietro,
 \newblock {\em DICE: Monitoring Global Invariants with Wireless Sensor Networks}, June 2014,
 \newblock in {\em ACM, vol. 10, no. 4. pp. 54:1--54:34}
 \newblock {\em \url{http://doi.acm.org/10.1145/2509434}}.
+
+%13
+\bibitem{hoare}
+Hoare, C. A. R.,
+\newblock {\em Communicating Sequential Processes}, Aug. 1978,
+\newblock in {\em ACM, vol. 21, no. 8. pp. 666--677}
+\newblock {\em \url{http://doi.acm.org/10.1145/359576.359585}}.
 
 
 \end{thebibliography}
