@@ -204,31 +204,20 @@ footnote.}
 \iffalse
 \begin{itemize}
 \item Taking Sensor Networks from the Lab to the Jungle
-\item Wireless Sensor Networks for Habitat Monitoring
-\item Building Virtual Sensors and Actuators over Logical Neighborhoods
+%\item Wireless Sensor Networks for Habitat Monitoring
+%\item Building Virtual Sensors and Actuators over Logical Neighborhoods
 \item A virtual sensor system for user-generated, real-time environmental data products
-\item Integrating modeling and smart sensors for environmental and human health
+%\item Integrating modeling and smart sensors for environmental and human health
 \item Capability representation model for heterogeneous remote sensing sensors: Case study on soil moisture monitoring
-\item Dice: Monitoring Global Invariants with Wireless Sensor Networks 
-\\ \em{Ştefan Gună, Luca Mottola, and Gian Pietro Picco. 2014. DICE: Monitoring global invariants with wireless
-sensor networks. ACM Trans. Sensor Netw. 10, 4, Article 54 (April 2014), 34 pages.}
-DOI: http://dx.doi.org/10.1145/2509434
-\textit{Guna:2014:DMG:2633905.2509434,
- author = {Gun\u{a}, \c{S}tefan and Mottola, Luca and Picco, Gian Pietro},
- title = {DICE: Monitoring Global Invariants with Wireless Sensor Networks},
- journal = {ACM Trans. Sen. Netw.},
- issue_date = {June 2014},
- volume = {10},
- number = {4},
- month = jun
- pages = {54:1--54:34},
- articleno = {54},
- numpages = {34},
- url = {http://doi.acm.org/10.1145/2509434},
- doi = {10.1145/2509434},
- publisher = {ACM}}
-\end{itemize}
+%\item Dice: Monitoring Global Invariants with Wireless Sensor Networks 
 \fi
+
+Sensors are becoming omnipresent in everyday life and is generating data at an remarkable rate and scale \cite{modelling}. Sensors and models play a vital role in harnessing "Big Data" to extract information.
+% and to illustrate current developments and identify key research needs using human and environmental health challenges as an example. 
+As more data become available from sensors, it will require rethinking of the scales, the processed models and creative thinking about fusing data.
+
+\textit{A virtual sensor system for user-generated, real-time environmental data products}
+
 
 %\section{Virtual Sensors}
 A virtual sensor is a constructed sensor in contrary to a physical sensor \cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
@@ -274,7 +263,6 @@ Dice?? \cite{dice}
 %Physical Sensor Management with Virtualized Sensors on Cloud Computing
 %http://ieeexplore.ieee.org/document/5635688/\#}
 
-Eller et annet paper???
 
 
 
@@ -283,8 +271,6 @@ Eller et annet paper???
 
 The dataset is provided by COAT and contains over 1.6 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The wildlife camera traps from Reconyx are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
 The dataset contains pictures during night- and daytime. The cameras have infrared flash so the cameras can take pictures at nighttime. These pictures are without color while the pictures taken at daytime are with color, as shown in Figure \ref{fig:pictures}.
-
-%\textbf{Wildlife camera Reconyx}
 
 \begin{figure*} %[t!]
     \centering
@@ -305,10 +291,9 @@ The dataset contains pictures during night- and daytime. The cameras have infrar
 
 
 \section{Dataset Directory Structure}
-The pictures in the dataset is structured in directories and folders. The dataset is first divided into different years going from 2011 to 2015. Each of these folders are then again divided into the areas of the 5 camera traps in the Arctic Tundra. Inside each of these folders specified by the area, they contain folders from each site inside the specific area.
-Figure \ref{fig:directories} shows a cropped screenshot of the directories.
+The pictures in the dataset is structured in directories and folders. The dataset is first divided into different years going from 2011 to 2015. Each of these folders are then again divided into the areas of the 5 camera traps in the Arctic Tundra. Inside each of these folders specified by the area, they contain folders from each site inside the specific area. Figure \ref{fig:directories} shows a cropped screenshot of the directories.
 
-\textbf{NOTES: (In total 1976 directories, men alle er ikke i bruk/relevant)}
+%\textbf{NOTES: (In total 1976 directories, men alle er ikke i bruk/relevant)}
 
 \begin{figure}
 \centering
@@ -320,19 +305,15 @@ Figure \ref{fig:directories} shows a cropped screenshot of the directories.
 \section{Image Annotations}
 %\textit{NOTES: Biologist and ecologists working on the COAT project have detected animals in each image and made annotations stored in excel-files containing metadata and animal classification.}
 
-COAT provided annotations stored in excel-files with information about all of the images in the dataset that biologist and ecologists working at the COAT project have detected. The biologist have used these annotations to see what animal was present at a specific time and to see statistics. The biologist have not made these annotations to go back in time and look at the images, and the dataset is then not made for...
-
+COAT provided annotations stored in excel-files with information about all of the images in the dataset that biologist and ecologists working at the COAT project have detected. The biologist have used these annotations to see what animal was present at a specific time and to see statistics. The biologist have not made these annotations for the purpose to go back in time and look at the images, which is the essential part in our approach.
+The annotation contains information about a pictures location, site, date, time, animal classification, temperature in Fahrenheit, brightness, sharpness, saturation, sensitivity etc. 
  
 The excel-files are structured in their own folder and each file is named as a combination of the camera traps area, it's year and the site. An example is \textit{"fotoboks2011\_nordkynn\_nordkynn.2011.xlsx"}.
 
-\textbf{NOTES: Ta med hvordan/hva slags metadata som ligger i excel-filen? Evt i bildene.}
 
 The dataset contains the images metadata and animal classification, but did not contain any filenames or a filepath. We then had to find a method to find out which images correspond to the metadata in the excel-files. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where images are located and read date-time from the metadata and store it in a new CSV-file (Comma-separated Values).
 %/dictionary with date-time as key and image-path as value.
 This was quite a time-consuming task because of the number of images to process.
-
-\textbf{NOTES: Forklare mer hvordan dette er gjort i design/implementasjon. Skal jeg si noe som ".. explained in details in Chapter/Section ...??}
-
 
 
 \chapter{Architecture}
@@ -366,21 +347,18 @@ The raw data contains images from the physical sensors and annotations in excel-
 
 %\section{Fusing of data and Fused Data}
 \section{Fusing Of Data}%\subsection{Fusing of data}
-Get analytics and classified data from raw data (excel) and the raw-data and fuse/aggregate correlated/corresponding(?) data.
+Get analytics and classified data from the raw-data and annotated data.
 
 %\textbf{Hva mer??}
 
 \section{Fused Data}%\subsection{Fused Data}
-The fused data retrieves it's data and on demand. The fused data is the physical sensors location combined with necessary metadata such as date-time, location, site, year, what kind of animal there as in the image and also how many animals there was/\textbf{and animal classification}.
+The fused data retrieves it's data on demand. The fused data is the physical sensors location combined with necessary metadata such as date-time, location, site, year, animal classification and also how many animals there was in an image.
 
 
 \section{Virtual Sensors} \label{sec:arch_vs}
 The virtual sensors are divided into multiple sensors where each virtual sensor represents a different animal that scientists are interested in, like ravens, red foxes, golden eagles or polar foxes.
 
-\textbf{NOTES: UTDYP DE VIRTUELLE SENSORENE} 
-These virtual sensors have the same functionalities...?
-
-The virtual sensors offers interaction between the fused data and the user interface. A user tells the user interface, described in Section \ref{sec:arch_user_int}, a task and forwards the task to the desired virtual sensor. The virtual sensor will then retrieve its results from the fused data.
+The virtual sensors have the same functinonalities and offers interaction between the fused data and the user interface. A user tells the user interface, described in Section \ref{sec:arch_user_int}, a task and forwards the task to the desired virtual sensor. The virtual sensor will then retrieve its results from the fused data.
 
 
 %The user types in the user interface, described in Section \ref{sec:arch_user_int}, what animal he/she wants to see, where it is and the date-time and the search is redirected to the sensor related to that specific animal. The virtual sensor retrieves its result from the fused data.
@@ -392,7 +370,7 @@ The virtual sensors offers interaction between the fused data and the user inter
 \section{User Interface} \label{sec:arch_user_int}
 A user wants to retrieve fused data about animals. The user interacts with the virtual sensor user interface. This takes care of the interaction with the virtual sensor. When a user gives a command, the desired virtual sensor retrieve data from the fused data as described in Section \ref{sec:arch_vs}, and presents the result back to the user.
 
-\textbf{NOTES: utdype query språk - utdype mer i design/implementation?}
+%\textbf{NOTES: utdype query språk - utdype mer i design/implementation?}
 
 
 
@@ -422,13 +400,8 @@ The data storage contains raw data from the physical camera trap sensors and exc
 \section{Sensor Fusion} \label{sec:des_fused}
 As mentioned earlier in Chapter \ref{chap:data_set}, the dataset did not contain any filename or a filepath. It only contained image metadata such as a pictures location, date-time, site, year and animal classification. We then had to find a method to find out which images correspond to which annotation in the excel-sheet.
 
-%Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). 
 We recursively traverse the directories where pictures are located and read date and time from the metadata for each picture along with the annotation in the excel-sheet. The images and annotations that matched, is stored in a Python dictionary, like a key-value store, with date-time as key and image-path as value. Images and annotations that matches is stored in a new CSV-file.
 As mentioned earlier, was this quite a time-consuming task because of the numbers of images to process and compare.
-
-%\textbf{Rekursiv traversering av directories og leser metadata fra bildene - Lagres i en dictionary hvor datetime og sted er key og image pathen er value).}
-
-%\textbf{respective/corresponding}
 
 
 \section{Virtual Sensors}
@@ -443,7 +416,7 @@ As mentioned earlier, was this quite a time-consuming task because of the number
 \subsection{Virtual Sensors} \label{ssec:des_vs}
 The virtual sensors are divided into multiple sensors depending on animals. The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
 
-The virtual sensors in this approach are functions in a sequential \textbf{system/program}. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes. \textit{Er dette mer diskusjonsmateriale? Eller ha det med her også?}
+The virtual sensors in this approach are functions in a sequential system. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes. \textit{Note: Er dette mer diskusjonsmateriale? Eller ha det med her også?}
 
 
 %\subsubsection{Raven Sensor}
@@ -571,8 +544,17 @@ The data storage contains raw data and prepossessed images that are structured a
 \subsection{Raw Data Information Extraction} \label{ssec:imp_rawdata}
 The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
 
-During implementation we came across a problem with the folders containing white-space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. This makes it difficult to extract images due to the reason that the new CSV-file had white-space between each characters. This is described further in Section \ref{ssec:imp_compare}. Our solution was to change the folder-names to not contain whitespace and UTF-8 characters.
+During implementation we came across a problem with the folders containing white-space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. 
+%This makes it difficult to extract images due to the reason that the new CSV-file had white-space between each characters.
+%This is described further in Section \ref{ssec:imp_compare}. 
 
+This was an obstacle during implementation because it led to difficulties reading the folder-names when they contained characters the system wouldn't interpret. The solution was to change the folder-names manually and avoid the use of whitespace and UTF-8 characters. An example of a new folder is \textit{'../bilder/aatekamera-siw'}.
+
+%\textbf{NOTES: folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
+
+%As described in Section \ref{ssec:imp_rawdata}, the folder-names contained white-spaces and UTF-8 characters. This was an obstacle during implementation because it led to difficulties reading the folder-names when they contained characters the system wouldn't interpret. The solution was to change the folder-names manually and avoid the use of whitespace and UTF-8 characters.
+
+%/home/camilla/Documents/daoshare2/COAT/2016-COAT/bilder/aatekamera-siw
 %'/home/camilla/Documents/daoshare/COAT/camtraps/COAT/fra-COAT/Bilder til institutt for informatikk/åtekamera (Siw)'
 
 
@@ -616,10 +598,6 @@ The extracted metadata from the images and the annotations in the excel files th
 
 %\textbf{NOTES: Why stored in a new CSV-file? begin somewhere, simplify search next time.. no database.. because of number of images to process - takes time, solution is to make a csv-file to store aggregated data so we don't need to search through the whole data storage next time, but only the new csv file.. not optimal or best solution, but works and it's a start..}
 
-
-\textbf{NOTES: folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
-
-As described in Section \ref{ssec:imp_rawdata}, the folder-names contained white-spaces and UTF-8 characters. 
 
 \section{Virtual Sensors} \label{sec:imp_virsens}
 \subsection{Virtual Sensors} %\label{ssec:imp_vsensor}
@@ -706,7 +684,7 @@ In this section we will discuss the results of the testing described in the sect
 What does the result say?
 Each experiment, result, meaning
 
-\subsection{Measure time to execute}
+\subsection{Measure Execution Time}
 \textbf{Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
 
 %followed/pursued
@@ -759,8 +737,16 @@ Figure \ref{fig:time_chart_overall} show the time for the whole system to run. A
 \fi
 
 
-\subsection{Measure CPU/memory??}
+\subsection{Measure CPU}
 Doing the experiments now..
+
+\subsection{Measure Memory}
+Doing the experiments now..
+
+\subsection{Disk Read/Write}
+Doing the experiments now..
+
+
 
 
 \chapter{Discussion}
@@ -955,6 +941,13 @@ Hoare, C. A. R.,
 \newblock {\em Communicating Sequential Processes}, Aug. 1978,
 \newblock in {\em ACM, vol. 21, no. 8. pp. 666--677}
 \newblock {\em \url{http://doi.acm.org/10.1145/359576.359585}}.
+
+%14
+\bibitem{modelling}
+Stefan Reis and Edmund Seto and Amanda Northcross and Nigel W.T. Quinn and Matteo Convertino and Rod L. Jones and Holger R. Maier and Uwe Schlink and Susanne Steinle and Massimo Vieno and Michael C. Wimberly,
+\newblock {\em Integrating modelling and smart sensors for environmental and human health}, 2015,
+\newblock in {\em Environmental Modelling \& Software, vol. 74, no. Supplement C. pp. 1364-8152}
+\newblock {\em \url{https://doi.org/10.1016/j.envsoft.2015.06.003}}.
 
 
 \end{thebibliography}
