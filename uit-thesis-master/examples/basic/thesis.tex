@@ -201,22 +201,23 @@ footnote.}
 
 
 \chapter{Related Work}
-\iffalse
-\begin{itemize}
-\item Taking Sensor Networks from the Lab to the Jungle
-%\item Wireless Sensor Networks for Habitat Monitoring
-%\item Building Virtual Sensors and Actuators over Logical Neighborhoods
-\item A virtual sensor system for user-generated, real-time environmental data products
-%\item Integrating modeling and smart sensors for environmental and human health
-\item Capability representation model for heterogeneous remote sensing sensors: Case study on soil moisture monitoring
-%\item Dice: Monitoring Global Invariants with Wireless Sensor Networks 
-\fi
-
 Sensors are becoming omnipresent in everyday life and is generating data at an remarkable rate and scale \cite{modelling}. Sensors and models play a vital role in harnessing "Big Data" to extract information.
 % and to illustrate current developments and identify key research needs using human and environmental health challenges as an example. 
 As more data become available from sensors, it will require rethinking of the scales, the processed models and creative thinking about fusing data.
 
-\textit{A virtual sensor system for user-generated, real-time environmental data products}
+
+The arrival of new instrumentation and sensors has led to an increasing amount of data which are becoming available for researchers and practitioners. However, accessing and integrating these data into usable environment for analysis and modeling can be highly time-consuming and challenging, particularly in real time \cite{hill}.
+%It is a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data\cite{hill}.
+As a solution to this challenge, they developed a prototype where users can exploit deployed virtual sensor types and interactively create and share new customized virtual sensors at different locations and suitable parameters to the researcher's desire.
+The system can provide point-averaged radar-rainfall products at either temporal resolution of the radar or as a temporal average of a fixed time period, which is illustrated in Figure \ref{fig:rainfall_sensor}
+In contrast, our virtual sensors system is running on-demand, not in real-time. Our approach has neither the ability to provide users to create and share new customized virtual sensor. 
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{rainfall_sensor.png}
+\caption{Figure illustrating the virtual rainfall sensor.}
+\label{fig:rainfall_sensor}
+\end{figure}
 
 
 %\section{Virtual Sensors}
@@ -234,16 +235,6 @@ The nodes in the logical neighborhood are specified based on their characteristi
 Our approach of virtual sensors are not specified by the use of logical neighborhoods. There are no communication between the virtual nodes.
 
 
-It is a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data\cite{hill}. Users can exploit deployed virtual sensor types and interactively create and share new customized virtual sensors at different locations and suitable parameters to the researcher's desire.
-The system can provide point-averaged radar-rainfall products at either temporal resolution of the radar or as a temporal average of a fixed time period, which is illustrated in Figure \ref{fig:rainfall_sensor}
-In contrast, our virtual sensors system is running on-demand, not in real-time. Our approach has neither the ability to provide users to create and share new customized virtual sensor. 
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{rainfall_sensor.png}
-\caption{Figure illustrating the virtual rainfall sensor.}
-\label{fig:rainfall_sensor}
-\end{figure}
 
 
 %\subsection{dice - expand!}
@@ -946,9 +937,8 @@ Hoare, C. A. R.,
 \bibitem{modelling}
 Stefan Reis and Edmund Seto and Amanda Northcross and Nigel W.T. Quinn and Matteo Convertino and Rod L. Jones and Holger R. Maier and Uwe Schlink and Susanne Steinle and Massimo Vieno and Michael C. Wimberly,
 \newblock {\em Integrating modelling and smart sensors for environmental and human health}, 2015,
-\newblock in {\em Environmental Modelling \& Software, vol. 74, no. Supplement C. pp. 1364-8152}
+\newblock in {\em Environmental Modelling \& Software, vol. 74, no. Supplement C. pp. 238 - 246}
 \newblock {\em \url{https://doi.org/10.1016/j.envsoft.2015.06.003}}.
-
 
 \end{thebibliography}
 
