@@ -145,16 +145,28 @@ The dissertation makes the following contributions:
 
 \section{Assumptions}
 AVGRENSE, VIKTIG!!
-Something about motivation and stuff
+Something about motivation..?
 
 \section{Limitations}
-AVGRENSE, VIKTIG!!
+%AVGRENSE, VIKTIG!!
 
-\begin{itemize}
-\item Mention focus on camera-sensors/data, and not other sensors?!
-\item Hvorfor fokus på bilder - forenkle, begrense, starte et sted
-\item Limiting search for animals - "predefined" what user can search
-\end{itemize}
+We limit our approach to only use homogeneous data from physical sensors.  This data is limited to be raw data images from camera trap sensors to simplify and limit the scope of the virtual sensor abstraction instead of supporting all possible data types.
+There is also a limitation to what a user can search for. We only implemented search for animals like red fox, raven and golden eagle or images containing no animals.
+
+
+%We chose to focus on the images from the raw data from the camera trap sensors to simplify and limit the scope of the virtual sensor abstraction instead of supporting all possible raw data material. 
+
+%The approach only use one type of physical sensor to
+
+
+
+%\begin{itemize}
+%\item We chose to focus on the raw data from the camera trap sensors to simplify and limit the virtual sensor abstraction. 
+%\item One type of sensors is enough for a start for researchers and have the ability to "expand"
+%\item Hvorfor fokus på bilder - forenkle, begrense, starte et sted
+%\item Limiting search for animals - "predefined" what user can search
+%\item ??
+%\end{itemize}
 
 
 %Instead of supporting all possible services, we give a predefined..
@@ -236,13 +248,11 @@ Our approach of virtual sensors are not specified by the use of logical neighbor
 
 
 
-
-%\subsection{dice - expand!}
-Dice?? \cite{dice}
+%Dice?? \cite{dice}
 %\textit{"Improve network lifetime -> routing protocol for many-2-many communication". Talking about TinyOS and CTP.
 %In this article we present DICE, a system enabling WSN-based distributed monitoring of global invariants. A DICE invariant is expressed by predicates defined over the state of multiple WSN nodes, such as the expected state of actuators based on given sensed environmental conditions.}
 
-\textit{FROM PAPER: We presented DICE (Distributed Invariant CheckEr), a system for WSN-based distributed monitoring of global invariants in physical processes. DICE provides a declarative language to specify invariants and a runtime support enabling efficient monitoring of their violations.}
+%\textit{FROM PAPER: We presented DICE (Distributed Invariant CheckEr), a system for WSN-based distributed monitoring of global invariants in physical processes. DICE provides a declarative language to specify invariants and a runtime support enabling efficient monitoring of their violations.}
 
 %\textit{\textbf{SYSTEM ARCHITECTURE}
 %We describe the toolchain and runtime architecture of DICE. Our prototype targets TinyOS [Hill et al. 2000]\cite{TinyOS}, and relies on CTP [Gnawali et al. 2009 - Collection tree protocol: two principles of wireless routing protocols] for the tree-based forwarding necessary to the TREE dissemination strategy. Nevertheless, the techniques we describe do not depend on either.
@@ -595,13 +605,15 @@ The extracted metadata from the images and the annotations in the excel files th
 %\textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 %Er de virtuelle sensorene servere eller client/publisher?}
 
-The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because we needed somewhere to start and this was the ... \textbf{..start somewhere and eventually lack of time/time constraints and wanted to show something instead of nothing..}
+The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because we needed somewhere to start and this was one way to go. Lack of time prevented us to investigate other solutions with threads or subprocesses. The focus was to show images to a user and continue development as long as time didn't become an hindrance.
 
 
 %\textbf{NOTES: Valgte å fokusere på tre dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
 %\textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
-We also chose to focus on virtual sensors for three different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that were \textbf{most present/appeared the most} in the annotations in the excel files that were extracted.
+We also chose to focus on virtual sensors for three different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that were most present in the annotations in the excel files that were extracted.
+
+%appeared the most...
 
 
 %\textit{NOTES: John M.: "Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus."}
@@ -669,20 +681,21 @@ All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-64
 
 We decided to measure execution time on the five different experiments. We measured execution time on the new csv-file that contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. We also ran three experiments where we tried to run the comparison between images and annotations concurrently with 4, 100 and 500 processes by using a multiprocessing library in Python that supports spawning processes using an API similar to the threading module.
 
+We also measure CPU, memory and disk reads and disk writes by using Pythons psutil library while running the system with reading and comparing one excel-sheet with the metadata from the raw data.
+
 \section{Results}
 In this section we will discuss the results of the testing described in the sections above...
 
-What does the result say?
-Each experiment, result, meaning
+\textbf{What does the result say? Each experiment, result, meaning}
 
 \subsection{Measure Execution Time}
-\textbf{Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
+%\textbf{Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
 
 %followed/pursued
 
-Figure \ref{fig:time_chart500} shows the time to execute different parts of the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process
+Figure \ref{fig:time_chart500} shows the time to execute different parts of the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
 
-The only bar in Figure \ref{fig:time_chart500} that stands out/emerge? from the other, is the time used when comparing data from both Varanger and Nordkynn.
+The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. This is because there are more data to compare and will so 
 
 \iffalse
 %\begin{figure}
@@ -702,6 +715,7 @@ The only bar in Figure \ref{fig:time_chart500} that stands out/emerge? from the 
 \end{figure}
 \fi
 
+
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart500proc_new.png}
@@ -709,7 +723,8 @@ The only bar in Figure \ref{fig:time_chart500} that stands out/emerge? from the 
 \label{fig:time_chart500}
 \end{figure}
 
-\textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
+
+%\textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
 
 Figure \ref{fig:time_chart_overall} show the time for the whole system to run. As we can see, ...
 
