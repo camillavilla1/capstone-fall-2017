@@ -506,7 +506,7 @@ This chapter will elaborate on how we implemented the system, general implementa
 %In the rest of this chapter 
 We will first look at some libraries used in this implementation, then we will take a look at the data storage in Section \ref{sec:imp_storage} and the sensor fusion in Section \ref{sec:imp_senfus}. At last, we will describe the virtual sensors and the user application in Section \ref{sec:imp_virsens}.
 
-The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. \textbf{ This was a practical ...choice/language because ... reason 1 (kjent med det fra før av), reason 2(object orientert), reason 3...(offers many/different (open-source) libraries)}. The libraries are mentioned below.
+The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. This was a practical choice because we were familiar with it from previous projects, it is an object oriented language and if offers multiple different libraries. The libraries used in this implementation are mentioned below.
 %We made this choice because Python is object oriented and it offers different frameworks that are relevant for this implementation.
 
 
@@ -595,7 +595,7 @@ The extracted metadata from the images and the annotations in the excel files th
 %\textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 %Er de virtuelle sensorene servere eller client/publisher?}
 
-The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because ... \textbf{..start somewhere and eventually lack of time/time constraints and wanted to show something instead of nothing..}
+The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because we needed somewhere to start and this was the ... \textbf{..start somewhere and eventually lack of time/time constraints and wanted to show something instead of nothing..}
 
 
 %\textbf{NOTES: Valgte å fokusere på tre dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
@@ -680,7 +680,9 @@ Each experiment, result, meaning
 
 %followed/pursued
 
-Figure \ref{fig:time_chart500} shows the time to execute different parts of the system in minutes... We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data.
+Figure \ref{fig:time_chart500} shows the time to execute different parts of the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process
+
+The only bar in Figure \ref{fig:time_chart500} that stands out/emerge? from the other, is the time used when comparing data from both Varanger and Nordkynn.
 
 \iffalse
 %\begin{figure}
