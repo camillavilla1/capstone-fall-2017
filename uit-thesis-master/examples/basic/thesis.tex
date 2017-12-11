@@ -728,23 +728,27 @@ Three of these experiments were ran the comparison between images metadata and a
 
 %We measured \textbf{execution time on the new csv-file that} contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. 
 
-
 %We also ran three experiments, similar to the one described above, where we ran the comparison between images and annotations concurrently with 4, 100 and 500 processes by Pythons multiprocessing library. The library supports spawning processes using an API similar to the threading module.
 
 
 \textbf{EN TING OM GANGEN. BLIR FOR MEGET I EN SETNING:}
-We also measure CPU, memory and disk reads and disk writes by using Pythons psutil library while running the system with reading and comparing one excel-sheet with the metadata from the raw data.
 
-\textit{Disk\_io\_counters}: Return system-wide disk I/O statistics as a named tuple including the following fields:
+We also measured system utilization such as  CPU, memory and disks by using Pythons psutil\footnote{\url{https://psutil.readthedocs.io/en/latest/\#}} library while running the system as described above. 
+The functions used for measuring system utilization are listed below:
+%with reading and comparing one excel-sheet with the metadata from the raw data.
 
-\begin{description}
-\item[Read count:] number of reads.
-\item[Write count:] number of writes.
-\item[Read bytes:] number of bytes read.
-\item[Write bytes:] number of bytes written
-\end{description}
+\begin{itemize}
+\item \textbf{CPU - cpu\_percent:} Return a float representing the current system-wide CPU utilization as a percentage.
+\item \textbf{MEMORY - virtual\_memory:} Return statistics about system memory usage.
+\item \textbf{DISKS - disk\_io\_counters:} Return system-wide disk I/O statistics as a named tuple including the following fields:
+	\begin{itemize}
+	\item \textbf{Read count:} number of reads.
+	\item \textbf{Write count:} number of writes.
+	\item \textbf{Read bytes:} number of bytes read.
+	\item \textbf{Write bytes:} number of bytes written
+	\end{itemize}
+\end{itemize}
 
-%disk_io_counters: Return system-wide disk I/O statistics as a named tuple including the following fields: read_count: number of reads, write_count: number of writes, read_bytes: number of bytes read, write_bytes: number of bytes written
 
 
 \section{Results}
