@@ -114,27 +114,34 @@ Results show that ...
 \mainmatter
 
 \chapter{Introduction}
-The Arctic tundra in the far northern hemisphere is challenged by climate changes in the world today and is one of the ecosystems that are most affected by these changes \cite{coat2016}. The \textit{Climate-ecological Observatory for Arctic Tundra - COAT} is a long-term research project developed by five Fram Center\footnote{\url{http://www.framsenteret.no/english}} institutions. Their goal is to create robust observation systems which enable documentation and understanding of climate change impacts on the Arctic tundra ecosystems. In autumn 2015, COAT was granted substantial funding to establish research infrastructure which allowed them to start up a research infrastructure during 2016-2020 \cite{coat2016}. 
+The Arctic tundra in the far northern hemisphere is challenged by climate changes in the world today and is one of the ecosystems that are most affected by these changes \cite{coat2016}. The \textit{Climate-ecological Observatory for Arctic Tundra - COAT} is a long-term research project developed by five Fram Center\footnote{\url{http://www.framsenteret.no/english}} institutions. Their goal is to create robust observation systems which enable documentation and understanding of climate change impacts on the Arctic tundra ecosystems. COAT was in autumn 2015 granted substantial funding to establish research infrastructure which allowed them to start up a research infrastructure during 2016-2020 \cite{coat2016}. 
 
-Every year, COAT deploys several camera traps in eastern Finnmark, Norway for roughly one month during the winter. The main purpose of these cameras is to study predator populations, with especially a focus on the redlisted arctic fox which is the most endagered mammal species in Norway  \cite{coatplan2016}. 
+Every year during the winter, COAT deploys several camera traps in eastern Finnmark, Norway for roughly one month. The main purpose of these cameras is to study predator populations, with especially a focus on the redlisted arctic fox which is the most endagered mammal species in Norway  \cite{coatplan2016}. 
 The camera traps are set up to take a time-lapsed photo every fifth minute during day and night which adds up to over 300 000 images per year \cite{methodseco}. Collecting this high volume of images gives Big Data challenges in the ecology field. 
 %The images are also manually examined and annotated, which is a enormously exhausting approach that requires months of human labor and resources.
 
-\textbf{Hvordan komme inn på virtuelle sensorer? Og til "this project will develop an abstraction" eller noe lignende...}
+Managing the sensors and collecting data is currently a manual task that can introduce many errors and \textbf{it is therefore} a need for systems and abstractions which makes it simple to build/develop, maintain and use sensors and sensor data in the Arctic tundra. 
 
-In this project we will describe a system that simplifies biologists need  to look at images from different locations in the Arctic tundra in one view...
+%\textbf{JM: Managing the sensors and collecting data is currently a manual task that can introduce many errors.}
+%\textbf{JM: Dermed trenger man både systemer og abstraksjoner som gjør det lettere å bygge, vedlikeholde og bruke sensorer (og data fra dem) i de arktiske områdene. I dette tilfellet fokuserer du på en del av dette.}
+
+
+In this project we will describe a system that simplifies biologists need  to look at images from different locations in the Arctic tundra in one view..
 
 Assume biologists want to search for image of a specific animal from different locations in the Arctic Tundra. A virtual sensor would locate data from the data storage and then return those images that matches to the biologists request...
 
-%This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
-
 
 \section{Motivation}
-%\textbf{Problem definition: This project investigated ... x, with the purpose of y.}
+\textbf{JM: En litt annen spinn (i tillegg til det du har) kan være at man kan dette et behov bedre og forenkle bruken ved å kombinere flere sensorer til en virtuell sensor.}
 
 The motivation  behind this project is that no single sensor may cover the sensing needs, and that sensing needs can change rapidly over time. Consequently, there is a need for sensor fusion, and allow for combining sensors at different computers.
 
-This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
+
+\textbf{develop a prototype kanskje? husk at du ikke trenger å gjenta ordlyden i den opprinnelige oppgavebeskrivelsen. Den var en pekepinn om hvor vi ville, men vi har luksusen å kunne endre fokus litt underveis i en oppgave. Sånn sett er det bedre at du beskriver det du har forsøkt å gjøre enn å bruke oppgavebeskrivelsen direkte.}
+
+This project will develop a prototype of (an abstraction of) virtual sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. 
+
+%This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
 
 \section{Contributions}
 %\textbf{What was the contribution? Ta enten her eller i conclusion? Eller begge steder}
@@ -226,7 +233,7 @@ As more data become available from sensors, it will require rethinking of the sc
 
 The arrival of new instrumentation and sensors has led to an increasing amount of data which are becoming available for researchers and practitioners. However, accessing and integrating these data into usable environment for analysis and modeling can be highly time-consuming and challenging, particularly in real time \cite{hill}.
 %It is a prototype of a virtual sensor system for environmental observation with real-time customization of physical sensor data\cite{hill}.
-As a solution to this challenge, they developed a prototype where users can exploit deployed virtual sensor types and interactively create and share new customized virtual sensors at different locations and suitable parameters to the researcher's desire.
+As a solution to this challenge, Hill. et al. developed a prototype where users can exploit deployed virtual sensor types and interactively create and share new customized virtual sensors at different locations and suitable parameters to the researcher's desire.
 The system can provide point-averaged radar-rainfall products at either temporal resolution of the radar or as a temporal average of a fixed time period, which is illustrated in Figure \ref{fig:rainfall_sensor}
 In contrast, our virtual sensors system is running on-demand, not in real-time. Our approach has neither the ability to provide users to create and share new customized virtual sensor. 
 
@@ -239,7 +246,7 @@ In contrast, our virtual sensors system is running on-demand, not in real-time. 
 
 
 %\section{Virtual Sensors}
-A virtual sensor is a constructed sensor in contrary to a physical sensor \cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
+A virtual sensor is a constructed sensor in constrast to a physical sensor \cite{VirtualSensors2006}. They are used in place of the real sensors where they read real physical sensor data and calculate the outputs by using some processing models.
 
 Previous research have focused on simple in-network data aggregation techniques and the sensor networks are often represented as a database. Two examples of such approaches are TinyDB \cite{tinyDB} and Cougar \cite{cougar}, which enable applications to have a central point (base station) and create routing trees  to funnel replies back to this root. The main focus on these approaches are operating intelligent in-network aggregation and routing to reduce  the overall energy cost.
 %while still keep the semantic value of data high.
@@ -275,8 +282,7 @@ Our approach of virtual sensors are not specified by the use of logical neighbor
 
 \chapter{The Dataset} \label{chap:data_set}
 %\textbf{HVORDAN DE ER SAMLET, HVORDAN DE ER ORGANISERT?}
-
-The dataset is provided by COAT and contains over 1.6 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The wildlife camera traps from Reconyx are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
+The dataset is provided by COAT and contains over 1.5 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The wildlife camera traps from Reconyx are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
 The dataset contains pictures during night- and daytime. The cameras have infrared flash so the cameras can take pictures at nighttime. These pictures are without color while the pictures taken at daytime are with color, as shown in Figure \ref{fig:pictures}.
 
 \begin{figure*} %[t!]
@@ -354,16 +360,22 @@ The raw data contains images from the physical sensors and annotations in excel-
 
 %\section{Fusing of data and Fused Data}
 \section{Fusing Of Data}%\subsection{Fusing of data}
+\textbf{JM: fusing er vel mer enn bare "get data"}
 Get analytics and classified data from the raw-data and annotated data.
 
 %\textbf{Hva mer??}
 
 \section{Fused Data}%\subsection{Fused Data}
+\textbf{fused data kan vel ikke hente noe. Data i seg selv er ikke aktiv, men en fused data service kan velge å ikke lagre data lokalt men hente rådata og fuse on demand. Er det det du mener her?}
+\textbf{Det viktige er at abstraksjonen for dem over er som om fused data skulle eksistere, men du antar ikke noe om lagring lokalt... forsto jeg det rett da? }
+
 The fused data retrieves it's data on demand. The fused data is the physical sensors location combined with necessary metadata such as date-time, location, site, year, animal classification and also how many animals there was in an image.
 
 
 \section{Virtual Sensors} \label{sec:arch_vs}
 The virtual sensors are divided into multiple sensors where each virtual sensor represents a different animal that scientists are interested in, like ravens, red foxes, golden eagles or polar foxes.
+
+\textbf{JM: same functionalities as what? eller mener du at hver virtuelle sensor ser lik ut? litt tvetydlg her.}
 
 The virtual sensors have the same functinonalities and offers interaction between the fused data and the user interface. A user tells the user interface, described in Section \ref{sec:arch_user_int}, a task and forwards the task to the desired virtual sensor. The virtual sensor will then retrieve its results from the fused data.
 
@@ -390,10 +402,11 @@ In this chapter we will look at the design of the system and present the design 
 %\ OLD
 %\textit{In this chapter we will look at the design of the environment. We will present the design of the data storage, the fused data the virtual sensors and the user application. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures.}
 
+\textbf{BYTT TIL NYTT BILDE!!!!!!}
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{Design.png}
+\includegraphics[width=\textwidth]{Design_done.png}
 \caption{Figure showing the system design.}
 \label{fig:design}
 \end{figure}
@@ -423,15 +436,12 @@ As mentioned earlier, was this quite a time-consuming task because of the number
 \subsection{Virtual Sensors} \label{ssec:des_vs}
 The virtual sensors are divided into multiple sensors depending on animals. The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
 
-The virtual sensors in this approach are functions in a sequential system. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes. \textit{Note: Er dette mer diskusjonsmateriale? Eller ha det med her også?}
-
-
 %\subsubsection{Raven Sensor}
 %\subsubsection{Golden Eagle Sensor}
 %\subsubsection{Red Fox Sensor}
 
 \subsection{User Application} \label{ssec:des_user}
-The user-application is the connection between the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see. The main menu is shown in Listing \ref{lst:mainmenu}.
+The user-application is the connection between the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see.
 The user only need to specify the following 3 parameters for the virtual sensor:
 
 \begin{itemize}
@@ -442,20 +452,7 @@ The user only need to specify the following 3 parameters for the virtual sensor:
 \item \textbf{Location:} At last, the user can chose if he/she wants the picture to be located anywhere specific. The only valid arguments in this field is Nordkynn, Komag, Nyborg or Stjernevann since these are the only names in the CSV-file in the fused data.
 \end{itemize}
 
-\begin{lstlisting}[frame=single,caption={Main menu },label={lst:mainmenu}, language=Python]
 
-**** WELCOME! ****
-******************
-
-Write what you want to see
-(Raven, RedFox, GoldenEagle): 
-
-Write when you want to see (blank is all dates): 
-E.g: 2011:03:24 or 2011:04:24 10:10:00
-
-Where do you want the animal to be located
-(nordkynn, varanger: komag, nyborg, stjernevann):
-\end{lstlisting}
 
 
 
@@ -528,6 +525,7 @@ The system is implemented and written in the high-level programming language Pyt
 
 \subsubsection{Exchangeable Image File Format - EXIF} \label{sssec:imp_exif}
 %\ac{EXIF}
+%\textbf{JM:exiftool ville vært raskere å bruke. Jeg har brukt en modul som wrapper rundt exiftool.}
 Exchangeable Image File Format (EXIF) is a standard that specifies the formats for images, sound, scanners and other systems recorded by digital cameras. This standard consists of image information of the EXIF image file or the EXIF audio file.
 
 Python have a module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata(image information from the jpg-files.
@@ -624,6 +622,7 @@ A different problem was that some column-header names was written with a big let
 
 %\textbf{NOTES: ..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn.. Biologer brukte Windows, jeg Ubuntu.. kanskje noe rot der.. men burde egentlig fikse på raw data uansett?}
 
+\textbf{JM: Her ville det nok vært en fordel med Python3}
 One more problem arose when some of the excel-file contained table-headers with UTF-8 characters, as seen in Figure \ref{fig:utf8}. These characters won't be interpreted by the system and the table-headers will not be readable.
 
 
@@ -666,9 +665,25 @@ The OpenCV library is used to visualize images to the user. The library read the
 
 
 \subsection{User application} \label{ssec:user}
-The user application is implemented as an interface that is visualized through the terminal window on the computer. The user application communicates with the virtual sensors by sending the users query to the corresponding virtual sensor. The corresponding virtual sensor is the sensor that contains the animal species the user specifies in the user query.
+The user application is implemented as an interface that is visualized through the terminal window on the computer. The user interface is shown in Listing \ref{lst:mainmenu}. The user application communicates with the virtual sensors by sending the users query to the corresponding virtual sensor. The corresponding virtual sensor is the sensor that contains the animal species the user specifies in the user query.
 
-There is currently not possible for more than one user to be connected in the same application at a time. Because of lack of time, we have not  implemented a solution to satisfy this \textbf{request??}. Our focus has been making a prototype of the user interface to be simple to use for the users and to show images on the users request.
+There is currently not possible for more than one user to be connected in the same application at a time. Because of lack of time, we have not  implemented a solution to satisfy this \textbf{request??}. Our focus has been making a virtual sensor abstraction system and not the user interface. This user application is developed to be simple to use for the users and to show images on the users request.
+
+
+\begin{lstlisting}[frame=single,caption={Main menu },label={lst:mainmenu}, language=Python]
+
+**** WELCOME! ****
+******************
+
+Write what you want to see
+(Raven, RedFox, GoldenEagle): 
+
+Write when you want to see (blank is all dates): 
+E.g: 2011:03:24 or 2011:04:24 10:10:00
+
+Where do you want the animal to be located
+(nordkynn, varanger: komag, nyborg, stjernevann):
+\end{lstlisting}
 
 
 \chapter{Evaluation} \label{chap:evaluation}
@@ -754,13 +769,24 @@ In this section we will discuss the results of the testing described in the sect
 
 \textbf{What does the result say? Each experiment, result, meaning}
 
+\textbf{for hvert eksperiment bør du prøve å få fram:}
+\begin{itemize}
+\item hva ønsker du å finne ut? 
+\item hvordan måler du + hva måler du? 
+\item hva gjør den delen av systemet som du måler? (leser fra disk, regner, sammenligner, koordinerer med andre osv)
+\item Hva er metrikken (eks: operasjoner per sekund, minutter per oppgave osv)
+\end{itemize}
+
+\textbf{Det gjør det lettere for leseren å henge med.}
+
 \subsection{Measure Execution Time}
 %followed/pursued
-Figure \ref{fig:time_chart500} shows the time to execute different parts of the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
+Figure \ref{fig:time_chart500} shows the time to execute different functions in the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
 
-The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the execution time increase ....
+The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the execution time escalate by factor of 4(?).
 
- comparing annotations from two files against the image's metadata, the execution time for the comparison increase by a factor of 3..
+
+increase overall tid by a factor of 3..
 
 comparing 860 min i forskjell... factor of 4
 %This is because there are more data to compare and will so 
@@ -788,7 +814,7 @@ comparing 860 min i forskjell... factor of 4
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart500proc_new.png}
-\caption{Figure showing time to execute the system (in minutes). \textbf{vær presis om hvilke deler av sys. du mener}}
+\caption{Figure showing time to execute different functions in the system (in minutes). These functions are the comparing between image's metadata and annotations in the excel-file(s), time to read the excel-file(s) and time used to find images and it's metadata.}
 \label{fig:time_chart500}
 \end{figure}
 
@@ -800,7 +826,7 @@ Figure \ref{fig:time_chart_overall} show the time for the whole system to run. A
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart3_new.png}
-\caption{Figure showing time to execute the system (in minutes).\textbf{vær presis om hvilke deler av sys. du mener}}
+\caption{Figure showing time to execute the system (in minutes) from starting the system to the system is finished.}
 \label{fig:time_chart_overall}
 \end{figure}
 
@@ -849,6 +875,8 @@ This chapter discusses our approach, experience and why we chose the solution we
 \section{Virtual Sensors}
 As mentioned in previous chapters, are the virtual sensors functions in our approach. We choose this approach because of we firstly wanted to find images from the fused data and show them to the users. Another reason is because of time limitations.
 
+\textbf{JM: Hvis du har noen ideer her kunne det være interessant å vite hva du ville forfulgt/undersøkt hvis du hadde mer tid.}
+
 Another solution to this approach of virtual sensors is to implement them as threads. This would again not be the best solution if for example the system should be able to add more virtual sensors during run-time. To solve this problem, we could have implemented the virtual sensors as independent processes which would not be affected when another virtual sensors is added, removed or at worst crash/fail.
 
 A virtual sensor could also be implemented as an abstraction or a general class with parameters such as \textit{id, type, capabilities, history and queries or raw data}. This parameters will then say something about what kind of virtual sensor it is, what it can do (show images, find new data if any etc.) and support for queries from user.
@@ -872,9 +900,13 @@ Then the user could for example search for \textit{"fox || raven"}, \textit{"fox
 
 \section{Sequential vs. concurrent implementation??}
 %Use a language more suitable for performance (execution time), like Golang..
+\textbf{JM: her er det eksperimentene er viktige. Det hjelper ikke å flytte til Go hvis du er I/O bound f.eks.}
+
 As described in Chapter \ref{chap:evaluation}, the execution time of system is not satisfying (or something...). Using Pythons multiprocessing library did not solve any problem with time spent on comparing images and annotations. The reason we tried Pythons multiprocessing library was to see if it made any performance-improvement on execution time compared to the sequential system. If it haven't been for the time constraints, we would try to implement another solution with threads.
 
 Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP \cite{hoare}. Go is built with concurrency in mind and has goroutines instead of threads. Another advantages of goroutines is that it comes with a built-in primitive to communicate between themselves by using something called channels. There is also no need for some kind of mutex locking when sharing data structures compared to threads.
+
+\textbf{FRA DESIGN: The virtual sensors in this approach are functions in a sequential system. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes.}
 
 
 \section{On-demand vs. background "updates" from datastorage}
