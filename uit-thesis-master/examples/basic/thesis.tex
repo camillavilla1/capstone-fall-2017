@@ -520,7 +520,7 @@ main(m1,s) char *s; {
 %\textbf{Threads, data structures, language...}
 This chapter will elaborate on how we implemented the system, general implementation requirements, issues and choices. 
 %In the rest of this chapter 
-We will first look at some libraries used in this implementation, then we will take a look at the data storage in Section \ref{sec:imp_storage} and the sensor fusion in Section \ref{sec:imp_senfus}. At last, we will describe the virtual sensors and the user application in Section \ref{sec:imp_virsens}.
+We will first look at some libraries used in this implementation, then we will take a look at the data storage in Section \ref{sec:imp_storage}. At last, we will describe the virtual sensors and the user application in Section \ref{sec:imp_virsens}.
 
 The system is implemented and written in the high-level programming language Python 2.7\footnote{\url{https://www.python.org/}}. This was a practical choice because we were familiar with it from previous projects, it is an object oriented language and if offers multiple different libraries. The libraries used in this implementation are mentioned below.
 %We made this choice because Python is object oriented and it offers different frameworks that are relevant for this implementation.
@@ -549,31 +549,51 @@ The data storage contains raw data and preprocessed images that are structured a
 
 %\section{Sensor Fusion} \label{sec:imp_senfus}
 \subsection{Raw Data Information Extraction} \label{ssec:imp_rawdata}
-The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the image's site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
+The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the image's site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value, as shown in Table 6.1. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
 
 \begin{table}[]
 \centering
-\label{my-label2}
+\label{tab:dictionary}
 \begin{tabular}{| l | l | c |}
   \hline 
-  \multicolumn{2}{|l|}{\textbf{Key}} 	& \textbf{Value}  \\
+  \multicolumn{2}{|c|}{\textbf{Key}} 	& \textbf{Value}  \\
   \hline
   \multirow{\textit{Site}}	& \textit{Region}	& \textit{Image path} \\
   \hline
-  \multirow{m1}	& Nordkynn	&  /.../ \\
+  \multirow{m2}	& Nordkynn	& /../2016-COAT/../nordkynn/m2.21.03.11/IMG\_0172.JPG \\
   \hline 
 \end{tabular}
-\caption{My caption}
+\caption{Show how an image's metadata is stored.}
 \end{table}
 
-%/ h o m e / c a m i l l a / D o c u m e n t s / d a o s h a r e / C O A T / 2 0 1 6 - C O A T / b i l d e r / a a t e k a m e r a - s i w / f o t o b o k s 2 0 1 1 / n o r d k y n n / m 1 . 2 1 . 0 3 . 1 1 / 1 0 0 R E C N X / I M G _ 0 0 5 4 . J P G
+\iffalse
+\begin{tabular}{|c||c||c|}
+  \hline
+  \multicolumn{2}{|c|}{\textbf{Key}} & \textbf{Value} \\
+  \hline
+  \begin{tabular}{@{}l@{}} 
+  	Site\\
+  	m2\\
+  \end{tabular}&
+  \begin{tabular}{@{}l@{}}
+  	Region\\
+    Nordkynn\\
+  \end{tabular}&
+  \begin{tabular}{@{}l@{}}
+    Image Path\\
+    /../2016-COAT/../nordkynn/m2.21.03.11/IMG\_0172.JPG \\
+  \end{tabular}&
+  \hline
+\end{tabular}
+\fi
 
 During implementation we came across a problem with the folders containing white-space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. 
 %This makes it difficult to extract images due to the reason that the new CSV-file had white-space between each characters.
 %This is described further in Section \ref{ssec:imp_compare}. 
 
 This was an obstacle during implementation because it led to difficulties reading the folder-names when they contained characters the system wouldn't interpret. The solution was to change the folder-names manually and avoid the use of whitespace and UTF-8 characters. An example of a new folder is \textit{'../bilder/aatekamera-siw'}.
-\textbf{How to automate this??}
+
+\textbf{Otto: How to automate this??}
 
 %\textbf{NOTES: folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
 
@@ -621,6 +641,7 @@ One more problem arose when some of the excel-file contained table-headers with 
 
 The extracted metadata from the images and the annotations in the excel files that matches, is stored in a CSV-file (Comma-separated Values). We chose to store the fused data in a new CSV-file because of the large number of images to process. It will simplify search in the future since it will be faster to search through the fused data in the CSV instead of searching through the raw data and compare them with the annotations. This is not the best choice, however it is a introduction to a solution.
 
+\textbf{OTTO: the fusing passer ikke inn her...}
 %\textbf{NOTES: Why stored in a new CSV-file? begin somewhere, simplify search next time.. no database.. because of number of images to process - takes time, solution is to make a csv-file to store aggregated data so we don't need to search through the whole data storage next time, but only the new csv file.. not optimal or best solution, but works and it's a start..}
 
 
@@ -629,15 +650,13 @@ The extracted metadata from the images and the annotations in the excel files th
 %\textit{ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen..
 %Er de virtuelle sensorene servere eller client/publisher?}
 
-The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because we needed somewhere to start and this was one way to go. Lack of time prevented us to investigate other solutions with threads or subprocesses. The focus was to show images to a user and continue development as long as time didn't become an hindrance.
+The virtual sensors are implemented as functions, not threads or independent subprocesses, as mentioned in Section \ref{ssec:des_vs}. The reason for this choice is because we needed somewhere to start and this was a simple approach. Lack of time prevented us to investigate other solutions with threads or subprocesses. Instead, the focus was to show images to a user and continue development as long as time didn't become an hindrance.
 
 
 %\textbf{NOTES: Valgte å fokusere på tre dyr (og alle dyr/bilder eller ingen dyr i bilde) ettersom de var de som det var flest av i excel-arkene.. and time constraints.. ville ha noe å vise enn ingenting} \\
 %\textbf{Write about that you don't have all animals, only the ones who is most of in csv-file, not every animal is presented in the dataset..}
 
 We also chose to focus on virtual sensors for three different animals and images without any animals in it. The three animals were the red fox, ravens and the golden eagle. We made this choice because these were the animals that were most present in the annotations in the excel files that were extracted.
-
-%appeared the most...
 
 
 %\textit{NOTES: John M.: "Kanskje bare gjøre et poeng at dette bare ble valgt på grunn av kjennskap til det / bruk i andre prosjekter og at nøyaktig hvilket verktøy som brukes til visualisering ikke var fokus."}
@@ -647,9 +666,9 @@ The OpenCV library is used to visualize images to the user. The library read the
 
 
 \subsection{User application} \label{ssec:user}
-The user application is implemented as an interface in the terminal that communicates with the virtual sensors.
+The user application is implemented as an interface that is visualized through the terminal window on the computer. The user application communicates with the virtual sensors by sending the users query to the corresponding virtual sensor. The corresponding virtual sensor is the sensor that contains the animal species the user specifies in the user query.
 
-There is currently not possible for more than one user to be connected in the same application at a time. Because of lack of time, we have not thought about implementing this. Our focus has been making a prototype of the user interface to be easy to use for biologists/users and to show images on the users request.
+There is currently not possible for more than one user to be connected in the same application at a time. Because of lack of time, we have not  implemented a solution to satisfy this \textbf{request??}. Our focus has been making a prototype of the user interface to be simple to use for the users and to show images on the users request.
 
 
 \chapter{Evaluation} \label{chap:evaluation}
@@ -703,9 +722,27 @@ All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-64
 \section{Experimental Design}
 %\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser (for concurrent compare). Python process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module). Prøvde også med over 500 processer, men ga ikke noe bedre resultat.. Tror det blir mye overhead..}
 
-We decided to measure execution time on the five different experiments. We measured execution time on the new csv-file that contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. We also ran three experiments where we tried to run the comparison between images and annotations concurrently with 4, 100 and 500 processes by using a multiprocessing library in Python that supports spawning processes using an API similar to the threading module.
+We measured execution time to locate images in the datastorage and read the images metadata, read annotations from the excel-file and at last compare the images metadata with the annotations in the excel-file and write it to a new CSV-file through five experiments.
 
+Three of these experiments were ran the comparison between images metadata and annotations from the excel-file concurrently with 4, 100 and 500 processes by Pythons multiprocessing library. The library supports spawning processes using an API similar to a threading module.
+
+%We measured \textbf{execution time on the new csv-file that} contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. 
+
+
+%We also ran three experiments, similar to the one described above, where we ran the comparison between images and annotations concurrently with 4, 100 and 500 processes by Pythons multiprocessing library. The library supports spawning processes using an API similar to the threading module.
+
+
+\textbf{EN TING OM GANGEN. BLIR FOR MEGET I EN SETNING:}
 We also measure CPU, memory and disk reads and disk writes by using Pythons psutil library while running the system with reading and comparing one excel-sheet with the metadata from the raw data.
+
+\textit{Disk\_io\_counters}: Return system-wide disk I/O statistics as a named tuple including the following fields:
+
+\begin{description}
+\item[Read count:] number of reads.
+\item[Write count:] number of writes.
+\item[Read bytes:] number of bytes read.
+\item[Write bytes:] number of bytes written
+\end{description}
 
 %disk_io_counters: Return system-wide disk I/O statistics as a named tuple including the following fields: read_count: number of reads, write_count: number of writes, read_bytes: number of bytes read, write_bytes: number of bytes written
 
@@ -722,7 +759,7 @@ In this section we will discuss the results of the testing described in the sect
 
 Figure \ref{fig:time_chart500} shows the time to execute different parts of the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
 
-The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. This is because there are more data to compare and will so 
+The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. This is because there are more data to compare and will so \textbf{Hvordan øker e-time med økende data sid(?)?}
 
 \iffalse
 %\begin{figure}
@@ -746,7 +783,7 @@ The only bar in the figure that stands out from the other, is the comparison of 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart500proc_new.png}
-\caption{Figure showing time to execute the system (in minutes).}
+\caption{Figure showing time to execute the system (in minutes). \textbf{vær presis om hvilke deler av sys. du mener}}
 \label{fig:time_chart500}
 \end{figure}
 
@@ -758,7 +795,7 @@ Figure \ref{fig:time_chart_overall} show the time for the whole system to run. A
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart3_new.png}
-\caption{Figure showing time to execute the system (in minutes).}
+\caption{Figure showing time to execute the system (in minutes).\textbf{vær presis om hvilke deler av sys. du mener}}
 \label{fig:time_chart_overall}
 \end{figure}
 
