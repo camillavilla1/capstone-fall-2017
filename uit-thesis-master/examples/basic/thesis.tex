@@ -77,19 +77,25 @@
 %\end{epigraph}
 
 \begin{abstract}
-%\lipsum[2-3]
 \begin{description}
-\item[W3] Whats wrong with the world? / motivation 1-3 setninger
+%\item[W3] Whats wrong with the world? / motivation 1-3 setninger
 \item[Architecture - 1-3 setninger]
 \item [Design- 1-3 setninger]
 \item[Implementation - 1-3 setninger]
 \item[Experiments - 1-3 setninger]
 \item[Results - 1-3 setninger]
 \item[Lessons learned/main conclusion - 1-3 setninger]
-\item [Kutt heller etterpaa] 
+\item [Kutt heller etterpå] 
 \end{description}
 
-This dissertation present/describe ...
+The Arctic Tundra in the far northern hemisphere is one of ecosystems that are most affected by the climate changes in the world today. Every year, COAT deploys several camera traps in eastern Finnmark, Norway during the winter to study predator populations. These cameras are collecting high volume of images that results in Big Data challenges in the ecology field.
+
+This project describes a system that simplifies biologists need to look at images from different locations in the Arctic Tundra. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the Arctic Tundra.
+
+Using data provided by COAT..
+
+Results show that ...
+
 \end{abstract}
 
 
@@ -527,7 +533,7 @@ Exchangeable Image File Format (EXIF) is a standard that specifies the formats f
 Python have a module called  EXIF 2.1.2\footnote{\url{https://pypi.python.org/pypi/ExifRead}}, to extract the metadata(image information from the jpg-files.
 
 \subsubsection{Pandas Dataframe} \label{sssec:imp_df}
-Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a NUMFocus\footnote{\url{https://www.numfocus.org/open-source-projects/}} sponsored project which will help ensure success of the development of pandas as a open-source project in world class. A dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel-file.
+Pandas\footnote{\url{http://pandas.pydata.org/}} is an open source Python Data Analysis Library which provides high-performance and easy-to-use data structures. It is a Open Source sponsored project. A Pandas dataframe\footnote{\url{https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html}} is a two-dimensional, dynamic tabular data structure with labeled axes (rows and columns), just like an excel spreadsheet.
 
 \subsubsection{OpenCV} \label{sssec:imp_cv}
 OpenCV V2.4.9.1\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/latest/}} is an open-source library which provides the functionality for loading and preprocessing images.
@@ -537,19 +543,37 @@ OpenCV V2.4.9.1\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/l
 
 
 \section{Data Storage} \label{sec:imp_storage}
-The data storage contains raw data and prepossessed images that are structured and sorted by animals. Unfortunately, these preprossesed images don't consists of any image metadata so we don't have any information of when the image is taken. Therefore, the solution is to traverse the whole data storage and find the raw data with metadata and compare these to the excel-files containing information like date, time, location and site.
+The data storage contains raw data and preprocessed images that are structured and sorted by animal species. Unfortunately, these preprocessed images don't include image metadata so we don't have any information of when the image is taken. Therefore, the whole data storage is traversed to find the raw data with metadata and compare these images to the excel-files containing information like date, time, location and site.
 %\textbf{HOW DID I TRAVERSE}
 
 
-\section{Sensor Fusion} \label{sec:imp_senfus}
+%\section{Sensor Fusion} \label{sec:imp_senfus}
 \subsection{Raw Data Information Extraction} \label{ssec:imp_rawdata}
-The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the images site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
+The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the image's site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
+
+\begin{table}[]
+\centering
+\label{my-label2}
+\begin{tabular}{| l | l | c |}
+  \hline 
+  \multicolumn{2}{|l|}{\textbf{Key}} 	& \textbf{Value}  \\
+  \hline
+  \multirow{\textit{Site}}	& \textit{Region}	& \textit{Image path} \\
+  \hline
+  \multirow{m1}	& Nordkynn	&  /.../ \\
+  \hline 
+\end{tabular}
+\caption{My caption}
+\end{table}
+
+%/ h o m e / c a m i l l a / D o c u m e n t s / d a o s h a r e / C O A T / 2 0 1 6 - C O A T / b i l d e r / a a t e k a m e r a - s i w / f o t o b o k s 2 0 1 1 / n o r d k y n n / m 1 . 2 1 . 0 3 . 1 1 / 1 0 0 R E C N X / I M G _ 0 0 5 4 . J P G
 
 During implementation we came across a problem with the folders containing white-space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. 
 %This makes it difficult to extract images due to the reason that the new CSV-file had white-space between each characters.
 %This is described further in Section \ref{ssec:imp_compare}. 
 
 This was an obstacle during implementation because it led to difficulties reading the folder-names when they contained characters the system wouldn't interpret. The solution was to change the folder-names manually and avoid the use of whitespace and UTF-8 characters. An example of a new folder is \textit{'../bilder/aatekamera-siw'}.
+\textbf{How to automate this??}
 
 %\textbf{NOTES: folder-path inneholdt mellomrom og æøå, gjorde det vanskelig å hente ut bilder når pathen krøllet seg... brukte litt tid på å prøve meg fram, endte med å snakke med JM om å endre folder-navn uten mellomrom og æøå.. Snakke om det i compare når jeg leser fra csv-filen ettersom det er i csv-filen det bugger seg når jeg skal lese ut path når den inneholder space og æøå?}
 
@@ -682,6 +706,9 @@ All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-64
 We decided to measure execution time on the five different experiments. We measured execution time on the new csv-file that contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. We also ran three experiments where we tried to run the comparison between images and annotations concurrently with 4, 100 and 500 processes by using a multiprocessing library in Python that supports spawning processes using an API similar to the threading module.
 
 We also measure CPU, memory and disk reads and disk writes by using Pythons psutil library while running the system with reading and comparing one excel-sheet with the metadata from the raw data.
+
+%disk_io_counters: Return system-wide disk I/O statistics as a named tuple including the following fields: read_count: number of reads, write_count: number of writes, read_bytes: number of bytes read, write_bytes: number of bytes written
+
 
 \section{Results}
 In this section we will discuss the results of the testing described in the sections above...
