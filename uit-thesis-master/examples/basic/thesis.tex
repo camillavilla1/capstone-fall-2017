@@ -724,14 +724,12 @@ All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-64
 
 We measured execution time to locate images in the datastorage and read the images metadata, read annotations from the excel-file and at last compare the images metadata with the annotations in the excel-file and write it to a new CSV-file through five experiments.
 
-Three of these experiments were ran the comparison between images metadata and annotations from the excel-file concurrently with 4, 100 and 500 processes by Pythons multiprocessing library. The library supports spawning processes using an API similar to a threading module.
+Three of these experiments where we compare image's metadata and annotations from the excel-file, were run concurrently with 4, 100 and 500 processes by Pythons multiprocessing library. The library allows fully leverage on multiple processors on a given machine and supports spawning processes using an API similar to a threading module.
 
 %We measured \textbf{execution time on the new csv-file that} contained only fused data from Varanger and the new CSV-file that contained fused data from Varanger and Nordkynn. 
 
 %We also ran three experiments, similar to the one described above, where we ran the comparison between images and annotations concurrently with 4, 100 and 500 processes by Pythons multiprocessing library. The library supports spawning processes using an API similar to the threading module.
 
-
-\textbf{EN TING OM GANGEN. BLIR FOR MEGET I EN SETNING:}
 
 We also measured system utilization such as  CPU, memory and disks by using Pythons psutil\footnote{\url{https://psutil.readthedocs.io/en/latest/\#}} library while running the system as described above. 
 The functions used for measuring system utilization are listed below:
@@ -757,13 +755,16 @@ In this section we will discuss the results of the testing described in the sect
 \textbf{What does the result say? Each experiment, result, meaning}
 
 \subsection{Measure Execution Time}
-%\textbf{Most time during finding folder and read metadata and comparing.. Read excel file is faaaast!!}
-
 %followed/pursued
-
 Figure \ref{fig:time_chart500} shows the time to execute different parts of the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
 
-The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. This is because there are more data to compare and will so \textbf{Hvordan øker e-time med økende data sid(?)?}
+The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the execution time increase ....
+
+ comparing annotations from two files against the image's metadata, the execution time for the comparison increase by a factor of 3..
+
+comparing 860 min i forskjell... factor of 4
+%This is because there are more data to compare and will so 
+\textbf{Hvordan øker e-time med økende data size?}
 
 \iffalse
 %\begin{figure}
