@@ -769,7 +769,11 @@ In this section we will discuss the results of the testing described in the sect
 %\textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
 
 %followed/pursued
-Figure \ref{fig:time_chart500} shows the time to execute different functions in the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
+We measured time usage in minutes per task during system runtime to \textbf{see/inspect} which tasks that spends most time executing when running the system. We can see from Figure \ref{fig:time_chart500} that the compare-task takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process. The reason that finding folder and metadata is relatively similar in each experiment is because it is the same number of images to traverse each time. This also applies to the execution time reading an excel-files.
+
+%Figure \ref{fig:time_chart500} shows the result. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
+
+%Figure \ref{fig:time_chart500} shows the time to execute different task in the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
 
 The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the execution time escalate by factor of 4(?).
 
@@ -786,7 +790,7 @@ The only bar in the figure that stands out from the other, is the comparison of 
 \end{figure}
 
 
-Figure \ref{fig:time_chart_overall} show the time for the whole system to run. As we can see, are the result similar to Figure \ref{fig:time_chart500}. To read images and extract metadata, read one excel-file and compare the data, it takes approximately the same execution time with a sequential program and with 4 and 100 processes provided by the multiprocessing tool.
+Figure \ref{fig:time_chart_overall} show the time usage for the whole system to run. As we can see, are the result similar to Figure \ref{fig:time_chart500}. To read images and extract metadata, read one excel-file and compare the data, it takes approximately the same execution time with a sequential program and with 4 and 100 processes provided by the multiprocessing tool.
 
 Reasons for the multiprocess versions to be relatively similar to the sequential implementation can be caused by the fact that the concurrent implementations can be CPU-bound or/and I/O bound.
 
@@ -802,8 +806,11 @@ increase overall tid by a factor of 3..
 \end{figure}
 
 
+%POSSIBLE BOTTLENECKS?????
 
 \subsection{Measure CPU Utilities}
+We measured the CPU utilities to \textbf{see} the CPU percentage of the system. As we can see in Figure ...
+ 
 Doing the experiments now..
 
 \subsection{Measure Memory Utilities}
@@ -833,7 +840,7 @@ Doing the experiments now..
 %\end{itemize}
 
 %some of the points where we met problems
-This chapter discusses our approach, experience and why we chose the solution we ended up with...
+This chapter discusses our approach, experience and why we chose the solution we ended up with.
 
 \section{Virtual Sensors}
 As mentioned in previous chapters, are the virtual sensors functions in our approach. We choose this approach because of we firstly wanted to find images from the fused data and show them to the users. Another reason is because of time limitations.
@@ -907,6 +914,11 @@ The dissertation makes the following contributions:
 We will outline some of the areas that can be elaborated in future work. These include:
 
 \begin{itemize}
+%\item CONCURRENT
+%\item IMPLEMENT VS AS ABSTRACTIONS (CLASS) AND SUBPROCESSES
+%\item QUERY: COMBINE DATA FROM MULTIPLE SENSORS
+%\item UPDATE DATASTORAGE FREQUENT, NOT ON-DEMAND
+
 \item Concurrent lesing av excel-filer (alle sammen). Lesing går egentlig greit, men burde hatt en løsning som leste alle filer som sluttet på .xsls eller noe lignende og så evt legge navne til filene i en liste slik at man kan sjekke om det filen er lest fra før av hvis man legger til nye filer i data storage..
 \item Concurrent lesing av metadata og traversering
 \item Concurrent sammneligning!!!
