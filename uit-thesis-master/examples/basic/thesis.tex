@@ -117,29 +117,23 @@ Results show that ...
 The Arctic tundra in the far northern hemisphere is challenged by climate changes in the world today and is one of the ecosystems that are most affected by these changes \cite{coat2016}. The \textit{Climate-ecological Observatory for Arctic Tundra - COAT} is a long-term research project developed by five Fram Center\footnote{\url{http://www.framsenteret.no/english}} institutions. Their goal is to create robust observation systems which enable documentation and understanding of climate change impacts on the Arctic tundra ecosystems. COAT was in autumn 2015 granted substantial funding to establish research infrastructure which allowed them to start up a research infrastructure during 2016-2020 \cite{coat2016}. 
 
 Every year during the winter, COAT deploys several camera traps in eastern Finnmark, Norway for roughly one month. The main purpose of these cameras is to study predator populations, with especially a focus on the redlisted arctic fox which is the most endagered mammal species in Norway  \cite{coatplan2016}. 
-The camera traps are set up to take a time-lapsed photo every fifth minute during day and night which adds up to over 300 000 images per year \cite{methodseco}. Collecting this high volume of images gives Big Data challenges in the ecology field. 
-%The images are also manually examined and annotated, which is a enormously exhausting approach that requires months of human labor and resources.
+The camera traps are set up to take a time-lapsed photo every fifth minute during day and night which adds up to over 300 000 images per year \cite{methodseco}. Collecting this high volume of images gives Big Data challenges in the ecology field.
 
-Managing the sensors and collecting data is currently a manual task that can introduce many errors and \textbf{it is therefore} a need for systems and abstractions which makes it simple to build/develop, maintain and use sensors and sensor data in the Arctic tundra. 
+Managing the sensors and collecting data is currently a manual task that can introduce many errors and \textbf{it is therefore} a need for systems and abstractions which makes it simple to develop, maintain and use sensors and sensor data in the Arctic tundra. 
 
-%\textbf{JM: Managing the sensors and collecting data is currently a manual task that can introduce many errors.}
-%\textbf{JM: Dermed trenger man både systemer og abstraksjoner som gjør det lettere å bygge, vedlikeholde og bruke sensorer (og data fra dem) i de arktiske områdene. I dette tilfellet fokuserer du på en del av dette.}
-
-
-In this project we will describe a system that simplifies biologists need  to look at images from different locations in the Arctic tundra in one view..
-
-Assume biologists want to search for image of a specific animal from different locations in the Arctic Tundra. A virtual sensor would locate data from the data storage and then return those images that matches to the biologists request...
-
+%In this project we will describe a system that simplifies biologists need  to look at images from different locations in the Arctic tundra in one view..
 
 \section{Motivation}
-\textbf{JM: En litt annen spinn (i tillegg til det du har) kan være at man kan dette et behov bedre og forenkle bruken ved å kombinere flere sensorer til en virtuell sensor.}
+%\textbf{JM: En litt annen spinn (i tillegg til det du har) kan være at man kan dette et behov bedre og forenkle bruken ved å kombinere flere sensorer til en virtuell sensor.}
 
 The motivation  behind this project is that no single sensor may cover the sensing needs, and that sensing needs can change rapidly over time. Consequently, there is a need for sensor fusion, and allow for combining sensors at different computers.
 
+%\textbf{develop a prototype kanskje? husk at du ikke trenger å gjenta ordlyden i den opprinnelige oppgavebeskrivelsen. Den var en pekepinn om hvor vi ville, men vi har luksusen å kunne endre fokus litt underveis i en oppgave. Sånn sett er det bedre at du beskriver det du har forsøkt å gjøre enn å bruke oppgavebeskrivelsen direkte.}
 
-\textbf{develop a prototype kanskje? husk at du ikke trenger å gjenta ordlyden i den opprinnelige oppgavebeskrivelsen. Den var en pekepinn om hvor vi ville, men vi har luksusen å kunne endre fokus litt underveis i en oppgave. Sånn sett er det bedre at du beskriver det du har forsøkt å gjøre enn å bruke oppgavebeskrivelsen direkte.}
+This project will develop a prototype of \textbf{(an abstraction of)} virtual sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the Arctic tundra. 
 
-This project will develop a prototype of (an abstraction of) virtual sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the Arctic tundra. 
+Assume biologists want to search for image of a specific animal from different locations in the Arctic Tundra. A virtual sensor would locate data from the data storage and then return those images that matches to the biologists request.
+
 
 %This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
 
@@ -897,10 +891,21 @@ In this project, we have implemented a prototype of virtual sensors with the pur
 
 Our experiments showed that ...
 
-\section{Contributions?}
-Har denne i introen også..
+\section{Contributions}
+The dissertation makes the following contributions:
+
+\begin{itemize}
+\item An introduction to virtual sensors.
+\item A description of data set preparation from the camera traps in the Arctic tundra.
+\item An implementation and description of a system that fuse raw data from different physical sensors into one virtual sensor.
+\item An evaluation of the system.
+\end{itemize}
+
+
 
 \chapter{Future Work}
+We will outline some of the areas that can be elaborated in future work. These include:
+
 \begin{itemize}
 \item Concurrent lesing av excel-filer (alle sammen). Lesing går egentlig greit, men burde hatt en løsning som leste alle filer som sluttet på .xsls eller noe lignende og så evt legge navne til filene i en liste slik at man kan sjekke om det filen er lest fra før av hvis man legger til nye filer i data storage..
 \item Concurrent lesing av metadata og traversering
