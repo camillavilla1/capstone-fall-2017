@@ -753,8 +753,9 @@ The functions used for measuring system utilization are listed below:
 \section{Results}
 In this section we will discuss the results of the testing described in the sections above.
 
-\textbf{What does the result say? Each experiment, result, meaning}
+%\textbf{What does the result say? Each experiment, result, meaning}
 
+\iffalse
 \textbf{for hvert eksperiment bør du prøve å få fram:}
 \begin{itemize}
 \item hva ønsker du å finne ut? 
@@ -764,6 +765,7 @@ In this section we will discuss the results of the testing described in the sect
 \end{itemize}
 
 \textbf{Det gjør det lettere for leseren å henge med.}
+\fi
 
 \subsection{Measure Execution Time}
 %\textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
@@ -782,7 +784,7 @@ The only bar in the figure that stands out from the other, is the comparison of 
 
 %\textbf{Hvordan øker e-time med økende data size?}
 
-\begin{figure}
+\begin{figure} %[!t]
 \centering
 \includegraphics[width=\textwidth]{chart_done.png}
 \caption{Figure showing time to execute different functions in the system (in minutes). These functions are the comparing between image's metadata and annotations in the excel-file(s), time to read the excel-file(s) and time used to find images and it's metadata.}
@@ -809,16 +811,61 @@ increase overall tid by a factor of 3..
 %POSSIBLE BOTTLENECKS?????
 
 \subsection{Measure CPU Utilities}
-We measured the CPU utilities to \textbf{see} the CPU percentage of the system. As we can see in Figure ...
+We measured the CPU utilities to \textbf{see} the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, 
+
  
-Doing the experiments now..
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart_cpu.png}
+\caption{Figure showing ...}
+\label{fig:chart_cpu}
+\end{figure}
+
 
 \subsection{Measure Memory Utilities}
-Doing the experiments now..
+Figure \ref{fig:chart_memory}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart_memory.png}
+\caption{Figure showing ...}
+\label{fig:chart_memory}
+\end{figure}
+
 
 \subsection{Measure Disks Utilities}
-Doing the experiments now..
+Figure \ref{fig:chart_read_count} and Figure \ref{fig:chart_read_count_since_last}.
 
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart_read_count.png}
+\caption{Figure showing disk reads...}
+\label{fig:chart_read_count}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart_read_count_since_last.png}
+\caption{Figure showing disk read compared to last disk read...}
+\label{fig:chart_read_count_since_last}
+\end{figure}
+
+
+Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_write_count_since_last}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart_write_count.png}
+\caption{Figure showing disk writes...}
+\label{fig:chart_write_count}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{chart_write_count_since_last.png}
+\caption{Figure showing disk write compared to last disk write...}
+\label{fig:chart_write_count_since_last}
+\end{figure}
 
 
 
