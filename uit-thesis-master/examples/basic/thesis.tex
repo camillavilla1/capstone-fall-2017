@@ -139,7 +139,7 @@ The motivation  behind this project is that no single sensor may cover the sensi
 
 \textbf{develop a prototype kanskje? husk at du ikke trenger å gjenta ordlyden i den opprinnelige oppgavebeskrivelsen. Den var en pekepinn om hvor vi ville, men vi har luksusen å kunne endre fokus litt underveis i en oppgave. Sånn sett er det bedre at du beskriver det du har forsøkt å gjøre enn å bruke oppgavebeskrivelsen direkte.}
 
-This project will develop a prototype of (an abstraction of) virtual sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. 
+This project will develop a prototype of (an abstraction of) virtual sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the Arctic tundra. 
 
 %This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
 
@@ -686,7 +686,7 @@ This chapter describes the experimental setup and metrics used to evaluate the i
 \ NOTATER:
 %\begin{itemize}
 %\item python -m cProfile -s cumtime find_folder_ok_concurrent.py 
-
+\section{Notes}
 \item Time: \\
 Finding folders and metadata takes:  1:43:13.488799 (103,2167 minutes), \\
 Reading excel file takes:  0:00:17.413845 (0.2833 minutes),\\
@@ -721,6 +721,8 @@ FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 \end{itemize}
 \fi
 
+
+
 \section{Experimental Setup}
 All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit with gcc V6.3.0 compiler and Python V2.7.13.
 
@@ -736,7 +738,7 @@ Three of these experiments where we compare image's metadata and annotations fro
 %We also ran three experiments, similar to the one described above, where we ran the comparison between images and annotations concurrently with 4, 100 and 500 processes by Pythons multiprocessing library. The library supports spawning processes using an API similar to the threading module.
 
 
-We also measured system utilization such as  CPU, memory and disks by using Pythons psutil\footnote{\url{https://psutil.readthedocs.io/en/latest/\#}} library while running the system as described above. 
+We also measured system utilization such as CPU, memory and disks by using Pythons psutil\footnote{\url{https://psutil.readthedocs.io/en/latest/\#}} library while running the system as described above. 
 The functions used for measuring system utilization are listed below:
 %with reading and comparing one excel-sheet with the metadata from the raw data.
 
@@ -770,18 +772,17 @@ In this section we will discuss the results of the testing described in the sect
 \textbf{Det gjør det lettere for leseren å henge med.}
 
 \subsection{Measure Execution Time}
+%\textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
+
 %followed/pursued
 Figure \ref{fig:time_chart500} shows the time to execute different functions in the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
 
 The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the execution time escalate by factor of 4(?).
 
-
-increase overall tid by a factor of 3..
-
-comparing 860 min i forskjell... factor of 4
+%comparing 860 min i forskjell... factor of 4
 %This is because there are more data to compare and will so 
-\textbf{Hvordan øker e-time med økende data size?}
 
+%\textbf{Hvordan øker e-time med økende data size?}
 
 \begin{figure}
 \centering
@@ -791,9 +792,13 @@ comparing 860 min i forskjell... factor of 4
 \end{figure}
 
 
-%\textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
+Figure \ref{fig:time_chart_overall} show the time for the whole system to run. As we can see, are the result similar to Figure \ref{fig:time_chart500}. To read images and extract metadata, read one excel-file and compare the data, it takes approximately the same execution time with a sequential program and with 4 and 100 processes provided by the multiprocessing tool.
 
-Figure \ref{fig:time_chart_overall} show the time for the whole system to run. As we can see, ...
+Reasons for the multiprocess versions to be relatively similar to the sequential implementation can be caused by the fact that the concurrent implementations can be CPU-bound or/and I/O bound.
+
+Har 4 CPU cores
+
+increase overall tid by a factor of 3..
 
 \begin{figure}
 \centering
@@ -845,7 +850,7 @@ Another solution to this approach of virtual sensors is to implement them as thr
 
 A virtual sensor could also be implemented as an abstraction or a general class with parameters such as \textit{id, type, capabilities, history and queries or raw data}. This parameters will then say something about what kind of virtual sensor it is, what it can do (show images, find new data if any etc.) and support for queries from user.
 
-If time wasn't a \textbf{limitation/constraint/issue}, we would have tried to investigate the implementation of virtual sensors as an abstraction where a class with parameters specifies the different virtual sensors. These virtual sensors would also be subprocesses in the system so they don't affect each other. 
+If time wasn't a limitation, we would have tried to investigate the implementation of virtual sensors as an abstraction where a class with parameters specifies the different virtual sensors. These virtual sensors would also be subprocesses in the system so they don't affect each other. 
 
 
 \section{Queries}
@@ -888,7 +893,7 @@ Another challenge with this approach is that some data in the excel-files contai
 \chapter{Conclusion}
 \textbf{NOTES: Focus on showing an image to user, spent lot of time with dataset and modify so data could be extracted, many improvements - also described in future work.. Experiment show need for concurrent system, a lot of data/big data to process}
 
-In this project, we have implemented a system...
+In this project, we have implemented a prototype of virtual sensors with the purpose to provide a more powerful and flexible sensor monitoring in the Arctic tundra. 
 
 Our experiments showed that ...
 
