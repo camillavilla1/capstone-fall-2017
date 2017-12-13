@@ -767,7 +767,7 @@ The only bars in the figure that stands out from the other, is the comparison of
 
 Figure \ref{fig:time_chart_overall} show the time usage for the whole system to run. As we can see, are the result similar to Figure \ref{fig:time_chart500}. To read images and extract metadata, read one excel-file and compare the data, it takes approximately the same execution time with a sequential program and with 4 and 100 processes provided by the multiprocessing tool.
 
-The system reads and writes to disk at an highly frequency and with the insight that hard drives in most cases are slow, we can draw the conclusion that the system is I/O bound. This can also explain why the multiprocess-implementations are relatively similar to the sequential implementation.
+The system reads and writes to disk at a high frequency and with the insight that hard drives in most cases are slow, we can draw the conclusion that the system is I/O bound. This can also explain why the multiprocess-implementations are relatively similar to the sequential implementation.
 
 %\textbf{time usage escalate/increase by a factor of 3}
 
@@ -784,7 +784,7 @@ The system reads and writes to disk at an highly frequency and with the insight 
 \subsection{Measure CPU Utilities} \label{sec:eva_cpu}
 %\textbf{bruker mye cpu i starten og midten, men roer seg ned etter hvert - ligger da på rundt 25\% CPU. På starten driver programmet med traversering og lesing av metadata, så excel-lesing og så comparing. Comparing kan bruke mye cpu på starten hvis det må til disk å lese, men etter hvert ligger kanskje mye i memory/cachen..? i slutten: la cpu pga skriving til fil som betyr venting, se \ref{fig:chart_read_count}.}
 
-We measured the CPU utilities to examine the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, the CPU percentage peaks during operations. The system starts with traversing and read metadata from the raw data in the data storage which cause the peaks at the start of the graph. Comparing metadata and annotations in the excel-file is the last task. A which use low CPU percentage, as seen in the figure, and a reason for this may be that the CPU must wait because the comparing-task writes it's result to a file, as seen in Figure \ref{fig:chart_write_count}, with an increasing number of writes during system runtime.
+We measured the CPU utilities to examine the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, the CPU percentage peaks during operations. The system starts with traversing and read metadata from the raw data in the data storage which cause the peaks at the start of the graph. Comparing metadata and annotations in the excel-file is the last task which use low CPU percentage, as seen in the figure. A reason for this may be that the CPU must wait because the comparing-task do read-operations on data and writes it's result to a file, as seen in Figure \ref{fig:chart_write_count}, with an increasing number of writes during system runtime.
 
 \begin{figure}
 \centering
@@ -818,10 +818,7 @@ We measured the disk utilities to examine the disk I/O statistics of the system.
 As we can see in Figure \ref{fig:chart_read_count}, increases the read count during system runtime. This is because of the comparing-task which is reading the values from the metadata and annotations.
 
 
-Figure \ref{fig:chart_read_count_since_last} show number of reads compared to last read. As we can see, are there not many differences between a read and it's last read. There are some peaks during runtime, especially the peaks on a difference over 6000 reads. As we can see from Figure \ref{fig:chart_read_count}, is there a peak vertically approximately at the same time. This is also a trend in the graphs in Figure \ref{fig:write_disk}.
-
-\textbf{kan se på antall counts at den går drastisk rett opp på samme tidspunkt.. noe som skjer der... Også peaks i read writes på samme tidspunkt..?}
-
+Figure \ref{fig:chart_read_count_since_last} show number of reads compared to last read. As we can see, are there not many differences between a read and it's last read. There are some peaks during runtime, especially the peaks on a difference over 6000 reads. As we can see from Figure \ref{fig:chart_read_count}, is there a peak vertically approximately at the same time. This is also a trend in the write-operation graphs in Figure \ref{fig:write_disk}.
 
 \begin{figure}
 \centering
@@ -845,9 +842,11 @@ Figure \ref{fig:chart_read_count_since_last} show number of reads compared to la
 \subsubsection{Write Utilization}
 As we can see in Figure \ref{fig:chart_write_count}, there is an increasing number of writes during runtime. This is similar to the graphs showing read counts in Figure \ref{fig:read_disks}, since the coomparing-task is writing the result from the comparing in a new file. 
 
+Number of writes compared to last write is shown in Figure \ref{fig:chart_write_count_since_last}. We can see that there are more difference between a write and last read compared to the read-operations shown in Figure \ref{fig:chart_read_count_since_last}.
 
-Number of writes compared to last write is shown in Figure \ref{fig:chart_write_count_since_last}. We can see that there are a few peaks during runtime
 
+
+\textbf{kan se på antall counts at den går drastisk rett opp på samme tidspunkt.. noe som skjer der... Også peaks i read writes på samme tidspunkt..?}
 
 \begin{figure}
 \centering
