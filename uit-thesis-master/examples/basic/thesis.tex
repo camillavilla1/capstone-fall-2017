@@ -119,7 +119,7 @@ The Arctic tundra in the far northern hemisphere is challenged by climate change
 Every year during the winter, COAT deploys several camera traps in eastern Finnmark, Norway for roughly one month. The main purpose of these cameras is to study predator populations, with especially a focus on the redlisted arctic fox which is the most endagered mammal species in Norway  \cite{coatplan2016}. 
 The camera traps are set up to take a time-lapsed photo every fifth minute during day and night which adds up to over 300 000 images per year \cite{methodseco}. Collecting this high volume of images gives Big Data challenges in the ecology field.
 
-Managing the sensors and collecting data is currently a manual task that can introduce many errors and \textbf{it is therefore} a need for systems and abstractions which makes it simple to develop, maintain and use sensors and sensor data in the Arctic tundra. 
+Managing the sensors and collecting data is currently a manual task that can introduce many errors and it is therefore a need for systems and abstractions which makes it simple to develop, maintain and use sensors and sensor data in the Arctic tundra. 
 
 %In this project we will describe a system that simplifies biologists need  to look at images from different locations in the Arctic tundra in one view..
 
@@ -130,9 +130,9 @@ The motivation  behind this project is that no single sensor may cover the sensi
 
 %\textbf{develop a prototype kanskje? husk at du ikke trenger å gjenta ordlyden i den opprinnelige oppgavebeskrivelsen. Den var en pekepinn om hvor vi ville, men vi har luksusen å kunne endre fokus litt underveis i en oppgave. Sånn sett er det bedre at du beskriver det du har forsøkt å gjøre enn å bruke oppgavebeskrivelsen direkte.}
 
-This project will develop a prototype of \textbf{(an abstraction of)} virtual sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the Arctic tundra. 
+This project will develop a prototype of virtual sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the Arctic tundra. 
 
-Assume biologists want to search for image of a specific animal from different locations in the Arctic Tundra. A virtual sensor would locate data from the data storage and then return those images that matches to the biologists request.
+Assume biologists want to search for image of a specific animal from different locations in the Arctic Tundra. A virtual sensor would locate raw data from the data storage and then return those raw data images that matches to the biologists request.
 
 
 %This project will develop an abstraction for virtual sensors, and do a prototype of the abstraction on a set of computers with physical sensors. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the arctic tundra. As such, a fox feeding station is the usage domain to be used for the prototype.
@@ -423,9 +423,7 @@ As mentioned earlier, was this quite a time-consuming task because of the number
 \subsection{Virtual Sensors} \label{ssec:des_vs}
 The virtual sensors are divided into multiple sensors depending on animals. The respective virtual sensor must handle events from the user. Assume a user wants to find pictures of a red fox at a specific time.  The user interface makes the respective virtual sensor aware of the task. The virtual sensor will then go to a list of all red foxes that are located from the fused data and search for the specific request. If the virtual sensor find pictures that are similar to the request from the user, one and one picture is visualized on the computer screen to the user.
 
-%\subsubsection{Raven Sensor}
-%\subsubsection{Golden Eagle Sensor}
-%\subsubsection{Red Fox Sensor}
+\newpage
 
 \subsection{User Application} \label{ssec:des_user}
 The user-application is the connection between the user and the virtual sensors. It gets input from the user and sends a request to the virtual sensor based on its input. The user-applications goal is to make an interface that is easy to use and to show images that the user want to see.
@@ -755,14 +753,7 @@ In this section we will discuss the results of the testing described in the sect
 %followed/pursued
 We measured time usage in minutes per task during system runtime to inspect which tasks that spends most time executing when running the system. We can see from Figure \ref{fig:time_chart500} that the compare-task takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process. The reason that finding folder and metadata is relatively similar in each experiment is because it is the same number of images to traverse each time. This also applies to the execution time reading an excel-files.
 
-%Figure \ref{fig:time_chart500} shows the result. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
-
-%Figure \ref{fig:time_chart500} shows the time to execute different task in the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
-
-The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the time usage when comparing data escalate \textbf{by a factor of 4(?)}.
-
-%comparing 860 min i forskjell... factor of 4
-%This is because there are more data to compare and will so 
+The only bars in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the time usage when comparing data escalate by a factor of 4. We can also see that the comparison with 500 processes stands out probably because over the overhead of running so many processes and I/O boundaries.
 
 %\textbf{Hvordan øker e-time med økende data size?}
 
@@ -776,7 +767,7 @@ The only bar in the figure that stands out from the other, is the comparison of 
 
 Figure \ref{fig:time_chart_overall} show the time usage for the whole system to run. As we can see, are the result similar to Figure \ref{fig:time_chart500}. To read images and extract metadata, read one excel-file and compare the data, it takes approximately the same execution time with a sequential program and with 4 and 100 processes provided by the multiprocessing tool.
 
-The system reads and writes to disk at an highly frequency and with the \textbf{insight/knowledge} that hard drives in most cases are slow, we can draw the conclusion that the system is I/O bound. This can also explain why the multiprocess-implementations are relatively similar to the sequential implementation.
+The system reads and writes to disk at an highly frequency and with the insight that hard drives in most cases are slow, we can draw the conclusion that the system is I/O bound. This can also explain why the multiprocess-implementations are relatively similar to the sequential implementation.
 
 %\textbf{time usage escalate/increase by a factor of 3}
 
@@ -923,22 +914,10 @@ Another challenge with this approach is that some data in the excel-files contai
 %Og mye tid på excel-fil som inneholdt forskjellige datoer etc. som gjorde at jeg måtte trikse og mikse for å få riktig dato så jeg fikk opp riktig bildet/få opp bildet i det hele tatt..
 
 \chapter{Conclusion}
-\textbf{NOTES: Focus on showing an image to user, spent lot of time with dataset and modify so data could be extracted, many improvements - also described in future work.. Experiment show need for concurrent system, a lot of data/big data to process}
+In this project, we have implemented a prototype of virtual sensors with the purpose to provide a more powerful and flexible sensor monitoring in the Arctic tundra. We give an introduction to virtual sensors and a description of the dataset from the camera traps in the Arctic Tundra. We describes a system that that fuse raw data from different physical sensors into one virtual sensor and provide an evaluation of the system.
+We've focused on showing results to the user and spend a lot of time with the dataset and modify the data so it could be extracted in the system.
 
-In this project, we have implemented a prototype of virtual sensors with the purpose to provide a more powerful and flexible sensor monitoring in the Arctic tundra. 
-
-Our experiments showed that \textbf{need for parallel tasks.. something to improve performance on time usage}...
-
-\section{Contributions}
-The dissertation makes the following contributions:
-
-\begin{itemize}
-\item An introduction to virtual sensors.
-\item A description of data set preparation from the camera traps in the Arctic tundra.
-\item An implementation and description of a system that fuse raw data from different physical sensors into one virtual sensor.
-\item An evaluation of the system.
-\end{itemize}
-
+Our experiments showed that the system have a long usage time during runtime and processing the high amount of data results in an I/O bound system. There is a need for some kind of parallel tasks or a concurrent system to improve performance on time usage.
 
 
 \chapter{Future Work}
@@ -952,7 +931,7 @@ We will outline some of the areas that can be elaborated in future work. These i
 \item \textbf{Automated data storage updates:} Adding an solution to an automated data storage update is discussed in Section \ref{sec:disc_updates}. Current solution only supports on-demand updates and there is definitely a need for a script running in the background checking for updates in the data storage. This script should also be implemented to support a solution that reads all files containing annotation of data and store this in a list so we can check if the file has been read or if it is a new one.
 
 
-\item \textbf{Improve execution time:} As discussed in Section \ref{sec:disc_concurrent}, there is a need for improvement when comparing images metadata with annotations. A solution to improvement is to use concurrent computing and investigate this solution using subprocesses, threads or another concurrency control library. \textbf{CAN BE I/O bound?!!?!}
+\item \textbf{Improve execution time:} As discussed in Section \ref{sec:disc_concurrent}, there is a need for improvement when comparing images metadata with annotations. A solution to improvement is to use concurrent computing and investigate this solution using subprocesses, threads, another concurrency control library or a parallel implementation.
 
 \end{itemize}
 
