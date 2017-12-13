@@ -749,11 +749,11 @@ In this section we will discuss the results of the testing described in the sect
 \textbf{Det gjør det lettere for leseren å henge med.}
 \fi
 
-\subsection{Measure Execution Time}
+\subsection{Measure Execution Time} \label{sec:eva_time}
 %\textbf{When only Varanger, same time for sequential" and concurrent.. Eneste som skiller seg ut er Varanger og Nordkynn sammen, men ikke så rart ettersom det er fra 2 lokasjoner og ikke en som de andre.. Mer data å sammenligne. Concurrent med 500 processer skiller seg også litt ut i forhold til de andre concurrent, men tror dette har med overhead eller noe å gjøre..}
 
 %followed/pursued
-We measured time usage in minutes per task during system runtime to \textbf{see/inspect} which tasks that spends most time executing when running the system. We can see from Figure \ref{fig:time_chart500} that the compare-task takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process. The reason that finding folder and metadata is relatively similar in each experiment is because it is the same number of images to traverse each time. This also applies to the execution time reading an excel-files.
+We measured time usage in minutes per task during system runtime to inspect which tasks that spends most time executing when running the system. We can see from Figure \ref{fig:time_chart500} that the compare-task takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process. The reason that finding folder and metadata is relatively similar in each experiment is because it is the same number of images to traverse each time. This also applies to the execution time reading an excel-files.
 
 %Figure \ref{fig:time_chart500} shows the result. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
 
@@ -776,11 +776,9 @@ The only bar in the figure that stands out from the other, is the comparison of 
 
 Figure \ref{fig:time_chart_overall} show the time usage for the whole system to run. As we can see, are the result similar to Figure \ref{fig:time_chart500}. To read images and extract metadata, read one excel-file and compare the data, it takes approximately the same execution time with a sequential program and with 4 and 100 processes provided by the multiprocessing tool.
 
-Reasons for the multiprocess versions to be relatively similar to the sequential implementation can be caused by the fact that the concurrent implementations can be CPU-bound or/and I/O bound.
+The system reads and writes to disk at an highly frequency and with the \textbf{insight/knowledge} that hard drives in most cases are slow, we can draw the conclusion that the system is I/O bound. This can also explain why the multiprocess-implementations are relatively similar to the sequential implementation.
 
-Har 4 CPU cores med 4 threads
-
-\textbf{time usage escalate/increase by a factor of 3}
+%\textbf{time usage escalate/increase by a factor of 3}
 
 \begin{figure}
 \centering
@@ -792,10 +790,10 @@ Har 4 CPU cores med 4 threads
 
 %POSSIBLE BOTTLENECKS?????
 
-\subsection{Measure CPU Utilities}
+\subsection{Measure CPU Utilities} \label{sec:eva_cpu}
 %\textbf{bruker mye cpu i starten og midten, men roer seg ned etter hvert - ligger da på rundt 25\% CPU. På starten driver programmet med traversering og lesing av metadata, så excel-lesing og så comparing. Comparing kan bruke mye cpu på starten hvis det må til disk å lese, men etter hvert ligger kanskje mye i memory/cachen..? i slutten: la cpu pga skriving til fil som betyr venting, se \ref{fig:chart_read_count}.}
 
-We measured the CPU utilities to \textbf{see/study/examine} the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, the CPU percentage spike during operations. The system starts with traversing and read metadata from the raw data in the data storage which cause the spikes at the start of the graph. Comparing metadata and annotations in the excel-file is the last task. A which use low CPU percentage, as seen in the figure, and a reason for this may be that the CPU must wait because the comparing-task writes it's result to a file, as seen in Figure \ref{fig:chart_write_count}, with an increasing number of writes during system runtime.
+We measured the CPU utilities to examine the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, the CPU percentage peaks during operations. The system starts with traversing and read metadata from the raw data in the data storage which cause the peaks at the start of the graph. Comparing metadata and annotations in the excel-file is the last task. A which use low CPU percentage, as seen in the figure, and a reason for this may be that the CPU must wait because the comparing-task writes it's result to a file, as seen in Figure \ref{fig:chart_write_count}, with an increasing number of writes during system runtime.
 
 \begin{figure}
 \centering
@@ -805,10 +803,10 @@ We measured the CPU utilities to \textbf{see/study/examine} the CPU percentage o
 \end{figure}
 
 
-\subsection{Measure Memory Utilities}
+\subsection{Measure Memory Utilities} \label{sec:eva_mem}
 %\textbf{Kan se at den i starten bruker litt minne, en peak på 94\% før den daler ned til rundt 90\% før den igjen stiger til rundt 94\% og blir i dette området helt til programmet er ferdig... Øker mye på slutten pga vi skriver til fil? Økende memory pga økende antall av lesing/skriving til fil..}
 
-We measured the memory utilities to \textbf{see/study/examine} the memory usage of the system. Figure \ref{fig:chart_memory} shows the result during system runtime. We can see that the system have between 90\% and 96\% memory usage.
+We measured the memory utilities to examine the memory usage of the system. Figure \ref{fig:chart_memory} shows the result during system runtime. We can see that the system have between 90\% and 96\% memory usage.
 The reason for the high percent of memory usage around 94\% is most likely caused by the comparing-task which have a increasing number of reads, shown in Figure \ref{fig:chart_read_count}, and writes shown in Figure \ref{fig:chart_write_count}.
 
 
@@ -822,16 +820,16 @@ The reason for the high percent of memory usage around 94\% is most likely cause
 \end{figure}
 
 
-\subsection{Measure Disks Utilities}
-We measured the disk utilities to \textbf{see/study/examine} the disk I/O statistics of the system.
+\subsection{Measure Disks Utilities} \label{sec:eva_disks}
+We measured the disk utilities to examine the disk I/O statistics of the system.
 
 \subsubsection{Read Utilization}
 As we can see in Figure \ref{fig:chart_read_count}, increases the read count during system runtime. This is because of the comparing-task which is reading the values from the metadata and annotations.
 
 
-Figure \ref{fig:chart_read_count_since_last} show number of reads compared to last read. As we can see, are there not many differences between a read and it's last read. There are some spikes during runtime, especially the spike on a difference over 6000 reads. As we can see from Figure \ref{fig:chart_read_count}, is there a spike vertically approximately at the same time. This is also a trend in the graphs in Figure \ref{fig:write_disk}.
+Figure \ref{fig:chart_read_count_since_last} show number of reads compared to last read. As we can see, are there not many differences between a read and it's last read. There are some peaks during runtime, especially the peaks on a difference over 6000 reads. As we can see from Figure \ref{fig:chart_read_count}, is there a peak vertically approximately at the same time. This is also a trend in the graphs in Figure \ref{fig:write_disk}.
 
-\textbf{kan se på antall counts at den går drastisk rett opp på samme tidspunkt.. noe som skjer der... Også spike i read writes på samme tidspunkt..?}
+\textbf{kan se på antall counts at den går drastisk rett opp på samme tidspunkt.. noe som skjer der... Også peaks i read writes på samme tidspunkt..?}
 
 
 \begin{figure}
@@ -854,7 +852,10 @@ Figure \ref{fig:chart_read_count_since_last} show number of reads compared to la
 
 
 \subsubsection{Write Utilization}
-As we can see in Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_write_count_since_last}
+As we can see in Figure \ref{fig:chart_write_count}, there is an increasing number of writes during runtime. This is similar to the graphs showing read counts in Figure \ref{fig:read_disks}, since the coomparing-task is writing the result from the comparing in a new file. 
+
+
+Number of writes compared to last write is shown in Figure \ref{fig:chart_write_count_since_last}. We can see that there are a few peaks during runtime
 
 
 \begin{figure}
@@ -877,23 +878,6 @@ As we can see in Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_wr
 
 
 \chapter{Discussion}
-%Idea, architecture, design, results, other solutions, "arch have scale-problem?".
-
-%\begin{itemize}
-%\item Virtual sensors probably uavhengige prosesser, ikke threads ettersom man evt vil addere flere sensorer og unnga a starte alle sensorer på nytt igjen.. HVORFOR valgte jeg løsningen som jeg gjorde, og er dette er andre løsninger..
-%\item Burde lage egne gorutiner/subprocesser/classer for hvert dyr. alle er en basic class med f. eks ID, TYPE, CAPABILITIES, HISTORIKK?, QUERIES/RAW DATA..
-%\item Kombinere VS søke på "ravn \& rev eller ravn | rev.. mellom 2 tidspunkt, nordkynn | varanger... etc..
-%!!!!!!!!!!!!\item hash-map instead of multiple lists with different animals. hash on animal and/or place
-%\item parallel/concurrent program when doing metadata-collecting and reading from excel-files and writing to csv. Python - bad experience with threads/subprocess, golang probably better?
-%\item Drawback with Python - not that good at threading/parallel/concurrency.. Python is not good for multi-processor/multi-core work. Prøvde å bruke multiprocess-bibliotek med pools med processer.. Ble litt bedre, men ikke noe spesielt.. Golang ville kanskje vært bedre mtp concurrency. Gjør GOlang when performance is critical..
-%\item Forskjellig språk har focus på forskjellig ting og er gode forskjellige ting.. Uansett hvilket språk man velger pga en fordel, vil det mest sannsnylig være et annet språk som er bedre på en annenn ting du skal implementere.. som f. eks. Golang bedre concurrent enn Python..
-%\item Updates of "database" in background, not on demand -> future work?
-%\item Et script som går gjennom alle excel-filene som den ikke har lest og lagrer data eller noe sånt.. Bør gjøres i bakgrunnen/ikke on-demand. Filer som slutter på .xlsx leses og evt. legges i en liste som kan sjekke senere om filen er blitt lest eller ikke..
-%\item Brukte mye tid på data behandlingen og datasettet.. mye tull med utf-8 og whitespace osv, og forskjellige datoer i excel-fil..
-%\item Og mye tid på excel-fil som inneholdt forskjellige datoer etc. som gjorde at jeg måtte trikse og mikse for å få riktig dato så jeg fikk opp riktig bildet/få opp bildet i det hele tatt..
-%\end{itemize}
-
-%some of the points where we met problems
 This chapter discusses our approach, experience and why we chose the solution we ended up with.
 
 \section{Virtual Sensors} \label{sec:disc_vs}
@@ -916,12 +900,9 @@ Then the user could for example search for \textit{"fox || raven"}, \textit{"fox
 %This would open the possibility for a combination/fusing of different virtual sensors...
 
 \section{Sequential vs. concurrent implementation} \label{sec:disc_concurrent}
-
 As described in Chapter \ref{chap:evaluation}, the execution time of system is not satisfying considering how many hours the system use to complete. Using Pythons multiprocessing library did not solve any problem with time spent on comparing images and annotations. The reason we tried Pythons multiprocessing library was to see if it made any performance-improvement on execution time compared to the sequential system. If it haven't been for the time constraints, we would try to implement another solution with threads.
 
-Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP \cite{hoare}. Go is built with concurrency in mind and has goroutines instead of threads. Another advantages of goroutines is that it comes with a built-in primitive to communicate between themselves by using something called channels. There is also no need for some kind of mutex locking when sharing data structures compared to threads. However, there is no purpose of implement the system in another language if the system is I/O bound.
-
-%\textbf{FRA DESIGN: The virtual sensors in this approach are functions in a sequential system. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes.}
+Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP \cite{hoare}. Go is built with concurrency in mind and has goroutines instead of threads. Another advantages of goroutines is that it comes with a built-in primitive to communicate between themselves by using something called channels. There is also no need for some kind of mutex locking when sharing data structures compared to threads. However, there is no purpose of implement the system in another language if the system is I/O bound. To improve the system runtime, there is a need to implement a system with parallel tasks, like for example parallel comparing of image metadata and annotations. 
 
 
 \section{Updates From Datastorage} \label{sec:disc_updates}
@@ -946,7 +927,7 @@ Another challenge with this approach is that some data in the excel-files contai
 
 In this project, we have implemented a prototype of virtual sensors with the purpose to provide a more powerful and flexible sensor monitoring in the Arctic tundra. 
 
-Our experiments showed that ...
+Our experiments showed that \textbf{need for parallel tasks.. something to improve performance on time usage}...
 
 \section{Contributions}
 The dissertation makes the following contributions:
