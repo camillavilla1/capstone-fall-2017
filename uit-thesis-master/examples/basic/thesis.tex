@@ -916,7 +916,7 @@ As we can see in Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_wr
 %some of the points where we met problems
 This chapter discusses our approach, experience and why we chose the solution we ended up with.
 
-\section{Virtual Sensors}
+\section{Virtual Sensors} \label{sec:disc_vs}
 As mentioned in previous chapters, are the virtual sensors functions in our approach. We choose this approach because of we firstly wanted to find images from the fused data and show them to the users. Another reason is because of time limitations.
 
 \textbf{JM: Hvis du har noen ideer her kunne det være interessant å vite hva du ville forfulgt/undersøkt hvis du hadde mer tid.}
@@ -928,14 +928,14 @@ A virtual sensor could also be implemented as an abstraction or a general class 
 If time wasn't a limitation, we would have tried to investigate the implementation of virtual sensors as an abstraction where a class with parameters specifies the different virtual sensors. These virtual sensors would also be subprocesses in the system so they don't affect each other. 
 
 
-\section{Queries}
+\section{Queries} \label{sec:disc_query}
 Our approach support queries with only one option per animal, location and datetime, described in Section \ref{ssec:des_user}. The reason for this choice is because we started with a simple implementation with intent to expand at a later point. The first implementation only contained what kind of animal the user wanted to see. At later point, both location and datetime was added to narrow the search result. Due to time constraints, we didn't have time to implement more advanced search functionalities.
 
 An improvement would then be to support operations like AND and OR for all three options in the user interface.
 Then the user could for example search for \textit{"fox || raven"}, \textit{"fox \&\& raven"}, \textit{"Nordkynn || Stjernevann"} or to choose an interval between two datetimes like \textit{"26-04-2016 - 30-04-2016"}. This would make image search more flexible and add more advanced search queries for the users.
 %This would open the possibility for a combination/fusing of different virtual sensors...
 
-\section{Sequential vs. concurrent implementation}
+\section{Sequential vs. concurrent implementation} \label{sec:disc_concurrent}
 %Use a language more suitable for performance (execution time), like Golang..
 \textbf{JM: her er det eksperimentene er viktige. Det hjelper ikke å flytte til Go hvis du er I/O bound f.eks.}
 
@@ -987,20 +987,17 @@ The dissertation makes the following contributions:
 \chapter{Future Work}
 We will outline some of the areas that can be elaborated in future work. These include:
 
-\begin{itemize}
-%\item IMPLEMENT VS AS ABSTRACTIONS (CLASS) AND SUBPROCESSES
-%\item QUERY: COMBINE DATA FROM MULTIPLE SENSORS
-%\item UPDATE DATASTORAGE FREQUENT, NOT ON-DEMAND
-%\item CONCURRENCY
 
-\item Concurrent lesing av excel-filer (alle sammen). Lesing går egentlig greit, men burde hatt en løsning som leste alle filer som sluttet på .xsls eller noe lignende og så evt legge navne til filene i en liste slik at man kan sjekke om det filen er lest fra før av hvis man legger til nye filer i data storage..
-\item Concurrent lesing av metadata og traversering
-\item Concurrent sammneligning!!!
-\item VS er subproseser/channels(?) i GO slik at man evt kan fjerne/legge til sensorer om man vil
-\item Gjøre i Golang?
-\item Concurrent VS: kan hente data fra flere sensorer eller kombinere flere VS.. Eks: ravn \& rev eller ravn | rev.
-\item Query for å hente bilder mellom 2 tidspunkt
-\item Oppdatere/sjekek frequent, ikke som nå (on-demand).
+\begin{itemize}
+\item \textbf{Implement virtual sensors as abstractions and subprocesses:} The implemented virtual sensors is our first prototype. As described in Section \ref{sec:disc_vs}, would another approach be to implement the virtual sensors as abstractions and subprocesses. This would improve the virtual sensors by making it possible to create, change or remove sensors if needed. It would also give the user the ability to combine multiple virtual sensors to a new virtual sensor.
+
+\item \textbf{Query - combine data from multiple sensors:} This implementation of the system doesn't support multiple different search queries. In Section \ref{sec:disc_query}, we discuss how we could improve this by adding more advanced functionalitites to the user application. This would be an improvement because it would for example narrow a users search result when searching for \textit{"red fox \&\& raven"} or to retrieve images between to datetimes. 
+
+\item \textbf{Automated data storage updates:} Adding an solution to an automated data storage update is discussed in Section \ref{sec:disc_updates}. Current solution only supports on-demand updates and there is definitely a need for a script running in the background checking for updates in the data storage. This script should also be implemented to support a solution that reads all files containing annotation of data and store this in a list so we can check if the file has been read or if it is a new one.
+
+
+\item \textbf{Improve execution time:} As discussed in Section \ref{sec:disc_concurrent}, there is a need for improvement when comparing images metadata with annotations. A solution to improvement is to use concurrent computing and investigate this solution using subprocesses, threads or another concurrency control library. \textbf{CAN BE I/O bound?!!?!}
+
 \end{itemize}
 
 
