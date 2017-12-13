@@ -846,11 +846,12 @@ The reason for the high percent of memory usage around 94\% is most likely cause
 We measured the disk utilities to \textbf{see/study/examine} the disk I/O statistics of the system.
 
 \subsubsection{Read Utilization}
-\textbf{READ:}
+As we can see in Figure \ref{fig:chart_read_count}, increases the read count during system runtime. This is because of the comparing-task which is reading the values from the metadata and annotations.
 
-As we can see in Figure \ref{fig:chart_read_count}, increases the read count during system runtime. This is because of
 
-..and Figure \ref{fig:chart_read_count_since_last}...
+Figure \ref{fig:chart_read_count_since_last} show number of reads compared to last read. As we can see, are there not many differences between a read and it's last read. There are some spikes during runtime, especially the spike on a difference over 6000 reads. As we can see from Figure \ref{fig:chart_read_count}, is there a spike vertically approximately at the same time. This is also a trend in the graphs in Figure \ref{fig:write_disk}.
+
+\textbf{kan se på antall counts at den går drastisk rett opp på samme tidspunkt.. noe som skjer der... Også spike i read writes på samme tidspunkt..?}
 
 
 \begin{figure}
@@ -873,8 +874,6 @@ As we can see in Figure \ref{fig:chart_read_count}, increases the read count dur
 
 
 \subsubsection{Write Utilization}
-\textbf{WRITE:}
-
 As we can see in Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_write_count_since_last}
 
 
@@ -989,10 +988,10 @@ The dissertation makes the following contributions:
 We will outline some of the areas that can be elaborated in future work. These include:
 
 \begin{itemize}
-%\item CONCURRENT
 %\item IMPLEMENT VS AS ABSTRACTIONS (CLASS) AND SUBPROCESSES
 %\item QUERY: COMBINE DATA FROM MULTIPLE SENSORS
 %\item UPDATE DATASTORAGE FREQUENT, NOT ON-DEMAND
+%\item CONCURRENCY
 
 \item Concurrent lesing av excel-filer (alle sammen). Lesing går egentlig greit, men burde hatt en løsning som leste alle filer som sluttet på .xsls eller noe lignende og så evt legge navne til filene i en liste slik at man kan sjekke om det filen er lest fra før av hvis man legger til nye filer i data storage..
 \item Concurrent lesing av metadata og traversering
