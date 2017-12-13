@@ -717,6 +717,8 @@ FRA fotoboks2011\_nordkynn\_nordkynn.2011.xlsx
 
 
 
+
+
 \section{Experimental Setup}
 All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-6400T CPU @ 2.20GHz × 4, Intel® HD Graphics 530 (Skylake GT2), 15,6 GiB memory and 503 GB disk. It ran on Ubuntu 17.04 64-bit with gcc V6.3.0 compiler and Python V2.7.13.
 
@@ -777,7 +779,7 @@ We measured time usage in minutes per task during system runtime to \textbf{see/
 
 %Figure \ref{fig:time_chart500} shows the time to execute different task in the system. We can see that the comparison between images and annotations is the part of the system that takes the longest time followed by the part that finds folders and read metadata from the raw data. This is because of the of the high number of data to process.
 
-The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the execution time escalate by factor of 4(?).
+The only bar in the figure that stands out from the other, is the comparison of data from both Varanger and Nordkynn. We can see that by increasing the data size by adding another excel-file, the time usage when comparing data escalate \textbf{by a factor of 4(?)}.
 
 %comparing 860 min i forskjell... factor of 4
 %This is because there are more data to compare and will so 
@@ -796,9 +798,9 @@ Figure \ref{fig:time_chart_overall} show the time usage for the whole system to 
 
 Reasons for the multiprocess versions to be relatively similar to the sequential implementation can be caused by the fact that the concurrent implementations can be CPU-bound or/and I/O bound.
 
-Har 4 CPU cores
+Har 4 CPU cores med 4 threads
 
-increase overall tid by a factor of 3..
+\textbf{time usage escalate/increase by a factor of 3}
 
 \begin{figure}
 \centering
@@ -811,7 +813,9 @@ increase overall tid by a factor of 3..
 %POSSIBLE BOTTLENECKS?????
 
 \subsection{Measure CPU Utilities}
-We measured the CPU utilities to \textbf{see} the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, 
+\textbf{bruker mye cpu i starten og midten, men roer seg ned etter hvert - ligger da på rundt 25\% CPU. På starten driver programmet med traversering og lesing av metadata, så excel-lesing og så comparing. Comparing kan bruke mye cpu på starten hvis det må til disk å lese, men etter hvert ligger kanskje mye i memory/cachen..?}
+
+We measured the CPU utilities to \textbf{see/study/examine} the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, 
 
  
 \begin{figure}
@@ -823,7 +827,9 @@ We measured the CPU utilities to \textbf{see} the CPU percentage of the system. 
 
 
 \subsection{Measure Memory Utilities}
-Figure \ref{fig:chart_memory}
+\textbf{Kan se at den i starten bruker litt minne, en peak på 94\% før den daler ned til rundt 90\% før den igjen stiger til rundt 94\% og blir i dette området helt til programmet er ferdig...}
+
+We measured the memory utilities to \textbf{see/study/examine} the memory usage of the system. As we can see in Figure \ref{fig:chart_memory},
 
 \begin{figure}
 \centering
@@ -834,8 +840,12 @@ Figure \ref{fig:chart_memory}
 
 
 \subsection{Measure Disks Utilities}
-Figure \ref{fig:chart_read_count} and Figure \ref{fig:chart_read_count_since_last}.
+\subsubsection{Read Utilization}
+\textbf{READ:}
 
+We measured the disk utilities to \textbf{see/study/examine} the disk I/O statistics of the system. As we can see in Figure \ref{fig:chart_read_count} and Figure \ref{fig:chart_read_count_since_last}...
+
+\iffalse
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart_read_count.png}
@@ -849,10 +859,33 @@ Figure \ref{fig:chart_read_count} and Figure \ref{fig:chart_read_count_since_las
 \caption{Figure showing disk read compared to last disk read...}
 \label{fig:chart_read_count_since_last}
 \end{figure}
+\fi
+
+\begin{figure}
+\centering
+\begin{subfigure}[b]{1\textwidth}
+   \includegraphics[width=1\textwidth]{chart_read_count.png}
+   \caption{Figure showing disk reads during system runtime.}
+   \label{fig:chart_read_count} 
+\end{subfigure}
+
+\begin{subfigure}[b]{1\textwidth}
+   \includegraphics[width=1\textwidth]{chart_read_count_since_last.png}
+   \caption{Figure showing disk read compared to last disk read during system runtime.}
+   \label{fig:chart_read_count_since_last}
+\end{subfigure}
+
+\caption{Figure showing disk I/O reads during system runtime.}
+\label{fig:read_disks}
+\end{figure}
 
 
-Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_write_count_since_last}
+\subsubsection{Write Utilization}
+\textbf{WRITE:}
 
+As we can see in Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_write_count_since_last}
+
+\iffalse
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart_write_count.png}
@@ -866,7 +899,26 @@ Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_write_count_since_l
 \caption{Figure showing disk write compared to last disk write...}
 \label{fig:chart_write_count_since_last}
 \end{figure}
+\fi
 
+
+\begin{figure}
+\centering
+\begin{subfigure}[b]{1\textwidth}
+   \includegraphics[width=1\textwidth]{chart_write_count.png}
+   \caption{Figure showing disk writes during system runtime.}
+   \label{fig:chart_write_count} 
+\end{subfigure}
+
+\begin{subfigure}[b]{1\textwidth}
+   \includegraphics[width=1\textwidth]{chart_write_count_since_last.png}
+   \caption{Figure showing disk writes compared to last disk read during system runtime.}
+   \label{fig:chart_write_count_since_last}
+\end{subfigure}
+
+\caption{Figure showing disk I/O writes during system runtime.}
+\label{fig:write_disk}
+\end{figure}
 
 
 \chapter{Discussion}
