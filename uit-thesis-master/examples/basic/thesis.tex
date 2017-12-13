@@ -813,53 +813,45 @@ Har 4 CPU cores med 4 threads
 %POSSIBLE BOTTLENECKS?????
 
 \subsection{Measure CPU Utilities}
-\textbf{bruker mye cpu i starten og midten, men roer seg ned etter hvert - ligger da på rundt 25\% CPU. På starten driver programmet med traversering og lesing av metadata, så excel-lesing og så comparing. Comparing kan bruke mye cpu på starten hvis det må til disk å lese, men etter hvert ligger kanskje mye i memory/cachen..?}
+%\textbf{bruker mye cpu i starten og midten, men roer seg ned etter hvert - ligger da på rundt 25\% CPU. På starten driver programmet med traversering og lesing av metadata, så excel-lesing og så comparing. Comparing kan bruke mye cpu på starten hvis det må til disk å lese, men etter hvert ligger kanskje mye i memory/cachen..? i slutten: la cpu pga skriving til fil som betyr venting, se \ref{fig:chart_read_count}.}
 
-We measured the CPU utilities to \textbf{see/study/examine} the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, 
+We measured the CPU utilities to \textbf{see/study/examine} the CPU percentage of the system. As we can see in Figure \ref{fig:chart_cpu}, the CPU percentage spike during operations. The system starts with traversing and read metadata from the raw data in the data storage which cause the spikes at the start of the graph. Comparing metadata and annotations in the excel-file is the last task. A which use low CPU percentage, as seen in the figure, and a reason for this may be that the CPU must wait because the comparing-task writes it's result to a file, as seen in Figure \ref{fig:chart_write_count}, with an increasing number of writes during system runtime.
 
- 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart_cpu.png}
-\caption{Figure showing ...}
+\caption{Figure showing CPU utilization if the system during runtime.}
 \label{fig:chart_cpu}
 \end{figure}
 
 
 \subsection{Measure Memory Utilities}
-\textbf{Kan se at den i starten bruker litt minne, en peak på 94\% før den daler ned til rundt 90\% før den igjen stiger til rundt 94\% og blir i dette området helt til programmet er ferdig...}
+%\textbf{Kan se at den i starten bruker litt minne, en peak på 94\% før den daler ned til rundt 90\% før den igjen stiger til rundt 94\% og blir i dette området helt til programmet er ferdig... Øker mye på slutten pga vi skriver til fil? Økende memory pga økende antall av lesing/skriving til fil..}
 
-We measured the memory utilities to \textbf{see/study/examine} the memory usage of the system. As we can see in Figure \ref{fig:chart_memory},
+We measured the memory utilities to \textbf{see/study/examine} the memory usage of the system. Figure \ref{fig:chart_memory} shows the result during system runtime. We can see that the system have between 90\% and 96\% memory usage.
+The reason for the high percent of memory usage around 94\% is most likely caused by the comparing-task which have a increasing number of reads, shown in Figure \ref{fig:chart_read_count}, and writes shown in Figure \ref{fig:chart_write_count}.
+
+
+
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{chart_memory.png}
-\caption{Figure showing ...}
+\caption{Figure showing memory utilization if the system during runtime.}
 \label{fig:chart_memory}
 \end{figure}
 
 
 \subsection{Measure Disks Utilities}
+We measured the disk utilities to \textbf{see/study/examine} the disk I/O statistics of the system.
+
 \subsubsection{Read Utilization}
 \textbf{READ:}
 
-We measured the disk utilities to \textbf{see/study/examine} the disk I/O statistics of the system. As we can see in Figure \ref{fig:chart_read_count} and Figure \ref{fig:chart_read_count_since_last}...
+As we can see in Figure \ref{fig:chart_read_count}, increases the read count during system runtime. This is because of
 
-\iffalse
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{chart_read_count.png}
-\caption{Figure showing disk reads...}
-\label{fig:chart_read_count}
-\end{figure}
+..and Figure \ref{fig:chart_read_count_since_last}...
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{chart_read_count_since_last.png}
-\caption{Figure showing disk read compared to last disk read...}
-\label{fig:chart_read_count_since_last}
-\end{figure}
-\fi
 
 \begin{figure}
 \centering
@@ -884,22 +876,6 @@ We measured the disk utilities to \textbf{see/study/examine} the disk I/O statis
 \textbf{WRITE:}
 
 As we can see in Figure \ref{fig:chart_write_count} and Figure \ref{fig:chart_write_count_since_last}
-
-\iffalse
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{chart_write_count.png}
-\caption{Figure showing disk writes...}
-\label{fig:chart_write_count}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{chart_write_count_since_last.png}
-\caption{Figure showing disk write compared to last disk write...}
-\label{fig:chart_write_count_since_last}
-\end{figure}
-\fi
 
 
 \begin{figure}
