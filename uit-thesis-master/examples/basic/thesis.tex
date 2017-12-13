@@ -88,7 +88,7 @@
 %\item [Kutt heller etterpå] 
 %\end{description}
 
-The Arctic Tundra in the far northern hemisphere is one of ecosystems that are most affected by the climate changes in the world today. Every year, COAT deploys several camera traps in eastern Finnmark, Norway during the winter to study predator populations. These cameras are collecting high volume of images that results in Big Data challenges in the ecology field. Managing the sensors and collecting data is currently a manual task that can introduce many errors and there is a need for systems and abstractions which makes it simple to build, maintain and use sensors and sensor data.
+The Arctic Tundra in the far northern hemisphere is one of ecosystems that are most affected by the climate changes in the world today. Every year during the winter, COAT deploys several camera traps in eastern Finnmark, Norway to study predator populations. These cameras are collecting high volume of images that results in Big Data challenges in the ecology field. Managing the sensors and collecting data is currently a manual task that can introduce many errors and there is a need for systems and abstractions which makes it simple to build, maintain and use sensors and sensor data.
 
 This project describes a system that simplifies biologists need to look at images from different locations in the Arctic Tundra. The purpose is to provide for a more powerful and flexible sensor in the COAT monitoring of the Arctic Tundra.
 
@@ -387,7 +387,7 @@ A user wants to retrieve fused data about animals. The user interacts with the v
 %\textbf{Client/Server, p2p, put/get, pub/sub, protokoller, FTP etc..
 %BESKRIV INTERAKSJONEN MELLOM ENHETENE!!}
 
-In this chapter we will look at the design of the system and present the design of each component of the architecture. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines and dataflow between each component in the system. The dotted arrows show how the data storage is structured with files and raw data.
+In this chapter we will look at the design of the system and present the design of each component of the architecture. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines and dataflow between each component in the system. The dotted lines show how the data storage is structured with files and raw data.
 
 %\ OLD
 %\textit{In this chapter we will look at the design of the environment. We will present the design of the data storage, the fused data the virtual sensors and the user application. Figure \ref{fig:design} shows the design of the system. The arrows indicates the communication lines. The dotted arrows show how the data storage is structured with files and pictures.}
@@ -532,7 +532,7 @@ The data storage contains raw data and preprocessed images that are structured a
 
 %\section{Sensor Fusion} \label{sec:imp_senfus}
 \subsection{Raw Data Information Extraction} \label{ssec:imp_rawdata}
-The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the image's site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value, as shown in Table 6.1. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
+The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the image's site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value, as shown in Table 6.1. This was as mentioned earlier, a time-consuming task because of the 1.5 millions of pictures that was being processed.
 
 
 \begin{table}[]
