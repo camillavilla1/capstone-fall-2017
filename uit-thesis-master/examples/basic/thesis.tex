@@ -150,9 +150,9 @@ The dissertation makes the following contributions:
 
 %OTTO: Principles, models, artifact and evaluation of it. Lessons learned/insights. Conclusion
 
-\section{Assumptions}
-AVGRENSE, VIKTIG!!
-Something about motivation..?
+%\section{Assumptions}
+%AVGRENSE, VIKTIG!!
+%Something about motivation..?
 
 \section{Limitations}
 %AVGRENSE, VIKTIG!!
@@ -406,7 +406,6 @@ The data storage contains raw data from the physical camera trap sensors and exc
 
 \section{Sensor Fusion} \label{sec:des_fused}
 As mentioned earlier in Chapter \ref{chap:data_set}, the dataset did not contain any filename or a filepath. It only contained image metadata such as a pictures location, date-time, site, year and animal classification. We then had to find a method to find out which images correspond to which annotation in the excel-sheet.
-\\
 
 We recursively traverse the directories where pictures are located and read date and time from the metadata for each picture along with the annotation in the excel-sheet. The images and annotations that matched, is stored in a Python dictionary, like a key-value store, with date-time as key and image-path as value. Images and annotations that matches is stored in a new CSV-file.
 As mentioned earlier, was this quite a time-consuming task because of the numbers of images to process and compare.
@@ -537,6 +536,7 @@ The data storage contains raw data and preprocessed images that are structured a
 \subsection{Raw Data Information Extraction} \label{ssec:imp_rawdata}
 The raw data in the data storage is traversed by walking the OS directories. If the traversed file ends with JPG, the image information in the EXIF is being extracted and the datetime value is read. This datetime along with the image's site, region and image path is stored in a Python dictionary, where the datetime, site and region is key and the image path is the value, as shown in Table 6.1. This was as mentioned earlier, a time-consuming task because of the 1.6 millions of pictures that was being processed.
 
+
 \begin{table}[]
 \centering
 \label{tab:dictionary}
@@ -552,26 +552,6 @@ The raw data in the data storage is traversed by walking the OS directories. If 
 \caption{Show how an image's metadata is stored.}
 \end{table}
 
-\iffalse
-\begin{tabular}{|c||c||c|}
-  \hline
-  \multicolumn{2}{|c|}{\textbf{Key}} & \textbf{Value} \\
-  \hline
-  \begin{tabular}{@{}l@{}} 
-  	Site\\
-  	m2\\
-  \end{tabular}&
-  \begin{tabular}{@{}l@{}}
-  	Region\\
-    Nordkynn\\
-  \end{tabular}&
-  \begin{tabular}{@{}l@{}}
-    Image Path\\
-    /../2016-COAT/../nordkynn/m2.21.03.11/IMG\_0172.JPG \\
-  \end{tabular}&
-  \hline
-\end{tabular}
-\fi
 
 During implementation we came across a problem with the folders containing white-space and UTF-8 character. An example of a folder is \textit{'/../Bilder til institutt for informatikk/åtekamera (Siw)'}. 
 %This makes it difficult to extract images due to the reason that the new CSV-file had white-space between each characters.
@@ -919,7 +899,7 @@ This chapter discusses our approach, experience and why we chose the solution we
 \section{Virtual Sensors} \label{sec:disc_vs}
 As mentioned in previous chapters, are the virtual sensors functions in our approach. We choose this approach because of we firstly wanted to find images from the fused data and show them to the users. Another reason is because of time limitations.
 
-\textbf{JM: Hvis du har noen ideer her kunne det være interessant å vite hva du ville forfulgt/undersøkt hvis du hadde mer tid.}
+%\textbf{JM: Hvis du har noen ideer her kunne det være interessant å vite hva du ville forfulgt/undersøkt hvis du hadde mer tid.}
 
 Another solution to this approach of virtual sensors is to implement them as threads. This would again not be the best solution if for example the system should be able to add more virtual sensors during run-time. To solve this problem, we could have implemented the virtual sensors as independent processes which would not be affected when another virtual sensors is added, removed or at worst crash/fail. 
 
@@ -936,19 +916,15 @@ Then the user could for example search for \textit{"fox || raven"}, \textit{"fox
 %This would open the possibility for a combination/fusing of different virtual sensors...
 
 \section{Sequential vs. concurrent implementation} \label{sec:disc_concurrent}
-%Use a language more suitable for performance (execution time), like Golang..
-\textbf{JM: her er det eksperimentene er viktige. Det hjelper ikke å flytte til Go hvis du er I/O bound f.eks.}
 
-As described in Chapter \ref{chap:evaluation}, the execution time of system is not satisfying (or something...). Using Pythons multiprocessing library did not solve any problem with time spent on comparing images and annotations. The reason we tried Pythons multiprocessing library was to see if it made any performance-improvement on execution time compared to the sequential system. If it haven't been for the time constraints, we would try to implement another solution with threads.
+As described in Chapter \ref{chap:evaluation}, the execution time of system is not satisfying considering how many hours the system use to complete. Using Pythons multiprocessing library did not solve any problem with time spent on comparing images and annotations. The reason we tried Pythons multiprocessing library was to see if it made any performance-improvement on execution time compared to the sequential system. If it haven't been for the time constraints, we would try to implement another solution with threads.
 
-Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP \cite{hoare}. Go is built with concurrency in mind and has goroutines instead of threads. Another advantages of goroutines is that it comes with a built-in primitive to communicate between themselves by using something called channels. There is also no need for some kind of mutex locking when sharing data structures compared to threads.
-
-\textit{However, there is no purpose of implement the system in another language if the system is I/O bound...}
+Another solution is to change the language from Python to The Go Programming Language\footnote{\url{https://golang.org/}}. One of Go's strongest sides is a built-in concurrency based on CSP \cite{hoare}. Go is built with concurrency in mind and has goroutines instead of threads. Another advantages of goroutines is that it comes with a built-in primitive to communicate between themselves by using something called channels. There is also no need for some kind of mutex locking when sharing data structures compared to threads. However, there is no purpose of implement the system in another language if the system is I/O bound.
 
 %\textbf{FRA DESIGN: The virtual sensors in this approach are functions in a sequential system. They could have been threads in a parallel program or the best solution would be if the virtual sensors where independent subprocesses because that would not affected other virtual sensors when a virtual sensor is added or removed from the system, as well as if one virtual sensor crashes.}
 
 
-\section{On-demand vs. background updates from datastorage ELLER Updates From Datastorage} \label{sec:disc_updates}
+\section{Updates From Datastorage} \label{sec:disc_updates}
 %Search server for new radar measurements in. If new data found, send to radar rainfall estimator.. \cite{hill}.
 Current solution does not support the ability to traverse the data storage with multiple excel-files. It only takes one and one excel-files that is predefined and extracts it's data.
 
@@ -986,7 +962,6 @@ The dissertation makes the following contributions:
 
 \chapter{Future Work}
 We will outline some of the areas that can be elaborated in future work. These include:
-
 
 \begin{itemize}
 \item \textbf{Implement virtual sensors as abstractions and subprocesses:} The implemented virtual sensors is our first prototype. As described in Section \ref{sec:disc_vs}, would another approach be to implement the virtual sensors as abstractions and subprocesses. This would improve the virtual sensors by making it possible to create, change or remove sensors if needed. It would also give the user the ability to combine multiple virtual sensors to a new virtual sensor.
