@@ -94,7 +94,7 @@ This project describes a system that simplifies biologists need to look at image
 
 Using data provided by COAT, we will develop a prototype of virtual sensors. Users can interact with the virtual sensors through a user interface. The virtual sensors retrieves their data from the fused data from the data storage containing raw data and annotated data from the physical camera trap sensors.
 
-Results show that ...
+Results show that the system have a long usage time during runtime and processing high amounts of data results in an I/O bounded system and there is a need for a parallel or concurrent system.
 
 \end{abstract}
 
@@ -586,7 +586,7 @@ A different problem was that some column-header names was written with a big let
 
 %\textbf{NOTES: ..Excel-file har også æøå som ikke vises i Ubuntu sin excel libre offie calc.. Kanskje bare hos meg, men burde gått igjennom og hatt en consistency mellom navn.. Biologer brukte Windows, jeg Ubuntu.. kanskje noe rot der.. men burde egentlig fikse på raw data uansett?}
 
-\textbf{JM: Her ville det nok vært en fordel med Python3!!!!!!}
+%\textbf{JM: Her ville det nok vært en fordel med Python3!!!!!!}
 One more problem arose when some of the excel-file contained table-headers with UTF-8 characters, as seen in Figure \ref{fig:utf8}. These characters won't be interpreted by the system and the table-headers will not be readable.
 
 
@@ -844,9 +844,7 @@ As we can see in Figure \ref{fig:chart_write_count}, there is an increasing numb
 
 Number of writes compared to last write is shown in Figure \ref{fig:chart_write_count_since_last}. We can see that there are more difference between a write and last read compared to the read-operations shown in Figure \ref{fig:chart_read_count_since_last}.
 
-
-
-\textbf{kan se på antall counts at den går drastisk rett opp på samme tidspunkt.. noe som skjer der... Også peaks i read writes på samme tidspunkt..?}
+%\textbf{kan se på antall counts at den går drastisk rett opp på samme tidspunkt.. noe som skjer der... Også peaks i read writes på samme tidspunkt..?}
 
 \begin{figure}
 \centering
@@ -858,7 +856,7 @@ Number of writes compared to last write is shown in Figure \ref{fig:chart_write_
 
 \begin{subfigure}[b]{1\textwidth}
    \includegraphics[width=1\textwidth]{chart_write_count_since_last.png}
-   \caption{Figure showing disk writes compared to last disk read during system runtime.}
+   \caption{Figure showing disk writes compared to last disk write during system runtime.}
    \label{fig:chart_write_count_since_last}
 \end{subfigure}
 
