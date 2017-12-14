@@ -941,6 +941,17 @@ We will outline some of the areas that can be elaborated in future work. These i
 To run \textbf{\textit{"fused\_data.py"}:}
 \begin{enumerate}
 \item You need access to daostore.
+\item Install libraries:
+	\begin{itemize}
+	\item exifread
+	\item pandas
+	\item cv2
+	\item os
+	\item datetime
+	\item psutil
+	\item threading
+	\item multiprocessing
+	\end{itemize}
 \item In fused\_data.py:
 	\begin{enumerate}
 	\item Change path before \textit{../COAT/2016-../} to your daostore-path in function: \_metadata\_in\_folder
@@ -952,10 +963,19 @@ To run \textbf{\textit{"fused\_data.py"}:}
 To run \textbf{\textit{"virtual\_sensors.py"}:}
 \begin{enumerate}
 \item You need access to daostore.
+\item Install libraries:
+	\begin{itemize}
+	\item exifread
+	\item pandas
+	\item cv2
+	\item os
+	\item datetime
+	\item csv
+	\item string - digits
+	\end{itemize}
 \item To run system type \textit{"python virtual\_sensors.py"}.
+\item Change csv-name in function: \textit{"read\_csv"} to open your csv-file (standard: \textit{"fused\_data.csv"}).
 \end{enumerate}
-
-HUSK Å ENDRE NAVN PÅ CSV!!!!
 
 
 
@@ -1048,11 +1068,11 @@ S. Hamel, S. T. Killengreen, J.-A. Henden, N. E. Eide, L. Roed-Eriksen, R. A. Im
 %\newblock {\em \url{http://www.framsenteret.no/getfile.php/2435814.1574.xyxruwywpp/FinalPDF_COAT.pdf}}.
 
 %12
-\bibitem{dice}
-Gun\u{a}, \c{S}tefan and Mottola, Luca and Picco, Gian Pietro,
-\newblock {\em DICE: Monitoring Global Invariants with Wireless Sensor Networks}, June 2014,
-\newblock in {\em ACM, vol. 10, no. 4. pp. 54:1--54:34}
-\newblock {\em \url{http://doi.acm.org/10.1145/2509434}}.
+%\bibitem{dice}
+%Gun\u{a}, \c{S}tefan and Mottola, Luca and Picco, Gian Pietro,
+%\newblock {\em DICE: Monitoring Global Invariants with Wireless Sensor Networks}, June 2014,
+%\newblock in {\em ACM, vol. 10, no. 4. pp. 54:1--54:34}
+%\newblock {\em \url{http://doi.acm.org/10.1145/2509434}}.
 
 %13
 \bibitem{hoare}
