@@ -219,6 +219,8 @@ footnote.}
 
 
 
+
+
 \chapter{Related Work}
 Sensors are becoming omnipresent in everyday life and is generating data at an remarkable rate and scale \cite{modelling}. Sensors and models play a vital role in harnessing "Big Data" to extract information.
 % and to illustrate current developments and identify key research needs using human and environmental health challenges as an example. 
@@ -274,10 +276,10 @@ Our approach of virtual sensors are not specified by the use of logical neighbor
 
 
 
-\chapter{The Dataset} \label{chap:data_set}
+\chapter{The Data Set} \label{chap:data_set}
 %\textbf{HVORDAN DE ER SAMLET, HVORDAN DE ER ORGANISERT?}
-The dataset is provided by COAT and contains over 1.5 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The wildlife camera traps from Reconyx are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
-The dataset contains pictures during night- and daytime. The cameras have infrared flash so the cameras can take pictures at nighttime. These pictures are without color while the pictures taken at daytime are with color, as shown in Figure \ref{fig:pictures}.
+The data set is provided by COAT and contains over 1.5 millions of pictures taken from 2011 to 2015 by their camera traps stationed in the Arctic Tundra in Finnmark, Norway. The wildlife camera traps from Reconyx are placed at six different areas in the Arctic Tundra: Nordkynn, Ifjord, Komag, Nyborg, Stjernevann and Gaissene.
+The data set contains pictures during night- and daytime. The cameras have infrared flash so the cameras can take pictures at nighttime. These pictures are without color while the pictures taken at daytime are with color, as shown in Figure \ref{fig:pictures}.
 
 \begin{figure*} %[t!]
     \centering
@@ -298,7 +300,7 @@ The dataset contains pictures during night- and daytime. The cameras have infrar
 
 
 \section{Dataset Directory Structure}
-The pictures in the dataset is structured in directories and folders. The dataset is first divided into different years going from 2011 to 2015. Each of these folders are then again divided into the areas of the 5 camera traps in the Arctic Tundra. Inside each of these folders specified by the area, they contain folders from each site inside the specific area. Figure \ref{fig:directories} shows a cropped screenshot of the directories.
+The pictures in the data set is structured in directories and folders. The data set is first divided into different years going from 2011 to 2015. Each of these folders are then again divided into the areas of the 5 camera traps in the Arctic Tundra. Inside each of these folders specified by the area, they contain folders from each site inside the specific area. Figure \ref{fig:directories} shows a cropped screenshot of the directories.
 
 %\textbf{NOTES: (In total 1976 directories, men alle er ikke i bruk/relevant)}
 
@@ -312,13 +314,13 @@ The pictures in the dataset is structured in directories and folders. The datase
 \section{Image Annotations}
 %\textit{NOTES: Biologist and ecologists working on the COAT project have detected animals in each image and made annotations stored in excel-files containing metadata and animal classification.}
 
-COAT provided annotations stored in excel-files with information about all of the images in the dataset that biologist and ecologists working at the COAT project have detected. The biologist have used these annotations to see what animal was present at a specific time and to see statistics. The biologist have not made these annotations for the purpose to go back in time and look at the images, which is the essential part in our approach.
+COAT provided annotations stored in excel-files with information about all of the images in the data set that biologist and ecologists working at the COAT project have detected. The biologist have used these annotations to see what animal was present at a specific time and to see statistics. The biologist have not made these annotations for the purpose to go back in time and look at the images, which is the essential part in our approach.
 The annotation contains information about a pictures location, site, date, time, animal classification, temperature in Fahrenheit, brightness, sharpness, saturation, sensitivity etc. 
  
 The excel-files are structured in their own folder and each file is named as a combination of the camera traps area, it's year and the site. An example is \textit{"fotoboks2011\_nordkynn\_nordkynn.2011.xlsx"}.
 
 
-The dataset contains the images metadata and animal classification, but did not contain any filenames or a filepath. We then had to find a method to find out which images correspond to the metadata in the excel-files. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where images are located and read date-time from the metadata and store it in a new CSV-file (Comma-separated Values).
+The data set contains the images metadata and animal classification, but did not contain any filenames or a file path. We then had to find a method to find out which images correspond to the metadata in the excel-files. Fortunately, each image had metadata stored in Exchangeable Image File Format (EXIF). We recursively traverse the directories where images are located and read date-time from the metadata and store it in a new CSV-file (Comma-separated Values).
 %/dictionary with date-time as key and image-path as value.
 This was quite a time-consuming task because of the number of images to process.
 
@@ -405,7 +407,7 @@ The data storage contains raw data from the physical camera trap sensors and exc
 
 
 \section{Sensor Fusion} \label{sec:des_fused}
-As mentioned earlier in Chapter \ref{chap:data_set}, the dataset did not contain any filename or a filepath. It only contained image metadata such as a pictures location, date-time, site, year and animal classification. We then had to find a method to find out which images correspond to which annotation in the excel-sheet.
+As mentioned earlier in Chapter \ref{chap:data_set}, the dataset did not contain any filename or a file path. It only contained image metadata such as a pictures location, date-time, site, year and animal classification. We then had to find a method to find out which images correspond to which annotation in the excel-sheet.
 
 We recursively traverse the directories where pictures are located and read date and time from the metadata for each picture along with the annotation in the excel-sheet. The images and annotations that matched, is stored in a Python dictionary, like a key-value store, with date-time as key and image-path as value. Images and annotations that matches is stored in a new CSV-file.
 As mentioned earlier, was this quite a time-consuming task because of the numbers of images to process and compare.
@@ -526,7 +528,7 @@ OpenCV V2.4.9.1\footnote{\url{https://opencv-python-tutroals.readthedocs.io/en/l
 
 
 \section{Data Storage} \label{sec:imp_storage}
-The data storage contains raw data and preprocessed images that are structured and sorted by animal species. Unfortunately, these preprocessed images don't include image metadata so we don't have any information of when the image is taken. Therefore, the whole data storage is traversed to find the raw data with metadata and compare these images to the excel-files containing information like date, time, location and site.
+The data storage contains raw data and preprocessed images used for animal detection using machine learning, that are structured and sorted by animal species. Unfortunately, these preprocessed images don't include image metadata so we don't have any information of when the image is taken. Therefore, the whole data storage is traversed to find the raw data with metadata and compare these images to the excel-files containing information like date, time, location and site.
 %\textbf{HOW DID I TRAVERSE}
 
 
@@ -703,7 +705,7 @@ All experiements were done on a Lenovo ThinkCenter with an Intel® Core™ i5-64
 \section{Experimental Design}
 %\textbf{Measured time when executed in all 4 experiments.. Hadde en test med nordkynn, en med nordkynn og varanger, og 2 tester hvorav den ene var nordkynn med 4 prosesser (concurrent) og den andre var nordkynn med 100 prosesser (for concurrent compare). Python process pool (multiprocessing: multiprocessing is a package that supports spawning processes using an API similar to the threading module). Prøvde også med over 500 processer, men ga ikke noe bedre resultat.. Tror det blir mye overhead..}
 
-We measured execution time to locate images in the datastorage and read the images metadata, read annotations from the excel-file and at last compare the images metadata with the annotations in the excel-file and write it to a new CSV-file through five experiments.
+We measured execution usage time to locate images in the data storage and read the images metadata, read annotations from the excel-file and at last compare the images metadata with the annotations in the excel-file and write it to a new CSV-file through five experiments.
 
 Three of these experiments where we compare image's metadata and annotations from the excel-file, were run concurrently with 4, 100 and 500 processes by Pythons multiprocessing library. The library allows fully leverage on multiple processors on a given machine and supports spawning processes using an API similar to a threading module.
 
@@ -911,8 +913,8 @@ Another challenge with this approach is that some data in the excel-files contai
 %Og mye tid på excel-fil som inneholdt forskjellige datoer etc. som gjorde at jeg måtte trikse og mikse for å få riktig dato så jeg fikk opp riktig bildet/få opp bildet i det hele tatt..
 
 \chapter{Conclusion}
-In this project, we have implemented a prototype of virtual sensors with the purpose to provide a more powerful and flexible sensor monitoring in the Arctic tundra. We give an introduction to virtual sensors and a description of the dataset from the camera traps in the Arctic Tundra. We describes a system that that fuse raw data from different physical sensors into one virtual sensor and provide an evaluation of the system.
-We've focused on showing results to the user and spend a lot of time with the dataset and modify the data so it could be extracted in the system.
+In this project, we have implemented a prototype of virtual sensors with the purpose to provide a more powerful and flexible sensor monitoring in the Arctic tundra. We give an introduction to virtual sensors and a description of the data set from the camera traps in the Arctic Tundra. We describes a system that that fuse raw data from different physical sensors into one virtual sensor and provide an evaluation of the system.
+We've focused on showing results to the user and spend a lot of time with the data set and modify the data so it could be extracted in the system.
 
 Our experiments showed that the system have a long usage time during runtime and processing the high amount of data results in an I/O bound system. There is a need for some kind of parallel tasks or a concurrent system to improve performance on time usage.
 
